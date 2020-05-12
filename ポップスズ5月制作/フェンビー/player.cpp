@@ -3,12 +3,13 @@
 #include"player.h"
 #include"enemy.h"
 
-int playerImage;
+int playerImage[2];
+
 CHARACTER player;
 //ロード
 void SysInitPlayer()
 {
-	playerImage = LoadGraph("bmp/潜水艇1.png");
+	LoadDivGraph("bmp/潜水艇アニメーション.png", 2, 2, 1, 32, 32, playerImage);
 }
 //初期化
 void InitPlayer()
@@ -18,6 +19,7 @@ void InitPlayer()
 	player.div = DIV_RAHGT;
 	player.hp = 100;
 	player.flag = false;
+	player.count = 0;
 }
 //更新
 void UpdetaPlayer()
@@ -83,6 +85,7 @@ void UpdetaPlayer()
 			enemy[i].flag = false;
 		}
 	}
+	player.count++;
 }
 
 //描画
@@ -91,10 +94,10 @@ void DrawPlayer()
 	switch (player.div) 
 	{
 	case DIV_RAHGT:
-		DrawGraph(player.pos.x, player.pos.y, playerImage, true);
+		DrawGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
 		break;
 	case DIV_LEFT:
-		DrawTurnGraph(player.pos.x, player.pos.y, playerImage, true);
+		DrawTurnGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
 		break;
 	}
 	DrawFormatString(30, 30, 0xff0000, "%d", player.hp, true);
