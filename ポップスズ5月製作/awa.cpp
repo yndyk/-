@@ -68,10 +68,10 @@ void DrawBuble()
 			DrawGraph(bubble[i].pos.x, bubble[i].pos.y, bubbleImage, true);
 		}
 
-		DrawFormatString(0, 50, 0xff0000, "cnt:%d", cnt);
-		DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
-		DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", bubble[i].pos.x);
-		DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
+		//DrawFormatString(0, 50, 0xff0000, "cnt:%d", cnt);
+		//DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
+		//DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", bubble[i].pos.x);
+		//DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
 	}
 }
 
