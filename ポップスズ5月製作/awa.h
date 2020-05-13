@@ -1,5 +1,7 @@
 #pragma once
 
+#define BUBBLE_MAX 10
+
 extern CHARACTER bubble;
 
 void SysInitBubble();
