@@ -3,8 +3,13 @@
 #include "player.h"
 #include "enemy.h"
 #include"shot.h"
+<<<<<<< HEAD
 #include"unti.h"
 #include"awa.h"
+=======
+#include "awa.h"
+#include "unti.h"
+>>>>>>> 45f9ddbcb5c71fe727bf36da1a8959e95d38c8df
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -144,6 +149,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitPlayer();
 	 SysInitEnemy();
 	 SysInitShot();
+	 SysInitBubble();
 	 SysinitUnti();
 	 SysInitBubble();
 	 return true;
@@ -160,6 +166,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitPlayer();
 	InitEnemy();
 	InitShot();
+	InitBubble();
 	initUnti();
 	InitBubble();
 }
@@ -185,8 +192,14 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaPlayer();
 		UpdetaEnemy();
 		UpdetaShot();
+<<<<<<< HEAD
 		UpdetaUnti();//ここでうんちの処理をする
 		UpdetaBuble();
+=======
+		UpdetaBuble();
+		HitCheckBubble();
+		UpdetaUnti();
+>>>>>>> 45f9ddbcb5c71fe727bf36da1a8959e95d38c8df
 	}
 
 	//ポーズ中だったら色半分
@@ -220,6 +233,7 @@ void GameDraw(void)//描画設定
 	DrawPlayer();
 	DrawEnemy();
 	DrawShot();
+	DrawBuble();
 	DrawUnti();
 	DrawBuble();
 }
