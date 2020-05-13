@@ -3,13 +3,9 @@
 #include "player.h"
 #include "enemy.h"
 #include"shot.h"
-<<<<<<< HEAD
 #include"unti.h"
 #include"awa.h"
-=======
-#include "awa.h"
 #include "unti.h"
->>>>>>> 45f9ddbcb5c71fe727bf36da1a8959e95d38c8df
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -143,7 +139,7 @@ bool SystmeInit(void)//システム初期化
 	SetDrawScreen(DX_SCREEN_BACK);
 
 //グラフィック
-	 TitieImage = LoadGraph("bmp/title.bmp");
+	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
 	 MapImage = LoadGraph("bmp/map_big.bmp");
 	 MapImage2 = LoadGraph("bmp/map_big.bmp");
 	 SysInitPlayer();
@@ -173,7 +169,8 @@ void GameInit(void)//ゲームループ内の初期化
 
 void GameTitlr(void)//タイトル画面処理
 {
-	DrawString(SCREEN_SIZE_X/2, SCREEN_SIZE_Y / 2, "フェンビー", 0xffff00, true);
+	DrawGraph(10, 200, TitieImage, true);
+	//DrawString(SCREEN_SIZE_X/2, SCREEN_SIZE_Y / 2, "フェンビー", 0xffff00, true);
 }
 
 void GameMain(void)//ゲーム画面処理
@@ -192,14 +189,10 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaPlayer();
 		UpdetaEnemy();
 		UpdetaShot();
-<<<<<<< HEAD
 		UpdetaUnti();//ここでうんちの処理をする
 		UpdetaBuble();
-=======
-		UpdetaBuble();
 		HitCheckBubble();
-		UpdetaUnti();
->>>>>>> 45f9ddbcb5c71fe727bf36da1a8959e95d38c8df
+
 	}
 
 	//ポーズ中だったら色半分
@@ -235,7 +228,6 @@ void GameDraw(void)//描画設定
 	DrawShot();
 	DrawBuble();
 	DrawUnti();
-	DrawBuble();
 }
 
 bool FadeinScreen(int fadeStep)//フェードイン処理
