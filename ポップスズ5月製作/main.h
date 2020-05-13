@@ -1,5 +1,5 @@
 #pragma once
-#include "DxLib.h"
+#include "Dxlib.h"
 enum GAMEMODE
 {
 	GMODE_INIT,
