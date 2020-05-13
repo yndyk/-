@@ -8,3 +8,4 @@ void SysInitBubble();
 void InitBubble();
 void UpdetaBuble();
 void DrawBuble();
+void HitCheckBubble();

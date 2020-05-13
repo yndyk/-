@@ -15,9 +15,10 @@ void SysInitPlayer()
 void InitPlayer()
 {
 	player.pos = { 500,430 };
+	player.size = { 32, 32 };
 	player.speed = 5;
 	player.div = DIV_RAHGT;
-	player.hp = 100;
+	player.hp = PLAYER_HP_MAX;
 	player.flag = false;
 	player.count = 0;
 }

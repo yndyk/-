@@ -3,6 +3,7 @@
 #include "player.h"
 #include "enemy.h"
 #include"shot.h"
+#include "awa.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -142,6 +143,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitPlayer();
 	 SysInitEnemy();
 	 SysInitShot();
+	 SysInitBubble();
 	 return true;
 }
 
@@ -156,6 +158,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitPlayer();
 	InitEnemy();
 	InitShot();
+	InitBubble();
 }
 
 void GameTitlr(void)//タイトル画面処理
@@ -179,6 +182,8 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaPlayer();
 		UpdetaEnemy();
 		UpdetaShot();
+		UpdetaBuble();
+		HitCheckBubble();
 	}
 
 	//ポーズ中だったら色半分
@@ -214,6 +219,7 @@ void GameDraw(void)//描画設定
 	DrawPlayer();
 	DrawEnemy();
 	DrawShot();
+	DrawBuble();
 }
 
 bool FadeinScreen(int fadeStep)//フェードイン処理
