@@ -22,7 +22,6 @@ void InitBubble()
 	bubble.speed = 1;
 	bubble.hp = 20;			// 泡により回復するライフの量
 	bubble.flag = false;	// 表示するかしないか
-
 	cnt = 0;				// 毎フレーム加算されるカウント
 	bubbleCnt = 0;			// 現在画面上に表示されている泡の数
 
@@ -33,19 +32,22 @@ void UpdetaBuble()
 	srand(time(NULL));
 
 	cnt++;
-	if (cnt % 120 == 0) {
+	if (cnt % 120 == 0)
+	{
 		bubble.flag = true;
 	}
 
-
-	if (bubble.flag == true) {
+	if (bubble.flag == true) 
+	{
 		bubble.pos.y -= bubble.speed;
 	}
-	else {
+	else 
+	{
 		bubble.flag = true;
 	}
 
-	if (bubble.pos.y + 32 < 0) {
+	if (bubble.pos.y + 32 < 0) 
+	{
 		bubble.flag = false;
 		bubble.pos = { 64 + (rand() % 18 + 1) * 32, SCREEN_SIZE_Y + 32 };
 	}

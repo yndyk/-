@@ -4,6 +4,7 @@
 #include "enemy.h"
 #include"shot.h"
 #include"unti.h"
+#include"awa.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -144,6 +145,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitEnemy();
 	 SysInitShot();
 	 SysinitUnti();
+	 SysInitBubble();
 	 return true;
 }
 
@@ -159,6 +161,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitEnemy();
 	InitShot();
 	initUnti();
+	InitBubble();
 }
 
 void GameTitlr(void)//タイトル画面処理
@@ -182,7 +185,8 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaPlayer();
 		UpdetaEnemy();
 		UpdetaShot();
-		UpdetaUnti();
+		UpdetaUnti();//ここでうんちの処理をする
+		UpdetaBuble();
 	}
 
 	//ポーズ中だったら色半分
@@ -198,8 +202,6 @@ void GameMain(void)//ゲーム画面処理
 		DrawString(SCREEN_SIZE_X/2, SCREEN_SIZE_Y / 2, "PAUSE", 0xffff00, true);
 	}
 }
-
-
 
 void GameClera(void)//クリア画面処理
 {
@@ -219,6 +221,7 @@ void GameDraw(void)//描画設定
 	DrawEnemy();
 	DrawShot();
 	DrawUnti();
+	DrawBuble();
 }
 
 bool FadeinScreen(int fadeStep)//フェードイン処理
