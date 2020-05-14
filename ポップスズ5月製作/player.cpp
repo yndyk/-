@@ -4,12 +4,14 @@
 #include"enemy.h"
 
 int playerImage[2];
+int playerdamageImage;
 
 CHARACTER player;
 //ロード
 void SysInitPlayer()
 {
 	LoadDivGraph("bmp/潜水艇アニメーション.png", 2, 2, 1, 32, 32, playerImage);
+	playerdamageImage = LoadGraph("bmp/プレイヤーダメージ.png");
 }
 //初期化
 void InitPlayer()
@@ -20,13 +22,14 @@ void InitPlayer()
 	player.div = DIV_RAHGT;
 	player.hp = PLAYER_HP_MAX;
 	player.flag = false;
+	player.damageflag = false;
 	player.count = 0;
 }
 //更新
 void UpdetaPlayer()
 {
 	//移動
-	if(CheckHitKey(KEY_INPUT_RIGHT))
+	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
 		player.pos.x += player.speed;
 		player.div = DIV_LEFT;
@@ -44,7 +47,7 @@ void UpdetaPlayer()
 	{
 		player.pos.y += player.speed;
 	}
-	
+
 	//移動制限
 	if (player.pos.x >= 590)
 	{
@@ -62,7 +65,7 @@ void UpdetaPlayer()
 	{
 		player.pos.y = 0;
 	}
-	for (int i = 0; i < ENEMY_MAX; i++) 
+	for (int i = 0; i < ENEMY_MAX; i++)
 	{
 		if ((player.pos.x < enemy[i].pos.x + enemy[i].size.x
 			&&enemy[i].pos.x < player.pos.x + player.size.x
@@ -71,17 +74,18 @@ void UpdetaPlayer()
 		{
 			player.flag = true;
 			enemy[i].flag = false;
-			player.hp -= 1; 
-			if (player.hp == 0) 
+			player.damageflag = true;
+			player.hp -= 1;
+			if (player.hp == 0)
 			{
 				gamemode = GMODE_OVER;
 			}
 		}
 	}
-	if(gamemode == GMODE_OVER)
+	if (gamemode == GMODE_OVER)
 	{
 		player.flag = false;
-		for(int i = 0; i < ENEMY_MAX;i++)
+		for (int i = 0; i < ENEMY_MAX;i++)
 		{
 			enemy[i].flag = false;
 		}
@@ -92,16 +96,26 @@ void UpdetaPlayer()
 //描画
 void DrawPlayer()
 {
-	switch (player.div) 
+	switch (player.div)
 	{
 	case DIV_RAHGT:
-		DrawGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
+		DrawGraph(player.pos.x, player.pos.y, playerImage, true);
+		if (player.damageflag == true)
+		{
+			DrawGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+		}
 		break;
 	case DIV_LEFT:
-		DrawTurnGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
+		DrawTurnGraph(player.pos.x, player.pos.y, playerImage, true);
+		if (player.damageflag == true)
+		{
+			DrawTurnGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+		}
 		break;
+
 	}
+	player.damageflag = false;
 	DrawFormatString(30, 30, 0xff0000, "%d", player.hp, true);
-	DrawBox(0, 440, player.hp, 450,0xff0000,true);
+	DrawBox(0, 440, player.hp, 450, 0xff0000, true);
 	DrawBox(0, 440, player.hp, 450, 0x000000, false);
 }
