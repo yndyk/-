@@ -40,10 +40,11 @@ typedef struct
 	XY size;
 	int type;
 	int hp;
+	bool damageflag;
 }CHARACTER;
 
 extern GAMEMODE gamemode;
-
+extern int MapFlag;
 #define SCREEN_SIZE_X 640
 #define SCREEN_SIZE_Y 480
 

@@ -10,3 +10,5 @@ void SysinitUnti();
 void initUnti();
 void UpdetaUnti();
 void DrawUnti();
+void DeleteUnti();
+void ApperUnti();

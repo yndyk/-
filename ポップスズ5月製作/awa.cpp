@@ -20,7 +20,8 @@ void SysInitBubble()
 
 void InitBubble()
 {
-	for (int i = 0; i < BUBBLE_MAX; i++) {
+	for (int i = 0; i < BUBBLE_MAX; i++) 
+	{
 		bubble[i].size = { 26, 26 };
 		bubble[i].pos = { 64 + rand() % 18 + 1 * 32, SCREEN_SIZE_Y - 32 *3 };
 		bubble[i].speed = 1;
@@ -38,9 +39,12 @@ void UpdetaBuble()
 {
 	srand(time(NULL));
 	cnt++;
-	if (cnt % 180 == 0) {
-		for (int i = 0; i < BUBBLE_MAX; i++) {
-			if (!bubble[i].flag) {
+	if (cnt % 180 == 0) 
+	{
+		for (int i = 0; i < BUBBLE_MAX; i++) 
+		{
+			if (!bubble[i].flag) 
+			{
 				bubble[i].flag = true;
 				bubble[i].pos = { 64 + (rand() % 18 + 1) * 32, SCREEN_SIZE_Y + 32 };
 				break;
@@ -48,7 +52,8 @@ void UpdetaBuble()
 		}
 	}
 
-	for (int i = 0; i < BUBBLE_MAX; i++) {
+	for (int i = 0; i < BUBBLE_MAX; i++) 
+	{
 		if (bubble[i].flag)
 		{
 			bubble[i].pos.y -= bubble[i].speed;
@@ -71,23 +76,25 @@ void UpdetaBuble()
 
 void DrawBuble()
 {
-	for (int i = 0; i < BUBBLE_MAX; i++) {
+	for (int i = 0; i < BUBBLE_MAX; i++) 
+	{
 		if (bubble[i].flag == true)
 		{
 			DrawGraph(bubble[i].pos.x, bubble[i].pos.y, bubbleImage, true);
 		}
 
 		//DrawFormatString(0, 50, 0xff0000, "cnt:%d", cnt);
-		DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
+		//DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
 		//DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", bubble[i].pos.x);
-		DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
+		//DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
 	}
 }
 
 
 void HitCheckBubble()
 {
-	for (int i = 0; i < BUBBLE_MAX; i++) {
+	for (int i = 0; i < BUBBLE_MAX; i++) 
+	{
 		if (bubble[i].flag == true)
 		{
 			if (player.pos.x < bubble[i].pos.x + bubble[i].size.x &&
@@ -112,8 +119,10 @@ void HitCheckBubble()
 
 void BubbleDelete()
 {
-	for (int i = 0; i < BUBBLE_MAX; i++) {
-		if (bubble[i].flag) {
+	for (int i = 0; i < BUBBLE_MAX; i++) 
+	{
+		if (bubble[i].flag) 
+		{
 			cnt = 0;
 			bubble[i].flag = false;
 			num++;

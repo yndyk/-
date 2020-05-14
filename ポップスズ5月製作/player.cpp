@@ -96,26 +96,27 @@ void UpdetaPlayer()
 //•`‰æ
 void DrawPlayer()
 {
-	switch (player.div)
-	{
-	case DIV_RAHGT:
-		DrawGraph(player.pos.x, player.pos.y, playerImage, true);
-		if (player.damageflag == true)
+		switch (player.div)
 		{
-			DrawGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+		case DIV_RAHGT:
+				player.count++;
+				DrawGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
+				if (player.damageflag == true)
+				{
+					DrawGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+				}
+			break;
+		case DIV_LEFT:
+				player.count++;
+				DrawTurnGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
+				if (player.damageflag == true)
+				{
+					DrawTurnGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+				}
+			break;
 		}
-		break;
-	case DIV_LEFT:
-		DrawTurnGraph(player.pos.x, player.pos.y, playerImage, true);
-		if (player.damageflag == true)
-		{
-			DrawTurnGraph(player.pos.x, player.pos.y, playerdamageImage, true);
-		}
-		break;
-
-	}
-	player.damageflag = false;
-	DrawFormatString(30, 30, 0xff0000, "%d", player.hp, true);
-	DrawBox(0, 440, player.hp, 450, 0xff0000, true);
-	DrawBox(0, 440, player.hp, 450, 0x000000, false);
+		player.damageflag = false;
+		DrawFormatString(30, 30, 0xff0000, "%d", player.hp, true);
+		DrawBox(0, 440, player.hp, 450, 0xff0000, true);
+		DrawBox(0, 440, player.hp, 450, 0x000000, false);
 }

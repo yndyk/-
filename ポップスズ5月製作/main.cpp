@@ -12,6 +12,7 @@
 int TitieImage;
 int MapImage;
 int MapImage2;
+int MapFlag;
 int bright;	//明るさ
 int gameCouner;//メイン画面のカウンター
 
@@ -141,7 +142,7 @@ bool SystmeInit(void)//システム初期化
 //グラフィック
 	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
 	 MapImage = LoadGraph("bmp/map_big.bmp");
-	 MapImage2 = LoadGraph("bmp/map_big.bmp");
+	 MapImage2 = LoadGraph("bmp/EDGE1.bmp");
 	 SysInitPlayer();
 	 SysInitEnemy();
 	 SysInitShot();
@@ -159,6 +160,7 @@ void GameInit(void)//ゲームループ内の初期化
 	fadeOut = false;
 	fadein = false;
 	pauseFlag = false;
+	MapFlag = false;
 	InitPlayer();
 	InitEnemy();
 	InitShot();
@@ -223,6 +225,10 @@ void GameOver(void)
 void GameDraw(void)//描画設定
 {
 	DrawGraph(0, 0, MapImage, true);
+	if (MapFlag == true) 
+	{
+		DrawGraph(0, 0, MapImage2, true);
+	}
 	DrawPlayer();
 	DrawEnemy();
 	DrawShot();

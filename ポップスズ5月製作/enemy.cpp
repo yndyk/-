@@ -74,8 +74,8 @@ void UpdetaEnemy()
 					enemy[7].point == 1 && 
 					enemy[8].point == 1)
 				{
-					
-					gamemode = GMODE_CLERA;
+					MapFlag = true;
+					//gamemode = GMODE_CLERA;
 				}
 			}
 		}
