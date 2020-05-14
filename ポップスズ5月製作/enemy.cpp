@@ -1,3 +1,8 @@
+//-----------------------------------------------------
+// すべての敵が倒されたフラグ enemyAllDeadFlagを追加
+// MapFlagの削除
+//-----------------------------------------------------
+
 #include "main.h"
 #include"keycheck.h"
 #include"enemy.h"
@@ -6,6 +11,7 @@
 
 int enemyImage[2];
 CHARACTER enemy[ENEMY_MAX];
+bool enemyAllDeadFlag;
 
 //ロード
 void SysInitEnemy()
@@ -24,6 +30,7 @@ void InitEnemy()
 		enemy[i].point = 0;
 		enemy[i].size = { 32,32 };
 	}
+	enemyAllDeadFlag = false;
 }
 //更新
 void UpdetaEnemy()
@@ -74,7 +81,7 @@ void UpdetaEnemy()
 					enemy[7].point == 1 && 
 					enemy[8].point == 1)
 				{
-					MapFlag = true;
+					enemyAllDeadFlag = true;
 					//gamemode = GMODE_CLERA;
 				}
 			}

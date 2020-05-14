@@ -11,6 +11,7 @@ int bubbleImage;
 int bubbleCnt;	// 現在画面上に表示されている泡の数
 int randNum;	// 乱数格納用変数
 int cnt;
+int num;
 
 void SysInitBubble()
 {
@@ -29,13 +30,15 @@ void InitBubble()
 	}
 	cnt = 0;				// 毎フレーム加算されるカウント
 	bubbleCnt = 0;			// 現在画面上に表示されている泡の数
+	num = 0;
+
 }
 
 void UpdetaBuble()
 {
 	srand(time(NULL));
 	cnt++;
-	if (cnt % 270 == 0) {
+	if (cnt % 180 == 0) {
 		for (int i = 0; i < BUBBLE_MAX; i++) {
 			if (!bubble[i].flag) {
 				bubble[i].flag = true;
@@ -55,7 +58,13 @@ void UpdetaBuble()
 				bubble[i].flag = false;
 				bubble[i].pos = { 64 + (rand() % 18 + 1) * 32, SCREEN_SIZE_Y + 32 };
 			}
-
+		}
+		if (MapFlag)
+		{
+			if (num == 0)
+			{
+				BubbleClear();
+			}
 		}
 	}
 }
@@ -69,9 +78,9 @@ void DrawBuble()
 		}
 
 		//DrawFormatString(0, 50, 0xff0000, "cnt:%d", cnt);
-		//DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
+		DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
 		//DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", bubble[i].pos.x);
-		//DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
+		DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
 	}
 }
 
@@ -97,6 +106,17 @@ void HitCheckBubble()
 					player.hp = PLAYER_HP_MAX;
 				}
 			}
+		}
+	}
+}
+
+void BubbleClear()
+{
+	for (int i = 0; i < BUBBLE_MAX; i++) {
+		if (bubble[i].flag) {
+			cnt = 0;
+			bubble[i].flag = false;
+			num++;
 		}
 	}
 }

@@ -1,3 +1,9 @@
+//-------------------------------------
+//
+// ステージの切り替えの処理のほうにDeleteUnti()を移動しました
+//
+//-----------------------------------
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -54,13 +60,6 @@ void UpdetaUnti()
 		if(unti[i].pos.y > SCREEN_SIZE_Y)
 		{
 			unti[i].flag = false;
-		}
-		if (MapFlag)
-		{
-			if (Untinum == 0)
-			{
-				DeleteUnti();
-			}
 		}
 	}
 	for (int i = 0; i < UNTI_MAX; i++)
