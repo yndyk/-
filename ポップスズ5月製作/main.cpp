@@ -1,3 +1,13 @@
+//--------------------------------------------------
+//
+// main.cppの変更点
+//	変数MapImageとMapImage2をmap.cppに移動
+//	SystemInit()からそれぞれのLoadGraph()をmap.cppに移動
+//	GameDraw()内のステージ描画をmap.cppに移動
+//	MapFlagの削除
+//
+//--------------------------------------------------
+
 #include "main.h"
 #include "keycheck.h"
 #include "player.h"
@@ -6,13 +16,11 @@
 #include"unti.h"
 #include"awa.h"
 #include "unti.h"
+#include "map.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
 int TitieImage;
-int MapImage;
-int MapImage2;
-int MapFlag;
 int bright;	//明るさ
 int gameCouner;//メイン画面のカウンター
 
@@ -141,8 +149,7 @@ bool SystmeInit(void)//システム初期化
 
 //グラフィック
 	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
-	 MapImage = LoadGraph("bmp/map_big.bmp");
-	 MapImage2 = LoadGraph("bmp/EDGE1.bmp");
+	 StageSysinit();
 	 SysInitPlayer();
 	 SysInitEnemy();
 	 SysInitShot();
@@ -160,7 +167,6 @@ void GameInit(void)//ゲームループ内の初期化
 	fadeOut = false;
 	fadein = false;
 	pauseFlag = false;
-	MapFlag = false;
 	InitPlayer();
 	InitEnemy();
 	InitShot();
@@ -193,6 +199,7 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaShot();
 		UpdetaUnti();//ここでうんちの処理をする
 		UpdetaBuble();
+		StageUpdate();//ステージ切り替えの処理
 		HitCheckBubble();
 
 	}
@@ -224,11 +231,7 @@ void GameOver(void)
 
 void GameDraw(void)//描画設定
 {
-	DrawGraph(0, 0, MapImage, true);
-	if (MapFlag == true) 
-	{
-		DrawGraph(0, 0, MapImage2, true);
-	}
+	StageDraw();
 	DrawPlayer();
 	DrawEnemy();
 	DrawShot();

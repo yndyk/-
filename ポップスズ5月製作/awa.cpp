@@ -52,7 +52,7 @@ void UpdetaBuble()
 		}
 	}
 
-	for (int i = 0; i < BUBBLE_MAX; i++) 
+	for (int i = 0; i < BUBBLE_MAX; i++)
 	{
 		if (bubble[i].flag)
 		{
@@ -62,13 +62,6 @@ void UpdetaBuble()
 			{
 				bubble[i].flag = false;
 				bubble[i].pos = { 64 + (rand() % 18 + 1) * 32, SCREEN_SIZE_Y + 32 };
-			}
-		}
-		if (MapFlag)
-		{
-			if (num == 0)
-			{
-				BubbleDelete();
 			}
 		}
 	}
