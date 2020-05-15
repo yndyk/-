@@ -1,3 +1,9 @@
+//-------------------------------
+//
+// UpdateIkayaki()に敵の座標の取得を1度だけ実行する条件を追加しました
+//
+//-------------------------------
+
 #include "main.h"
 #include "ikayaki.h"
 #include "player.h"
@@ -15,19 +21,24 @@ void InitIkayaki()
 	for (int i = 0; i < IKAYAKI_MAX; i++)
 	{
 		ikayaki[i].pos = { 0, 0 };
-		ikayaki[i].speed = 2;
+		ikayaki[i].speed = 1;
 		ikayaki[i].count = 0;
 		ikayaki[i].flag = false;
 		ikayaki[i].size = { 32, 32 };
 		ikayaki[i].hp = 30;		// イカ焼き取得時に回復するライフの量
+		ikayaki[i].onlyOnce = false;
 	}
 }
 
 void UpdateIkayaki(XY pos,bool flag, int num)	// pos:座標　flag:フラグ　num:配列番号
 {
-	if (!ikayaki[num].flag)
+	if (!ikayaki[num].onlyOnce)
 	{
-		ikayaki[num].pos = pos;
+		if (!ikayaki[num].flag)
+		{
+			ikayaki[num].pos = pos;
+			ikayaki[num].onlyOnce = true;
+		}
 	}
 
 	ikayaki[num].flag = flag;
@@ -51,10 +62,10 @@ void DrawIkayaki(int num)
 	{
 		DrawGraph(ikayaki[num].pos.x, ikayaki[num].pos.y, ikayakiImage, true);
 	}
-	DrawFormatString(0, 100 + num * 18, 0xff0000, "flag;%d", ikayaki[num].flag);
-	//DrawFormatString(50, 100 + num * 18, 0xff0000, "x:%d", ikayaki[num].pos.x);
-	//DrawFormatString(100, 100 + num * 18, 0xff0000, "y:%d", ikayaki[num].pos.y);
-	DrawFormatString(150, 100 + num * 18, 0xff0000, "num;%d", num);
+	DrawFormatString(0, 100 + num * 18, 0xff0000, "f;%d", ikayaki[num].flag);
+	DrawFormatString(50, 100 + num * 18, 0xff0000, "x:%d", ikayaki[num].pos.x);
+	DrawFormatString(100, 100 + num * 18, 0xff0000, "y:%d", ikayaki[num].pos.y);
+	//DrawFormatString(150, 100 + num * 18, 0xff0000, "num;%d", num);
 }
 
 void HitCheckIkayaki()

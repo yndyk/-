@@ -1,6 +1,6 @@
 //-----------------------------------------------------
 // 
-// CHARACTER構造体にchangeFlagを追加
+// CHARACTER構造体に一度だけ実行する用の変数を追加
 // 
 //-----------------------------------------------------
 
@@ -49,6 +49,7 @@ typedef struct
 	int hp;
 	bool damageflag;
 	bool changeFlag;		// 画像切り替え用変数
+	bool onlyOnce;			// 1度だけ実行する用の変数
 }CHARACTER;
 
 #define SCREEN_SIZE_X 640
