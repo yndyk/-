@@ -40,6 +40,7 @@ typedef struct
 	XY size;
 	int type;
 	int hp;
+	int time;
 }CHARACTER;
 
 extern GAMEMODE gamemode;

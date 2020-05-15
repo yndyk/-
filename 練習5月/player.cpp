@@ -11,6 +11,7 @@ void SysInitPlayer()
 {
 	LoadDivGraph("bmp/潜水艇アニメーション.png", 2, 2, 1, 32, 32, playerImage);
 }
+
 //初期化
 void InitPlayer()
 {
@@ -22,6 +23,7 @@ void InitPlayer()
 	player.flag = false;
 	player.count = 0;
 }
+
 //更新
 void UpdetaPlayer()
 {
