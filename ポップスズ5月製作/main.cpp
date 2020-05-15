@@ -29,7 +29,7 @@ bool fadein;//フェードイン(true)
 bool fadeOut;//フェードアウト(false)
 //ポーズ
 bool pauseFlag;//ポーズのフラグ
-
+int leftTime;
 GAMEMODE gamemode;
 
 //WinMain関数の使用
@@ -131,8 +131,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		ScreenFlip();		//裏表面を表表面に瞬間コピー
 	}
 
-
-
 	DxLib_End();	//DxLibの終了
 	return 0;		//このプログラムの終了
 }
@@ -156,6 +154,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitBubble();
 	 SysinitUnti();
 	 SysInitBubble();
+	 leftTime = 60 * 31;
 	 return true;
 }
 
@@ -237,6 +236,7 @@ void GameDraw(void)//描画設定
 	DrawShot();
 	DrawBuble();
 	DrawUnti();
+	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / 60);
 }
 
 bool FadeinScreen(int fadeStep)//フェードイン処理

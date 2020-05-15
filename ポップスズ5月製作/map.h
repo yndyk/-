@@ -1,6 +1,7 @@
 #pragma once
 
-enum STAGE_ID {
+enum STAGE_ID 
+{
 	STAGE1,
 	STAGE2,
 	STAGE3
