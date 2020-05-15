@@ -4,6 +4,7 @@
 #include "enemy.h"
 #include "awa.h"
 #include "unti.h"
+#include "ikayaki.h"
 
 int MapImage;
 int MapImage2;//2ステージ
@@ -33,6 +34,7 @@ void StageUpdate()
 			InitPlayer();
 			BubbleDelete();
 			DeleteUnti();
+			DeleteIkayaki();
 			stageID = STAGE2;
 		}
 		break;
@@ -42,6 +44,7 @@ void StageUpdate()
 			InitPlayer();
 			BubbleDelete();
 			DeleteUnti();
+			DeleteIkayaki();
 			stageID = STAGE3;
 		}
 		break;
@@ -60,5 +63,7 @@ void StageDraw()
 	if (stageID == STAGE3)		image = MapImage3;
 
 	DrawGraph(0, 0, image, true);
+
+	DrawFormatString(0, 0, 0xff0000, "stageID:%d", stageID);
 
 }

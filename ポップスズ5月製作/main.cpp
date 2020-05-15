@@ -1,10 +1,9 @@
 //--------------------------------------------------
 //
-// main.cppの変更点
-//	変数MapImageとMapImage2をmap.cppに移動
-//	SystemInit()からそれぞれのLoadGraph()をmap.cppに移動
-//	GameDraw()内のステージ描画をmap.cppに移動
-//	MapFlagの削除
+// ikayakiに関する関数の追加
+// HitCheckBubble()をawa.cppに移動
+// 
+// 
 //
 //--------------------------------------------------
 #include "main.h"
@@ -16,6 +15,7 @@
 #include"awa.h"
 #include "unti.h"
 #include "map.h"
+#include "ikayaki.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -153,6 +153,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitBubble();
 	 SysinitUnti();
 	 SysInitBubble();
+	 SysInitIkayaki();
 	 leftTime = TIME_FRAME * 31;
 	 return true;
 }
@@ -171,6 +172,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitBubble();
 	initUnti();
 	InitBubble();
+	InitIkayaki();
 }
 
 void GameTitlr(void)//タイトル画面処理
@@ -192,13 +194,12 @@ void GameMain(void)//ゲーム画面処理
 	if(!pauseFlag)
 	{
 		//ポーズ中にしない処理
+		StageUpdate();//ステージ切り替えの処理
 		UpdetaPlayer();
 		UpdetaEnemy();
 		UpdetaShot();
 		UpdetaUnti();//ここでうんちの処理をする
 		UpdetaBuble();
-		StageUpdate();//ステージ切り替えの処理
-		HitCheckBubble();
 		leftTime--;
 	}
 

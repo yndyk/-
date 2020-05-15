@@ -1,3 +1,9 @@
+//-----------------------------------------------------
+// 
+// CHARACTER\‘¢‘Ì‚ÉchangeFlag‚ğ’Ç‰Á
+// 
+//-----------------------------------------------------
+
 #pragma once
 #include "Dxlib.h"
 
@@ -42,6 +48,7 @@ typedef struct
 	int type;
 	int hp;
 	bool damageflag;
+	bool changeFlag;		// ‰æ‘œØ‚è‘Ö‚¦—p•Ï”
 }CHARACTER;
 
 #define SCREEN_SIZE_X 640
