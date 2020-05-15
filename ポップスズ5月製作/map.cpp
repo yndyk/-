@@ -1,5 +1,6 @@
 #include "main.h"
 #include "map.h"
+#include"player.h"
 #include "enemy.h"
 #include "awa.h"
 #include "unti.h"
@@ -30,6 +31,7 @@ void StageUpdate()
 	case STAGE1:
 		if (enemyAllDeadFlag) {	// ‚±‚±‚É“G‚ğ‚·‚×‚Ä“|‚µ‚½‚Æ‚«‚Ìˆ—‚ğ‘‚­
 			InitEnemy();
+			InitPlayer();
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();
@@ -39,6 +41,7 @@ void StageUpdate()
 	case STAGE2:
 		if (enemyAllDeadFlag) {	// ‚±‚±‚É“G‚ğ‚·‚×‚Ä“|‚µ‚½‚Æ‚«‚Ìˆ—‚ğ‘‚­
 			InitEnemy();
+			InitPlayer();
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();

@@ -3,6 +3,7 @@
 #include"enemy.h"
 #include"player.h"
 #include"shot.h"
+#include"unti.h"
 
 int enemyImage[2];
 CHARACTER enemy[ENEMY_MAX];
@@ -83,6 +84,7 @@ void UpdetaEnemy()
 		}
 	}
 }
+
 //•`‰æ
 void DrawEnemy()
 {

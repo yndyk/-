@@ -20,7 +20,7 @@ void initUnti()
 {
 	for (int i = 0; i < UNTI_MAX;++i) 
 	{
-		unti[i].pos = { GetRand(500), 0 };
+		unti[i].pos = { GetRand(500),GetRand(30) };
 		unti[i].size = { UNTI_SIZE_X,UNTI_SIZE_Y };
 		unti[i].flag = false;
 		unti[i].speed = 3;
@@ -46,14 +46,20 @@ void UpdetaUnti()
 		}
 		if (unti[i].flag == false)
 		{
-			unti[i].pos = { GetRand(500), 0 };
+			unti[i].pos = { GetRand(500), GetRand(30) };
 			unti[i].count = 0;
 			unti[i].flag = true;
+
 		}
 		if (unti[i].pos.y > SCREEN_SIZE_Y + 32)
 		{
 			unti[i].pos = { GetRand(500), 0 };
 			unti[i].flag = true;
+		}
+		//ステージ切り替えのウンコの処理
+		if (MapFlag == true)
+		{
+			unti[i].count = 0;
 		}
 
 		//当たり判定
@@ -66,6 +72,7 @@ void UpdetaUnti()
 			unti[i].flag = false;
 			player.hp -= 1;
 		}
+
 	}
 }
 
@@ -79,7 +86,7 @@ void DrawUnti()
 			DrawGraph(unti[i].pos.x, unti[i].pos.y, UntiImage, true);
 			/*DrawBox(unti.pos.x, unti.pos.y,
 			unti.size.x, unti.size.y, 0xff0000, true);*/
-			//DrawFormatString(30, 60, 0xff0000, "%d", unti[i].count, true);
+			DrawFormatString(30, 60, 0xff0000, "%d", unti[i].count, true);
 		}
 	}
 }

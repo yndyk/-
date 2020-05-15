@@ -6,7 +6,6 @@
 // 
 //
 //--------------------------------------------------
-
 #include "main.h"
 #include "keycheck.h"
 #include "player.h"
@@ -186,7 +185,6 @@ void GameMain(void)//ƒQ[ƒ€‰æ–Êˆ—
 {
 	//PAUSE‚ª‰Ÿ‚³‚ê‚½‚ç
 	//pauseFlag‚ğØ‘Ö“¾‚é
-	
 	if(trgKey[P1_A])
 	{
 		pauseFlag = !pauseFlag;//!‚ğ‚Â‚¯‚é‚Æ”Û’è‚É‚È‚é
