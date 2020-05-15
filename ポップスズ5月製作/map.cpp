@@ -1,6 +1,11 @@
+//----------------------------------------------
+// 
+// switch•¶‚ÌŠecase‚ÉƒCƒJÄ‚«‚Ì‰Šú‰»ˆ—‚ğ“ü‚ê‚Ü‚µ‚½
+// 
+//----------------------------------------------
 #include "main.h"
 #include "map.h"
-#include"player.h"
+#include "player.h"
 #include "enemy.h"
 #include "awa.h"
 #include "unti.h"
@@ -32,6 +37,7 @@ void StageUpdate()
 		if (enemyAllDeadFlag) {	// ‚±‚±‚É“G‚ğ‚·‚×‚Ä“|‚µ‚½‚Æ‚«‚Ìˆ—‚ğ‘‚­
 			InitEnemy();
 			InitPlayer();
+			InitIkayaki();
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();
@@ -42,6 +48,7 @@ void StageUpdate()
 		if (enemyAllDeadFlag) {	// ‚±‚±‚É“G‚ğ‚·‚×‚Ä“|‚µ‚½‚Æ‚«‚Ìˆ—‚ğ‘‚­
 			InitEnemy();
 			InitPlayer();
+			InitIkayaki();
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();

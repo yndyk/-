@@ -87,6 +87,9 @@ void UpdetaEnemy()
 				}
 			}
 
+		}
+		else
+		{
 			if (enemy[i].changeFlag)
 			{
 				UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
@@ -107,7 +110,7 @@ void DrawEnemy()
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
 		//DrawFormatString(100, 100 + i * 18, 0xff0000, "flag:%d", enemy[i].flag);
-		DrawFormatString(150, 100+i*18, 0xff0000, "point:%d", enemy[i].point);
+		//DrawFormatString(150, 100+i*18, 0xff0000, "point:%d", enemy[i].point);
 		DrawIkayaki(i);
 	}
 	
