@@ -15,6 +15,7 @@ int UntiImage;
 CHARACTER unti[UNTI_MAX];
 int Untinum;
 int UntiCount;
+
 //ÉçÅ[Éh
 void SysinitUnti()
 {
@@ -62,6 +63,7 @@ void UpdetaUnti()
 			unti[i].flag = false;
 		}
 	}
+
 	for (int i = 0; i < UNTI_MAX; i++)
 	{
 			//ìñÇΩÇËîªíË
@@ -73,7 +75,7 @@ void UpdetaUnti()
 				player.flag = false;
 				unti[i].flag = false;
 				player.damageflag = true;
-				player.hp -= 1;
+				player.hp -= TIME_FRAME * 1;
 			}
 		}
 }

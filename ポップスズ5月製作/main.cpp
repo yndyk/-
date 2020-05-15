@@ -29,7 +29,7 @@ bool fadein;//フェードイン(true)
 bool fadeOut;//フェードアウト(false)
 //ポーズ
 bool pauseFlag;//ポーズのフラグ
-int leftTime;
+int leftTime;//時間
 GAMEMODE gamemode;
 
 //WinMain関数の使用
@@ -154,7 +154,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitBubble();
 	 SysinitUnti();
 	 SysInitBubble();
-	 leftTime = 60 * 31;
+	 leftTime = TIME_FRAME * 31;
 	 return true;
 }
 
@@ -184,6 +184,7 @@ void GameMain(void)//ゲーム画面処理
 {
 	//PAUSEが押されたら
 	//pauseFlagを切替得る
+	
 	if(trgKey[P1_A])
 	{
 		pauseFlag = !pauseFlag;//!をつけると否定になる
@@ -200,7 +201,7 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaBuble();
 		StageUpdate();//ステージ切り替えの処理
 		HitCheckBubble();
-
+		leftTime--;
 	}
 
 	//ポーズ中だったら色半分
@@ -220,7 +221,6 @@ void GameMain(void)//ゲーム画面処理
 void GameClera(void)//クリア画面処理
 {
 	DrawString(0, 0, "GAME_CLERA", 0xffff00, true);
-	
 }
 
 void GameOver(void)
@@ -236,7 +236,7 @@ void GameDraw(void)//描画設定
 	DrawShot();
 	DrawBuble();
 	DrawUnti();
-	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / 60);
+	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / TIME_FRAME);
 }
 
 bool FadeinScreen(int fadeStep)//フェードイン処理

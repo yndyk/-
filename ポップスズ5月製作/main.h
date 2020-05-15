@@ -1,5 +1,6 @@
 #pragma once
 #include "Dxlib.h"
+
 enum GAMEMODE
 {
 	GMODE_INIT,
@@ -43,18 +44,19 @@ typedef struct
 	bool damageflag;
 }CHARACTER;
 
-extern GAMEMODE gamemode;
 #define SCREEN_SIZE_X 640
 #define SCREEN_SIZE_Y 480
+#define TIME_FRAME 60
 
 #define PI 3.141592
+extern GAMEMODE gamemode;
+extern int leftTime;
 
 //プロトタイプ宣言
 void GameInit(void);
 bool SystmeInit(void);
 void GameTitlr(void);
 void GameMain(void);
-void GameMain2(void);
 void GameDraw(void);
 void GameClera(void);
 void GameOver(void);

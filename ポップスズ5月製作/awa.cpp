@@ -25,7 +25,7 @@ void InitBubble()
 		bubble[i].size = { 26, 26 };
 		bubble[i].pos = { 64 + rand() % 18 + 1 * 32, SCREEN_SIZE_Y - 32 *3 };
 		bubble[i].speed = 1;
-		bubble[i].hp = 20;			// 泡により回復するライフの量
+		bubble[i].hp = 60 * 20;			// 泡により回復するライフの量
 		bubble[i].flag = false;		// 表示するかしないか
 		bubble[i].count = 0;
 	}
@@ -96,14 +96,13 @@ void HitCheckBubble()
 				player.pos.y + player.size.y > bubble[i].pos.y)
 			{
 				bubble[i].flag = false;
-
-				if (player.hp < PLAYER_HP_MAX)
+				if (player.hp < TIME_FRAME*PLAYER_HP_MAX)
 				{
 					player.hp = player.hp + bubble[i].hp;
 				}
-				if (player.hp + bubble[i].hp >= PLAYER_HP_MAX)
+				if (player.hp + bubble[i].hp >= TIME_FRAME *PLAYER_HP_MAX)
 				{
-					player.hp = PLAYER_HP_MAX;
+					player.hp = TIME_FRAME *PLAYER_HP_MAX;
 				}
 			}
 		}

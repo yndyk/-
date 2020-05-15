@@ -5,8 +5,8 @@
 
 int playerImage[2];
 int playerdamageImage;
-
 CHARACTER player;
+
 //ロード
 void SysInitPlayer()
 {
@@ -20,11 +20,12 @@ void InitPlayer()
 	player.size = { 32, 32 };
 	player.speed = 5;
 	player.div = DIV_RAHGT;
-	player.hp = PLAYER_HP_MAX;
+	player.hp = TIME_FRAME *PLAYER_HP_MAX;
 	player.flag = false;
 	player.damageflag = false;
 	player.count = 0;
 }
+
 //更新
 void UpdetaPlayer()
 {
@@ -90,6 +91,7 @@ void UpdetaPlayer()
 			enemy[i].flag = false;
 		}
 	}
+	player.hp--;
 	player.count++;
 }
 
@@ -116,7 +118,7 @@ void DrawPlayer()
 			break;
 		}
 		player.damageflag = false;
-		DrawFormatString(30, 30, 0xff0000, "%d", player.hp, true);
-		DrawBox(0, 440, player.hp, 450, 0xff0000, true);
-		DrawBox(0, 440, player.hp, 450, 0x000000, false);
+		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
+		DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
+		DrawBox(0, 440, player.hp / 60, 450, 0x000000, false);
 }
