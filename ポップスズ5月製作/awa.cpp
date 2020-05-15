@@ -101,10 +101,6 @@ void HitCheckBubble()
 				{
 					player.hp = player.hp + bubble[i].hp;
 				}
-				if (player.hp + bubble[i].hp >= TIME_FRAME *PLAYER_HP_MAX)
-				{
-					player.hp = TIME_FRAME *PLAYER_HP_MAX;
-				}
 			}
 		}
 	}
