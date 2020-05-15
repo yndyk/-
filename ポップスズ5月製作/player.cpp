@@ -1,3 +1,10 @@
+//-----------------------------------------------------
+// 
+// ƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è‚É“G‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—‚ğ’Ç‰Á
+//	if (enemy[0]`[8].point == 1)‚Ì‰ÓŠ
+// 
+//-----------------------------------------------------
+
 #include "main.h"
 #include"keycheck.h"
 #include"player.h"
@@ -80,6 +87,21 @@ void UpdetaPlayer()
 			if (player.hp == 0)
 			{
 				gamemode = GMODE_OVER;
+			}
+
+			enemy[i].point = 1;
+			if (enemy[0].point == 1 &&
+				enemy[1].point == 1 &&
+				enemy[2].point == 1 &&
+				enemy[3].point == 1 &&
+				enemy[4].point == 1 &&
+				enemy[5].point == 1 &&
+				enemy[6].point == 1 &&
+				enemy[7].point == 1 &&
+				enemy[8].point == 1)
+			{
+				enemyAllDeadFlag = true;
+				//gamemode = GMODE_CLERA;
 			}
 		}
 	}

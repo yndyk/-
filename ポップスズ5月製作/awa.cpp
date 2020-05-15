@@ -63,6 +63,7 @@ void UpdetaBuble()
 				bubble[i].flag = false;
 				bubble[i].pos = { 64 + (rand() % 18 + 1) * 32, SCREEN_SIZE_Y + 32 };
 			}
+			HitCheckBubble();
 		}
 	}
 }
