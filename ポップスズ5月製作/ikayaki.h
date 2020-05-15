@@ -1,3 +1,9 @@
+//-------------------------------
+// 
+// ŠÖ”HitCheckIkayaki()‚Éˆø”int‚ğ’Ç‰Á‚µ‚Ü‚µ‚½
+//
+//-------------------------------
+
 #pragma once
 #define IKAYAKI_MAX 9
 
@@ -8,5 +14,5 @@ void SysInitIkayaki();
 void InitIkayaki();
 void UpdateIkayaki(XY, bool, int);
 void DrawIkayaki(int);
-void HitCheckIkayaki();
+void HitCheckIkayaki(int);
 void DeleteIkayaki();
