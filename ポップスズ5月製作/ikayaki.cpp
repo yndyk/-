@@ -1,6 +1,6 @@
 //-------------------------------
 //
-// イカがイカ焼きになるかどうかのフラグikayaki[].flagの取得を、一度しか読み取れないようにしました
+// 
 //
 //-------------------------------
 
@@ -21,7 +21,7 @@ void InitIkayaki()
 	for (int i = 0; i < IKAYAKI_MAX; i++)
 	{
 		ikayaki[i].pos = { 0, 0 };
-		ikayaki[i].speed = 1;
+		ikayaki[i].speed = { 1,1 };
 		ikayaki[i].count = 0;
 		ikayaki[i].flag = false;
 		ikayaki[i].size = { 32, 32 };
@@ -45,7 +45,7 @@ void UpdateIkayaki(XY pos,bool flag, int num)	// pos:座標　flag:フラグ　num:配列
 		
 	if (ikayaki[num].flag)
 	{
-		ikayaki[num].pos.y += ikayaki[num].speed;
+		ikayaki[num].pos.y += ikayaki[num].speed.y;
 
 		if (ikayaki[num].pos.y > SCREEN_SIZE_Y)
 		{
@@ -62,9 +62,9 @@ void DrawIkayaki(int num)
 	{
 		DrawGraph(ikayaki[num].pos.x, ikayaki[num].pos.y, ikayakiImage, true);
 	}
-	DrawFormatString(0, 100 + num * 18, 0xff0000, "f;%d", ikayaki[num].flag);
-	DrawFormatString(50, 100 + num * 18, 0xff0000, "x:%d", ikayaki[num].pos.x);
-	DrawFormatString(100, 100 + num * 18, 0xff0000, "y:%d", ikayaki[num].pos.y);
+	//DrawFormatString(0, 100 + num * 18, 0xff0000, "f;%d", ikayaki[num].flag);
+	//DrawFormatString(50, 100 + num * 18, 0xff0000, "x:%d", ikayaki[num].pos.x);
+	//DrawFormatString(100, 100 + num * 18, 0xff0000, "y:%d", ikayaki[num].pos.y);
 	//DrawFormatString(150, 100 + num * 18, 0xff0000, "num;%d", num);
 }
 

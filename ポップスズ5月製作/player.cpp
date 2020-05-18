@@ -1,7 +1,7 @@
 //-----------------------------------------------------
 // 
-// ƒvƒŒƒCƒ„[‚Ì“–‚½‚è”»’è‚É“G‚É“–‚½‚Á‚½‚Æ‚«‚Ìˆ—‚ğ’Ç‰Á
-//	if (enemy[0]`[8].point == 1)‚Ì‰ÓŠ
+// 
+//	
 // 
 //-----------------------------------------------------
 
@@ -25,7 +25,8 @@ void InitPlayer()
 {
 	player.pos = { 500,430 };
 	player.size = { 32, 32 };
-	player.speed = 5;
+	player.offSet = { player.size.x / 2, player.size.y / 2 };
+	player.speed = { 5,5 };
 	player.div = DIV_RAHGT;
 	player.hp = TIME_FRAME *PLAYER_HP_MAX;
 	player.flag = false;
@@ -39,21 +40,21 @@ void UpdetaPlayer()
 	//ˆÚ“®
 	if (CheckHitKey(KEY_INPUT_RIGHT))
 	{
-		player.pos.x += player.speed;
+		player.pos.x += player.speed.x;
 		player.div = DIV_LEFT;
 	}
 	if (CheckHitKey(KEY_INPUT_LEFT))
 	{
-		player.pos.x -= player.speed;
+		player.pos.x -= player.speed.x;
 		player.div = DIV_RAHGT;
 	}
 	if (CheckHitKey(KEY_INPUT_UP))
 	{
-		player.pos.y -= player.speed;
+		player.pos.y -= player.speed.y;
 	}
 	if (CheckHitKey(KEY_INPUT_DOWN))
 	{
-		player.pos.y += player.speed;
+		player.pos.y += player.speed.y;
 	}
 
 	//ˆÚ“®§ŒÀ

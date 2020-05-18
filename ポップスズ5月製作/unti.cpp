@@ -1,6 +1,6 @@
 //-------------------------------------
 //
-// ステージの切り替えの処理のほうにDeleteUnti()を移動しました
+// UpdateUnti()のsrand(time(NULL))をmain.cppに処理を移行
 //
 //-----------------------------------
 
@@ -8,8 +8,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "main.h"
-#include"player.h"
-#include"unti.h"
+#include "player.h"
+#include "unti.h"
 
 int UntiImage;
 CHARACTER unti[UNTI_MAX];
@@ -30,7 +30,7 @@ void initUnti()
 		unti[i].pos = { 64 + rand() % 18 + 1 * 32, 0 - 32 * 3 };
 		unti[i].size = { UNTI_SIZE_X,UNTI_SIZE_Y };
 		unti[i].flag = false;
-		unti[i].speed = 6;
+		unti[i].speed = { 6,6 };
 		unti[i].count = false;
 		
 	}
@@ -49,7 +49,7 @@ void UpdetaUnti()
 	{
 		if (unti[i].flag)
 		{
-			unti[i].pos.y += unti[i].speed;
+			unti[i].pos.y += unti[i].speed.y;
 
 			if (unti[i].pos.y + unti[i].size.y < 0)
 			{
