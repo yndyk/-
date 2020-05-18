@@ -87,8 +87,7 @@ void UpdetaEnemy()
 		if (enemy[i].flag == true)
 		{
 			//ˆÚ“®
-			MoveEnemy(i);		// “G‚ÌˆÚ“®§Œä
-
+			MoveEnemy(i);// “G‚ÌˆÚ“®§Œä
 			//’e‚Ì“–‚½‚è”»’è
 			if ((shot.pos.x < enemy[i].pos.x + enemy[i].size.x
 				&& enemy[i].pos.x < shot.pos.x + shot.size.x
@@ -115,8 +114,9 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
-
-						enemy[i].type = GetRand(3);
+						//
+						enemy[i].type = enemy[i].type + stageID;
+						
 					}
 				}
 			}
@@ -159,8 +159,8 @@ void DrawEnemy()
 				break;
 			}
 		
-			DrawGraph(enemy[i].pos.x - enemy[i].offSet.x, enemy[i].pos.y - enemy[i].offSet.y,
-				enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
+			/*DrawGraph(enemy[i].pos.x - enemy[i].offSet.x, enemy[i].pos.y - enemy[i].offSet.y,
+				enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);*/
 			//DrawCircle(enemy[i].pos.x, enemy[i].pos.y, 2, 0xffff00, true);
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
