@@ -10,10 +10,9 @@
 #include"player.h"
 #include"shot.h"
 #include "ikayaki.h"
+#include"map.h"
 
-int enemyImage[2];
-int enemyImage2[2];
-int enemyImage3[2];
+int enemyImage[ENEMY_TYPE_MAX][2];//エネミー3種類,2パターン
 int enemyType;
 int enemyType2;
 int enemyType3;
@@ -23,9 +22,9 @@ bool enemyAllDeadFlag;
 //ロード
 void SysInitEnemy()
 {
-	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage, true);
-	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage2, true);
-  	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage3, true);
+	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
+	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
+  	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
 	enemyType = false;
 	enemyType2 = false;
 	enemyType3 = false;
@@ -36,18 +35,36 @@ void InitEnemy()
 {
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
+		switch (enemy[i].type)//エネミー別に初期化する
+		{
+		case TYPE_1:
+			enemy[i].size = { 32,32 };
+			enemy[i].type = TYPE_1;
+			break;
+		case TYPE_2:
+			enemy[i].size = { 32,32 };
+			enemy[i].type = TYPE_2;
+			break;
+		case TYPE_3:
+			enemy[i].size = { 32,64 };
+			enemy[i].type = TYPE_3;
+			break;
+		default:
+			break;
+		}
+
 		enemy[i].pos = { 50 + i * 50,GetRand(20 + i * 50) };
 		enemy[i].speed = 2;
 		enemy[i].count = 0;
 		enemy[i].flag = true;
 		enemy[i].point = 0;
-		enemy[i].size = { 32,32 };
 		enemy[i].changeFlag = false;
 		enemy[i].div = DIV_RAHGT;
 	}
-	
+
 	enemyAllDeadFlag = false;
 }
+
 //更新
 void UpdetaEnemy()
 {
@@ -96,21 +113,12 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
-						enemyType = true;//エネミータイプ1
-						if (enemyType == true) 
-						{
-							enemyType2 = true;//エネミータイプ2
-						}
-						if(enemyType2 == false)
-						{
-							enemyType3 = true;//エネミータイプ3
-						}
-						//gamemode = GMODE_CLERA;
+						enemy[i].type = GetRand(3);
 					}
 				}
 			}
-
 		}
+
 		else
 		{
 			if (enemy[i].changeFlag)
@@ -120,52 +128,34 @@ void UpdetaEnemy()
 		}
 	}
 }
+
 //描画
 void DrawEnemy()
 {
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		if (enemy[i].flag == true) 
+		
+		if (enemy[i].flag == true)
 		{
 			switch (enemy[i].div)
 			{
 			case DIV_RAHGT:
-				enemy[i].count++;
-				if (enemyType == false) 
-				{
-					DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage2[enemy[i].count / 50 % 2], true);
-				}
-				if (enemyType2 == true)
-				{
-					DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);
-				}
-				if (enemyType3 == true)
-				{
-					DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage3[enemy[i].count / 50 % 2], true);
-				}
+				enemy[i].count++;	
+				//エネミータイプにステージを足す
+					DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
+						enemyImage[enemy[i].type + stageID][enemy[i].count / 50 % 2], true);
 				break;
 			case DIV_LEFT:
-				enemy[i].count++;
-				if (enemyType == false)
-				{
-					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage2[enemy[i].count / 50 % 2], true);
-				}
-				if (enemyType2 == true)
-				{
-					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);
-				}
-				if (enemyType3 == true)
-				{
-					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage3[enemy[i].count / 50 % 2], true);
-				}
+				enemy[i].count++;			
+					DrawTurnGraph(enemy[i].pos.x,enemy[i].pos.y,
+						enemyImage[enemy[i].type + stageID][enemy[i].count / 50 % 2], true);
 				break;
 			default:
 				break;
 			}
 			/*enemy[i].count++;
-			DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);	
+			DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);
 			DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage2[enemy[i].count / 50 % 2], true);*/
-			
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);

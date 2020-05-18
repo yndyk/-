@@ -26,7 +26,9 @@ enum GAMEDIV
 enum TYPE_MODE
 {
 	TYPE_1,
-	TYPE_2
+	TYPE_2,
+	TYPE_3,
+	TYPE_MAX
 };
 
 

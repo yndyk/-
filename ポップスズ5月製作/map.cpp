@@ -52,10 +52,6 @@ void StageUpdate()
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();
-			//エネミータイプ状況
-			enemyType = true;
-			enemyType2 = false;
-			enemyType3 = true;
 			stageID = STAGE3;
 		}
 		break;
@@ -63,10 +59,7 @@ void StageUpdate()
 		if (enemyAllDeadFlag) {	// ここに敵をすべて倒したときの処理を書く
 			
 			gamemode = GMODE_CLERA;
-			//エネミータイプ状況
-			enemyType = false;
-			enemyType2 = false;
-			enemyType3 = false;
+			stageID = STAGE1;//初期化する
 		}
 		break;
 	}

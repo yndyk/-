@@ -1,5 +1,6 @@
 #pragma once
 #define ENEMY_MAX 9
+#define ENEMY_TYPE_MAX 3
 extern CHARACTER enemy[ENEMY_MAX];
 extern bool enemyAllDeadFlag;
 extern int enemyType;

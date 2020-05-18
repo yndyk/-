@@ -7,6 +7,7 @@ enum STAGE_ID
 	STAGE3
 };
 
+extern STAGE_ID stageID;
 
 void StageSysinit();
 void StageInit();
