@@ -96,14 +96,14 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
-						enemyType = true;
+						enemyType = true;//エネミータイプ1
 						if (enemyType == true) 
 						{
-							enemyType2 = true;
+							enemyType2 = true;//エネミータイプ2
 						}
 						if(enemyType2 == false)
 						{
-							enemyType3 = true;
+							enemyType3 = true;//エネミータイプ3
 						}
 						//gamemode = GMODE_CLERA;
 					}
