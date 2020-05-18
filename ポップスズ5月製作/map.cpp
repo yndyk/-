@@ -52,11 +52,20 @@ void StageUpdate()
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();
+			enemyType = true;
+			enemyType2 = false;
+			enemyType3 = true;
 			stageID = STAGE3;
 		}
 		break;
 	case STAGE3:
-
+		if (enemyAllDeadFlag) {	// ‚±‚±‚É“G‚ğ‚·‚×‚Ä“|‚µ‚½‚Æ‚«‚Ìˆ—‚ğ‘‚­
+			
+			gamemode = GMODE_CLERA;
+			enemyType = false;
+			enemyType2 = false;
+			enemyType3 = false;
+		}
 		break;
 	}
 }

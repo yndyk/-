@@ -23,6 +23,13 @@ enum GAMEDIV
 	DIV_LEFT,
 	DIV_DOWN
 };
+enum TYPE_MODE
+{
+	TYPE_1,
+	TYPE_2
+};
+
+
 typedef struct
 {
 	int x;
@@ -35,6 +42,7 @@ typedef struct
 	float x;
 	float y;
 }XY_F;
+
 
 typedef struct
 {

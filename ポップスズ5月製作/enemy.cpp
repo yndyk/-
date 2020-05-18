@@ -12,14 +12,25 @@
 #include "ikayaki.h"
 
 int enemyImage[2];
+int enemyImage2[2];
+int enemyImage3[2];
+int enemyType;
+int enemyType2;
+int enemyType3;
 CHARACTER enemy[ENEMY_MAX];
 bool enemyAllDeadFlag;
 
 //ロード
 void SysInitEnemy()
 {
-	LoadDivGraph("bmp/イカ.png", 2, 2, 1, 32, 32, enemyImage, true);
+	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage, true);
+	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage2, true);
+  	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage3, true);
+	enemyType = false;
+	enemyType2 = false;
+	enemyType3 = false;
 }
+
 //初期化
 void InitEnemy()
 {
@@ -32,7 +43,9 @@ void InitEnemy()
 		enemy[i].point = 0;
 		enemy[i].size = { 32,32 };
 		enemy[i].changeFlag = false;
+		enemy[i].div = DIV_RAHGT;
 	}
+	
 	enemyAllDeadFlag = false;
 }
 //更新
@@ -48,13 +61,14 @@ void UpdetaEnemy()
 			if (enemy[i].pos.x > 590)
 			{
 				enemy[i].speed = -enemy[i].speed;
+				enemy[i].div = DIV_LEFT;
 			}
 
 			if (enemy[i].pos.x < 50)
 			{
 				enemy[i].speed = -enemy[i].speed;
+				enemy[i].div = DIV_RAHGT;
 			}
-
 
 			//弾の当たり判定
 			if ((shot.pos.x < enemy[i].pos.x + enemy[i].size.x
@@ -82,6 +96,15 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
+						enemyType = true;
+						if (enemyType == true) 
+						{
+							enemyType2 = true;
+						}
+						if(enemyType2 == false)
+						{
+							enemyType3 = true;
+						}
 						//gamemode = GMODE_CLERA;
 					}
 				}
@@ -104,8 +127,45 @@ void DrawEnemy()
 	{
 		if (enemy[i].flag == true) 
 		{
-			enemy[i].count++;
+			switch (enemy[i].div)
+			{
+			case DIV_RAHGT:
+				enemy[i].count++;
+				if (enemyType == false) 
+				{
+					DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage2[enemy[i].count / 50 % 2], true);
+				}
+				if (enemyType2 == true)
+				{
+					DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);
+				}
+				if (enemyType3 == true)
+				{
+					DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage3[enemy[i].count / 50 % 2], true);
+				}
+				break;
+			case DIV_LEFT:
+				enemy[i].count++;
+				if (enemyType == false)
+				{
+					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage2[enemy[i].count / 50 % 2], true);
+				}
+				if (enemyType2 == true)
+				{
+					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);
+				}
+				if (enemyType3 == true)
+				{
+					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage3[enemy[i].count / 50 % 2], true);
+				}
+				break;
+			default:
+				break;
+			}
+			/*enemy[i].count++;
 			DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage[enemy[i].count / 50 % 2], true);	
+			DrawGraph(enemy[i].pos.x, enemy[i].pos.y, enemyImage2[enemy[i].count / 50 % 2], true);*/
+			
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
@@ -113,7 +173,6 @@ void DrawEnemy()
 		//DrawFormatString(150, 100+i*18, 0xff0000, "point:%d", enemy[i].point);
 		DrawIkayaki(i);
 	}
-	
 	/*DrawFormatString(30, 30, 0xffff00, "%d", enemy[0].point, true);
 	DrawFormatString(30, 40, 0xffff00, "%d", enemy[1].point, true);
 	DrawFormatString(30, 50, 0xffff00, "%d", enemy[2].point, true);

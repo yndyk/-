@@ -139,6 +139,7 @@ void DrawPlayer()
 				}
 			break;
 		}
+
 		player.damageflag = false;
 		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
 		DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
