@@ -23,8 +23,8 @@ void InitBubble()
 	for (int i = 0; i < BUBBLE_MAX; i++) 
 	{
 		bubble[i].size = { 26, 26 };
-		bubble[i].pos = { 64 + rand() % 18 + 1 * 32, SCREEN_SIZE_Y - 32 *3 };
-		bubble[i].speed = 1;
+		bubble[i].pos = { 64 + rand() % 18 + 1 * 32, SCREEN_SIZE_Y - 32 * 3 };
+		bubble[i].speed = { 1,1 };
 		bubble[i].hp = 60 * 20;			// –A‚É‚æ‚è‰ñ•œ‚·‚éƒ‰ƒCƒt‚Ì—Ê
 		bubble[i].flag = false;		// •\Ž¦‚·‚é‚©‚µ‚È‚¢‚©
 		bubble[i].count = 0;
@@ -37,7 +37,7 @@ void InitBubble()
 
 void UpdetaBuble()
 {
-	srand(time(NULL));
+	//srand(time(NULL));
 	cnt++;
 	if (cnt % 180 == 0) 
 	{
@@ -56,7 +56,7 @@ void UpdetaBuble()
 	{
 		if (bubble[i].flag)
 		{
-			bubble[i].pos.y -= bubble[i].speed;
+			bubble[i].pos.y -= bubble[i].speed.y;
 
 			if (bubble[i].pos.y + bubble[i].size.y < 0)
 			{
@@ -100,6 +100,10 @@ void HitCheckBubble()
 				if (player.hp < TIME_FRAME*PLAYER_HP_MAX)
 				{
 					player.hp = player.hp + bubble[i].hp;
+				}
+				if (player.hp + bubble[i].hp >= TIME_FRAME *PLAYER_HP_MAX)
+				{
+					player.hp = TIME_FRAME *PLAYER_HP_MAX;
 				}
 			}
 		}

@@ -2,7 +2,7 @@
 //
 // ikayakiに関する関数の追加
 // HitCheckBubble()をawa.cppに移動
-// 
+// GameMain()にsrand(time(NULL))を追加
 // 
 //
 //--------------------------------------------------
@@ -17,6 +17,7 @@
 #include "unti.h"
 #include "map.h"
 #include "ikayaki.h"
+#include <time.h>
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -161,6 +162,8 @@ bool SystmeInit(void)//システム初期化
 
 void GameInit(void)//ゲームループ内の初期化
 {
+	srand(time(NULL));
+
 	//変数初期化
 	//フェード
 	fadeCnt = 0;
@@ -196,6 +199,8 @@ void GameMain(void)//ゲーム画面処理
 	if(!pauseFlag)
 	{
 		//ポーズ中にしない処理
+		srand(time(NULL));
+
 		StageUpdate();//ステージ切り替えの処理
 		UpdetaPlayer();
 		UpdetaEnemy();

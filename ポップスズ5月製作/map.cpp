@@ -57,7 +57,7 @@ void StageUpdate()
 		break;
 	case STAGE3:
 		if (enemyAllDeadFlag) {	// ‚±‚±‚É“G‚ğ‚·‚×‚Ä“|‚µ‚½‚Æ‚«‚Ìˆ—‚ğ‘‚­
-			
+
 			gamemode = GMODE_CLERA;
 			stageID = STAGE1;//‰Šú‰»‚·‚é
 		}
@@ -77,4 +77,9 @@ void StageDraw()
 
 	DrawFormatString(0, 0, 0xff0000, "stageID:%d", stageID);
 
+}
+
+int GetStageID()
+{
+	return stageID;
 }

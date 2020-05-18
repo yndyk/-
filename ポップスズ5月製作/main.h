@@ -1,6 +1,8 @@
 //-----------------------------------------------------
 // 
-// CHARACTER構造体に一度だけ実行する用の変数を追加
+// CHARACTER構造体の変数speedの型をintからXYに変更しました
+// X,Yの反射フラグをCHARACTER構造体内に追加しました
+// CHARACTER構造体にオフセット用変数の追加
 // 
 //-----------------------------------------------------
 
@@ -23,6 +25,7 @@ enum GAMEDIV
 	DIV_LEFT,
 	DIV_DOWN
 };
+
 enum TYPE_MODE
 {
 	TYPE_1,
@@ -30,7 +33,6 @@ enum TYPE_MODE
 	TYPE_3,
 	TYPE_MAX
 };
-
 
 typedef struct
 {
@@ -45,21 +47,24 @@ typedef struct
 	float y;
 }XY_F;
 
-
 typedef struct
 {
 	XY pos;
-	int speed;
+	XY speed;
 	int count;
 	int point;
 	bool flag;
 	GAMEDIV div;
 	XY size;
+	XY offSet;				// オフセット(画像の中心取得用)
 	int type;
 	int hp;
 	bool damageflag;
 	bool changeFlag;		// 画像切り替え用変数
 	bool onlyOnce;			// 1度だけ実行する用の変数
+	bool refrectFlagX;		// x軸反射フラグ
+	bool refrectFlagY;		// y軸反射フラグ
+	int movePattern;		// 移動パターン
 }CHARACTER;
 
 #define SCREEN_SIZE_X 640

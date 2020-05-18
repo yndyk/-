@@ -15,7 +15,7 @@ void SysInitShot()
 void InitShot()
 {
 	shot.pos = { 0,0 };
-	shot.speed = 8;
+	shot.speed = { 8, 8 };
 	shot.size = { 32,32 };
 	shot.count = 0;
 	shot.flag = false;
@@ -50,11 +50,11 @@ void UpdetaShot()
 	}
 	if (DivFlag == false) 
 	{
-		shot.pos.x -= shot.speed;
+		shot.pos.x -= shot.speed.x;
 	}
 	if (DivFlag == true)
 	{
-		shot.pos.x += shot.speed;
+		shot.pos.x += shot.speed.x;
 	}
 }
 //•`‰æ

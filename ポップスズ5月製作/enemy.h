@@ -1,3 +1,10 @@
+//-----------------------------------------------------
+// 
+// “G‚ÌˆÚ“®—pŠÖ”MoveEnemy(int)‚Ì’Ç‰Á
+// ˆÚ“®•ûŒü‚ğ”½“]‚³‚¹‚éŠÖ”RefrectMoveXY(int)‚Ì’Ç‰Á
+// 
+//-----------------------------------------------------
+
 #pragma once
 #define ENEMY_MAX 9
 #define ENEMY_TYPE_MAX 3
@@ -11,3 +18,5 @@ void SysInitEnemy();
 void InitEnemy();
 void UpdetaEnemy();
 void DrawEnemy();
+void MoveEnemy(int);
+void RefrectMoveXY(int);
