@@ -102,7 +102,6 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
-						
 					}
 				}
 			}
