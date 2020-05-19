@@ -14,45 +14,24 @@
 #include"map.h"
 #include "map.h"
 #include <math.h>
-int enemyImage[ENEMY_TYPE_MAX][2];//エネミー3種類,2パターン
-int enemyType;
-int enemyType2;
-int enemyType3;
+int enemyImage[3][2];//エネミー3種類,2パターン
 CHARACTER enemy[ENEMY_MAX];
 bool enemyAllDeadFlag;
-
+TYPE_MODE enemyType;//これで種類を管理する
+int enemyList;
 //ロード
 void SysInitEnemy()
 {
 	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
 	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
   	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
-	enemyType = false;
-	enemyType2 = false;
-	enemyType3 = false;
 }
 //初期化
 void InitEnemy()
 {
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		switch (enemy[i].type)//エネミー別に初期化する
-		{
-		case TYPE_1:
-			enemy[i].size = { 32,32 };
-			enemy[i].type = TYPE_1;
-			break;
-		case TYPE_2:
-			enemy[i].size = { 32,32 };
-			enemy[i].type = TYPE_2;
-			break;
-		case TYPE_3:
-			enemy[i].size = { 32,64 };
-			enemy[i].type = TYPE_3;
-			break;
-		default:
-			break;
-		}
+		TypeEnemy();
 
 		enemy[i].pos = { 50 + (rand() % 16) * 32, (rand() % 11) * 32 };
 		enemy[i].speed = { 2, 2 };
@@ -77,6 +56,7 @@ void InitEnemy()
 		enemy[i].movePattern = 0;
 	}
 	enemyAllDeadFlag = false;
+	enemyList = 0;
 }
 
 //更新
@@ -88,6 +68,7 @@ void UpdetaEnemy()
 		{
 			//移動
 			MoveEnemy(i);// 敵の移動制御
+			
 			//弾の当たり判定
 			if ((shot.pos.x < enemy[i].pos.x + enemy[i].size.x
 				&& enemy[i].pos.x < shot.pos.x + shot.size.x
@@ -114,12 +95,11 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
-						//
-						enemy[i].type = enemy[i].type + stageID;
 						
 					}
 				}
 			}
+			
 		}
 
 		else
@@ -139,7 +119,7 @@ void DrawEnemy()
 
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		
+		int enenmyType = GetRand(2);
 		if (enemy[i].flag == true)
 		{
 			switch (enemy[i].div)
@@ -148,12 +128,12 @@ void DrawEnemy()
 				enemy[i].count++;	
 				//エネミータイプにステージを足す
 					DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
-						enemyImage[enemy[i].type + stageID][enemy[i].count / 50 % 2], true);
+						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
 				break;
 			case DIV_LEFT:
-				enemy[i].count++;			
-					DrawTurnGraph(enemy[i].pos.x,enemy[i].pos.y,
-						enemyImage[enemy[i].type + stageID][enemy[i].count / 50 % 2], true);
+				enemy[i].count++;	
+					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y,
+						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
 				break;
 			default:
 				break;
@@ -274,5 +254,39 @@ void RefrectMoveXY(int num)
 		enemy[num].refrectFlagY = false;
 	}
 }
+
+void TypeEnemy()
+{
+	for(int i = 0; i < ENEMY_MAX;i++)
+	{
+		switch (enemyType)//エネミー別に初期化する
+		{
+		case TYPE_1:
+			enemy[i].size = { 32,32 };
+			enemy[i].type = TYPE_1;
+			break;
+		case TYPE_2:
+			enemy[i].size = { 32,32 };
+			enemy[i].type = TYPE_2;
+			break;
+		case TYPE_3:
+			enemy[i].size = { 32,64 };
+			enemy[i].type = TYPE_3;
+			break;
+		default:
+			break;
+		}
+	}
+	enemy[0].type = TYPE_1;
+	enemy[1].type = TYPE_2;
+	enemy[2].type = TYPE_3;
+	enemy[3].type = TYPE_1;
+	enemy[4].type = TYPE_2;
+	enemy[5].type = TYPE_3;
+	enemy[6].type = TYPE_1;
+	enemy[7].type = TYPE_2;
+	enemy[8].type = TYPE_3;
+}
+
 
 

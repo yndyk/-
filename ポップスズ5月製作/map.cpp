@@ -41,6 +41,7 @@ void StageUpdate()
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();
+			leftTime = TIME_FRAME * 31;
 			stageID = STAGE2;
 		}
 		break;
@@ -52,6 +53,7 @@ void StageUpdate()
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkayaki();
+			leftTime = TIME_FRAME * 31;
 			stageID = STAGE3;
 		}
 		break;
