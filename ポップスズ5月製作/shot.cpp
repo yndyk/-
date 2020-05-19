@@ -1,3 +1,9 @@
+//--------------------------------------------
+// 
+// オフセットの追加
+// 描画をオフセット分ずらす
+// 
+//--------------------------------------------
 #include "main.h"
 #include"player.h"
 #include"keycheck.h"
@@ -17,6 +23,7 @@ void InitShot()
 	shot.pos = { 0,0 };
 	shot.speed = { 8, 8 };
 	shot.size = { 32,32 };
+	shot.offSet = { shot.size.x / 2, shot.size.y / 2 };
 	shot.count = 0;
 	shot.flag = false;
 	DivFlag = false;//falseが右、trueが左
@@ -62,6 +69,15 @@ void DrawShot()
 {
 	if (shot.flag == true) 
 	{
-		DrawGraph(shot.pos.x, shot.pos.y, ShotImage, true);
+		DrawGraph(shot.pos.x - shot.offSet.x,
+			shot.pos.y - shot.offSet.y,
+			ShotImage, true);
+
+		// 当たり判定の可視化
+		DrawBox(shot.pos.x - shot.offSet.x,
+			shot.pos.y - shot.offSet.y,
+			shot.pos.x + shot.offSet.x,
+			shot.pos.y + shot.offSet.y,
+			0x000000, false);
 	}
 }

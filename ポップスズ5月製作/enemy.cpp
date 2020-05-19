@@ -2,6 +2,8 @@
 // 
 // 敵の初期座標の取得乱数の変更
 // 描画をオフセット分ずらした
+// 当たり判定の可視化
+// イカ焼きに代わるフラグをエネミーがダメージを受けた描画のあとにtrueにするに変更
 // 
 //-----------------------------------------------------
 
@@ -14,6 +16,8 @@
 #include"map.h"
 #include "map.h"
 #include <math.h>
+#include "hitCheck.h"
+
 int enemyImage[3][2];//エネミー3種類,2パターン
 int enemyDamageImage[3];//エネミーダメージ3種類
 bool enemyAllDeadFlag;
@@ -30,7 +34,6 @@ void SysInitEnemy()
 	enemyDamageImage[1] = LoadGraph("bmp/イカメカダメージ.png");
 	enemyDamageImage[2] = LoadGraph("bmp/長足イカダメージ.png");
 }
-
 //初期化
 void InitEnemy()
 {
@@ -76,15 +79,11 @@ void UpdetaEnemy()
 			MoveEnemy(i);// 敵の移動制御
 			
 			//弾の当たり判定
-			if ((shot.pos.x < enemy[i].pos.x + enemy[i].size.x
-				&& enemy[i].pos.x < shot.pos.x + shot.size.x
-				&& shot.pos.y < enemy[i].pos.y + enemy[i].size.y
-				&& enemy[i].pos.y < shot.pos.y + shot.size.y))
+			if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
 			{
 				shot.flag = false;
 				enemy[i].flag = false;
 				enemy[i].damageflag = true;
-				enemy[i].changeFlag = true;
 				shot.pos.x = player.pos.x;
 				shot.pos.y = player.pos.y;
 				//クリア判定
@@ -106,6 +105,7 @@ void UpdetaEnemy()
 					}
 				}
 			}
+			
 		}
 
 		else
@@ -133,28 +133,36 @@ void DrawEnemy()
 			case DIV_RAHGT:
 				enemy[i].count++;	
 				//エネミータイプ
-					DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
-						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
-					DamageEnemy();
-					break;
+				DrawGraph(enemy[i].pos.x - enemy[i].offSet.x,
+					enemy[i].pos.y - enemy[i].offSet.y,
+					enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
+				DamageEnemy();
+				break;
 			case DIV_LEFT:
 				enemy[i].count++;	
-					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y,
-						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
-					DamageEnemy();
-					break;
+				DrawTurnGraph(enemy[i].pos.x - enemy[i].offSet.x,
+					enemy[i].pos.y - enemy[i].offSet.y,
+					enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
+				DamageEnemy();
+				break;
 			default:
 				break;
 			}
 		
-			/*DrawGraph(enemy[i].pos.x - enemy[i].offSet.x, enemy[i].pos.y - enemy[i].offSet.y,
-				enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);*/
-			//DrawCircle(enemy[i].pos.x, enemy[i].pos.y, 2, 0xffff00, true);
+			// 当たり判定の可視化
+			DrawBox(enemy[i].pos.x - enemy[i].offSet.x,
+				enemy[i].pos.y - enemy[i].offSet.y,
+				enemy[i].pos.x + enemy[i].offSet.x,
+				enemy[i].pos.y + enemy[i].offSet.y,
+				0x000000, false);
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
 		//DrawFormatString(100, 100 + i * 18, 0xff0000, "flag:%d", enemy[i].refrectFlag);
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "ptn:%d", enemy[i].movePattern);
+
+		
+
 		DrawIkayaki(i);
 	}
 	
@@ -227,11 +235,7 @@ void MoveEnemy(int num)
 			enemy[num].movePattern = rand() % 2;
 		}
 
-
 		// ここに敵の一定範囲内に入ったらプレイヤーのほうに移動してくる処理を書く
-
-
-
 
 
 		if (enemy[num].movePattern == 0)
@@ -300,20 +304,20 @@ void DamageEnemy()
 {
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		if (enemy[i].damageflag == true) 
+		if (enemy[i].damageflag == true)
 		{
 			DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
 				enemyDamageImage[enemy[i].type], true);
 			enemyTime--;
 		}
-		if(enemyTime == 0)
+		if (enemyTime == 0)
 		{
 			enemy[i].damageflag = false;
+			enemy[i].changeFlag = true;
 			enemyTime = 60 * 3;
 		}
 	}
 	DrawFormatString(499, 0, 0xff0000, "%d", enemyTime / TIME_FRAME);
 }
-
 
 

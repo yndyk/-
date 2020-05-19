@@ -1,3 +1,10 @@
+//-----------------------------------------------
+// 
+// HitCheckBubble()íœ
+// “–‚½‚è”»’è‚Ì‰Â‹‰»
+// 
+//-----------------------------------------------
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -68,7 +75,7 @@ void UpdetaBuble()
 			}
 
 			// “–‚½‚è”»’è
-			if (HitCheckSquareToSquare(player, i, bubble))
+			if (HitCheckRectToRect(player, i, bubble))			// ‹éŒ`‚Æ‹éŒ`‚Ì“–‚½‚è”»’è
 			{
 				bubble[i].flag = false;
 				if (player.hp < TIME_FRAME * PLAYER_HP_MAX)
@@ -93,24 +100,19 @@ void DrawBuble()
 			DrawGraph(bubble[i].pos.x - bubble[i].offSet.x,
 				bubble[i].pos.y - bubble[i].offSet.y,
 				bubbleImage, true);
+			// “–‚½‚è”»’è‚Ì‰Â‹‰»
+			DrawBox(bubble[i].pos.x - bubble[i].offSet.x,
+				bubble[i].pos.y - bubble[i].offSet.y,
+				bubble[i].pos.x + bubble[i].offSet.x,
+				bubble[i].pos.y + bubble[i].offSet.y,
+				0x000000, false);
 		}
 
+		
 		//DrawFormatString(0, 50, 0xff0000, "cnt:%d", cnt);
 		//DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
 		//DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", bubble[i].pos.x);
-		DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
-	}
-}
-
-
-void HitCheckBubble()
-{
-	for (int i = 0; i < BUBBLE_MAX; i++) 
-	{
-		if (bubble[i].flag)
-		{
-			
-		}
+		//DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
 	}
 }
 

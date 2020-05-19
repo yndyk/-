@@ -1,3 +1,8 @@
+//-----------------------------------------------
+// 
+// HitCheckBubble()íœ
+// 
+//-----------------------------------------------
 #pragma once
 
 #define BUBBLE_MAX 4
@@ -8,5 +13,4 @@ void SysInitBubble();
 void InitBubble();
 void UpdetaBuble();
 void DrawBuble();
-void HitCheckBubble();
 void BubbleDelete();		// ‰æ–Êã‚Ì–A‚ğ‚·‚×‚ÄÁ‚·
