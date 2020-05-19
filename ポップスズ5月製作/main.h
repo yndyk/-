@@ -1,8 +1,8 @@
 //-----------------------------------------------------
 // 
-// CHARACTER構造体の変数speedの型をintからXYに変更しました
-// X,Yの反射フラグをCHARACTER構造体内に追加しました
-// CHARACTER構造体にオフセット用変数の追加
+// CHARACTER構造体に半径用変数rを追加しました
+// 処理の変更により変数の意味が変わったので、コメントを追加しました
+// 
 // 
 //-----------------------------------------------------
 
@@ -49,14 +49,15 @@ typedef struct
 
 typedef struct
 {
-	XY pos;
+	XY pos;					// 中心座標
 	XY speed;
 	int count;
 	int point;
-	bool flag;
+	bool flag;				// 描画フラグ
 	GAMEDIV div;
-	XY size;
-	XY offSet;				// オフセット(画像の中心取得用)
+	XY size;				// 画像サイズ
+	XY offSet;				// オフセット(画像の中心にposをずらす用)
+	int r;					// 半径
 	int type;
 	int hp;
 	bool damageflag;

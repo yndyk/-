@@ -1,7 +1,8 @@
 //-----------------------------------------------------
 // 
-// 
-//	
+// プレイヤーの描画をオフセット分ずらした
+// プレイヤーの当たり判定の可視化
+// プレイヤーの当たり判定処理時の条件の追加
 // 
 //-----------------------------------------------------
 
@@ -29,7 +30,7 @@ void InitPlayer()
 	player.speed = { 5,5 };
 	player.div = DIV_RAHGT;
 	player.hp = TIME_FRAME *PLAYER_HP_MAX;
-	player.flag = false;
+	player.flag = true;
 	player.damageflag = false;
 	player.count = 0;
 }
@@ -76,33 +77,35 @@ void UpdetaPlayer()
 	}
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		if ((player.pos.x < enemy[i].pos.x + enemy[i].size.x
-			&&enemy[i].pos.x < player.pos.x + player.size.x
-			&&player.pos.y < enemy[i].pos.y + enemy[i].size.y
-			&&enemy[i].pos.y < player.pos.y + player.size.y))
+		if (enemy[i].flag)				// 条件追加
 		{
-			player.flag = true;
-			enemy[i].flag = false;
-			player.damageflag = true;
-			player.hp -= 1;
-			if (player.hp == 0)
+			if ((player.pos.x < enemy[i].pos.x + enemy[i].size.x
+				&& enemy[i].pos.x < player.pos.x + player.size.x
+				&& player.pos.y < enemy[i].pos.y + enemy[i].size.y
+				&& enemy[i].pos.y < player.pos.y + player.size.y))
 			{
-				gamemode = GMODE_OVER;
-			}
+				player.flag = false;
+				enemy[i].flag = false;
+				player.damageflag = true;
+				player.hp -= 1;
+				if (player.hp == 0)
+				{
+					gamemode = GMODE_OVER;
+				}
 
-			enemy[i].point = 1;
-			if (enemy[0].point == 1 &&
-				enemy[1].point == 1 &&
-				enemy[2].point == 1 &&
-				enemy[3].point == 1 &&
-				enemy[4].point == 1 &&
-				enemy[5].point == 1 &&
-				enemy[6].point == 1 &&
-				enemy[7].point == 1 &&
-				enemy[8].point == 1)
-			{
-				enemyAllDeadFlag = true;
-				//gamemode = GMODE_CLERA;
+				enemy[i].point = 1;
+				if (enemy[0].point == 1 &&
+					enemy[1].point == 1 &&
+					enemy[2].point == 1 &&
+					enemy[3].point == 1 &&
+					enemy[4].point == 1 &&
+					enemy[5].point == 1 &&
+					enemy[6].point == 1 &&
+					enemy[7].point == 1 &&
+					enemy[8].point == 1)
+				{
+					enemyAllDeadFlag = true;
+				}
 			}
 		}
 	}
@@ -125,24 +128,39 @@ void DrawPlayer()
 		{
 		case DIV_RAHGT:
 				player.count++;
-				DrawGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
-				if (player.damageflag == true)
+				if (player.flag)		// flagがtrueの時に描画
 				{
-					DrawGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+					DrawGraph(player.pos.x - player.offSet.x, player.pos.y - player.offSet.y,
+						playerImage[player.count / 50 % 2], true);
+				}
+				if (player.damageflag)
+				{
+					DrawGraph(player.pos.x - player.offSet.x, player.pos.y - player.offSet.y,
+							  playerdamageImage, true);
 				}
 			break;
 		case DIV_LEFT:
 				player.count++;
-				DrawTurnGraph(player.pos.x, player.pos.y, playerImage[player.count / 50 % 2], true);
-				if (player.damageflag == true)
+				if (player.flag)		// flagがtrueの時に描画
 				{
-					DrawTurnGraph(player.pos.x, player.pos.y, playerdamageImage, true);
+					DrawTurnGraph(player.pos.x - player.offSet.x, player.pos.y - player.offSet.y,
+						playerImage[player.count / 50 % 2], true);
+				}
+				if (player.damageflag)
+				{
+					DrawTurnGraph(player.pos.x - player.offSet.x, player.pos.y - player.offSet.y,
+								  playerdamageImage, true);
 				}
 			break;
 		}
 
 		player.damageflag = false;
 		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
+		//DrawFormatString(0, 100, 0xff0000, "flag:%d", player.flag);
+		DrawBox(player.pos.x - player.offSet.x,
+			player.pos.y - player.offSet.y,
+			player.pos.x + player.offSet.x,
+			player.pos.y + player.offSet.y, 0x000000, false);			// 当たり判定の可視化
 		DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
 		DrawBox(0, 440, player.hp / 60, 450, 0x000000, false);
 }

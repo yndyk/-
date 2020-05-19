@@ -1,6 +1,7 @@
 //-------------------------------------
 //
 // UpdateUnti()のsrand(time(NULL))をmain.cppに処理を移行
+// ウンチがプレイヤーに当たってないときの処理の追加(仮)
 //
 //-----------------------------------
 
@@ -66,18 +67,25 @@ void UpdetaUnti()
 
 	for (int i = 0; i < UNTI_MAX; i++)
 	{
-			//当たり判定
+		//当たり判定
+		if (player.flag)
+		{
 			if ((player.pos.x < unti[i].pos.x + unti[i].size.x
-				&&unti[i].pos.x < player.pos.x + player.size.x
-				&&player.pos.y < unti[i].pos.y + unti[i].size.y
-				&&unti[i].pos.y < player.pos.y + player.size.y))
+				&& unti[i].pos.x < player.pos.x + player.size.x
+				&& player.pos.y < unti[i].pos.y + unti[i].size.y
+				&& unti[i].pos.y < player.pos.y + player.size.y))
 			{
-				player.flag = false;
 				unti[i].flag = false;
 				player.damageflag = true;
 				player.hp -= TIME_FRAME * 1;
+				player.flag = false;
 			}
 		}
+		else
+		{
+			player.flag = true;			// とりあえずの処理(ウンチが当たったときにプレイヤーが表示されなくなるバグがあったため)
+		}
+	}
 }
 
 //描画

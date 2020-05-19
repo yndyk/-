@@ -4,6 +4,7 @@
 #include "main.h"
 #include "awa.h"
 #include "player.h"
+#include "hitCheck.h"
 
 CHARACTER bubble[BUBBLE_MAX];
 
@@ -23,6 +24,8 @@ void InitBubble()
 	for (int i = 0; i < BUBBLE_MAX; i++) 
 	{
 		bubble[i].size = { 26, 26 };
+		bubble[i].r = bubble[i].size.x / 2;
+		bubble[i].offSet = { bubble[i].size.x / 2, bubble[i].size.y / 2 };
 		bubble[i].pos = { 64 + rand() % 18 + 1 * 32, SCREEN_SIZE_Y - 32 * 3 };
 		bubble[i].speed = { 1,1 };
 		bubble[i].hp = 60 * 20;			// –A‚É‚æ‚è‰ñ•œ‚·‚éƒ‰ƒCƒt‚Ì—Ê
@@ -63,7 +66,20 @@ void UpdetaBuble()
 				bubble[i].flag = false;
 				bubble[i].pos = { 64 + (rand() % 18 + 1) * 32, SCREEN_SIZE_Y + 32 };
 			}
-			HitCheckBubble();
+
+			// “–‚½‚è”»’è
+			if (HitCheckSquareToSquare(player, i, bubble))
+			{
+				bubble[i].flag = false;
+				if (player.hp < TIME_FRAME * PLAYER_HP_MAX)
+				{
+					player.hp = player.hp + bubble[i].hp;
+				}
+				if (player.hp + bubble[i].hp >= TIME_FRAME * PLAYER_HP_MAX)
+				{
+					player.hp = TIME_FRAME * PLAYER_HP_MAX;
+				}
+			}
 		}
 	}
 }
@@ -74,13 +90,15 @@ void DrawBuble()
 	{
 		if (bubble[i].flag == true)
 		{
-			DrawGraph(bubble[i].pos.x, bubble[i].pos.y, bubbleImage, true);
+			DrawGraph(bubble[i].pos.x - bubble[i].offSet.x,
+				bubble[i].pos.y - bubble[i].offSet.y,
+				bubbleImage, true);
 		}
 
 		//DrawFormatString(0, 50, 0xff0000, "cnt:%d", cnt);
 		//DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", bubble[i].pos.y);
 		//DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", bubble[i].pos.x);
-		//DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
+		DrawFormatString(140, 120 + i * 18, 0xff0000, "flag:%d", bubble[i].flag);
 	}
 }
 
@@ -89,23 +107,9 @@ void HitCheckBubble()
 {
 	for (int i = 0; i < BUBBLE_MAX; i++) 
 	{
-		if (bubble[i].flag == true)
+		if (bubble[i].flag)
 		{
-			if (player.pos.x < bubble[i].pos.x + bubble[i].size.x &&
-				player.pos.x + player.size.x > bubble[i].pos.x &&
-				player.pos.y < bubble[i].pos.y + bubble[i].size.y &&
-				player.pos.y + player.size.y > bubble[i].pos.y)
-			{
-				bubble[i].flag = false;
-				if (player.hp < TIME_FRAME*PLAYER_HP_MAX)
-				{
-					player.hp = player.hp + bubble[i].hp;
-				}
-				if (player.hp + bubble[i].hp >= TIME_FRAME *PLAYER_HP_MAX)
-				{
-					player.hp = TIME_FRAME *PLAYER_HP_MAX;
-				}
-			}
+			
 		}
 	}
 }
