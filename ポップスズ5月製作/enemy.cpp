@@ -15,17 +15,22 @@
 #include "map.h"
 #include <math.h>
 int enemyImage[3][2];//エネミー3種類,2パターン
-CHARACTER enemy[ENEMY_MAX];
+int enemyDamageImage[3];//エネミーダメージ3種類
 bool enemyAllDeadFlag;
+CHARACTER enemy[ENEMY_MAX];
 TYPE_MODE enemyType;//これで種類を管理する
-int enemyList;
+int enemyTime;
 //ロード
 void SysInitEnemy()
 {
 	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
 	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
   	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
+	enemyDamageImage[0] = LoadGraph("bmp/イカプレーンダメージ.png");
+	enemyDamageImage[1] = LoadGraph("bmp/イカメカダメージ.png");
+	enemyDamageImage[2] = LoadGraph("bmp/長足イカダメージ.png");
 }
+
 //初期化
 void InitEnemy()
 {
@@ -54,9 +59,10 @@ void InitEnemy()
 		enemy[i].refrectFlagX = false;			// x軸進行方向反転フラグ　true:反転　false:そのまま
 		enemy[i].refrectFlagY = false;			// y軸進行方向反転フラグ
 		enemy[i].movePattern = 0;
+		enemy[i].damageflag = false;
 	}
 	enemyAllDeadFlag = false;
-	enemyList = 0;
+	enemyTime = TIME_FRAME * 3;//ダメージの描画時間
 }
 
 //更新
@@ -77,6 +83,7 @@ void UpdetaEnemy()
 			{
 				shot.flag = false;
 				enemy[i].flag = false;
+				enemy[i].damageflag = true;
 				enemy[i].changeFlag = true;
 				shot.pos.x = player.pos.x;
 				shot.pos.y = player.pos.y;
@@ -99,7 +106,6 @@ void UpdetaEnemy()
 					}
 				}
 			}
-			
 		}
 
 		else
@@ -126,15 +132,17 @@ void DrawEnemy()
 			{
 			case DIV_RAHGT:
 				enemy[i].count++;	
-				//エネミータイプにステージを足す
+				//エネミータイプ
 					DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
 						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
-				break;
+					DamageEnemy();
+					break;
 			case DIV_LEFT:
 				enemy[i].count++;	
 					DrawTurnGraph(enemy[i].pos.x, enemy[i].pos.y,
 						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
-				break;
+					DamageEnemy();
+					break;
 			default:
 				break;
 			}
@@ -286,6 +294,25 @@ void TypeEnemy()
 	enemy[6].type = TYPE_1;
 	enemy[7].type = TYPE_2;
 	enemy[8].type = TYPE_3;
+}
+//ダメージ描画切り替え
+void DamageEnemy()
+{
+	for (int i = 0; i < ENEMY_MAX; i++)
+	{
+		if (enemy[i].damageflag == true) 
+		{
+			DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
+				enemyDamageImage[enemy[i].type], true);
+			enemyTime--;
+		}
+		if(enemyTime == 0)
+		{
+			enemy[i].damageflag = false;
+			enemyTime = 60 * 3;
+		}
+	}
+	DrawFormatString(499, 0, 0xff0000, "%d", enemyTime / TIME_FRAME);
 }
 
 

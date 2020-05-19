@@ -20,3 +20,4 @@ void DrawEnemy();
 void MoveEnemy(int);
 void RefrectMoveXY(int);
 void TypeEnemy();
+void DamageEnemy();
