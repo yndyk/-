@@ -1,8 +1,6 @@
 //--------------------------------------------------
 //
-// ikayaki‚ÉŠÖ‚·‚éŠÖ”‚Ì’Ç‰Á
-// HitCheckBubble()‚ğawa.cpp‚ÉˆÚ“®
-// GameMain()‚Ésrand(time(NULL))‚ğ’Ç‰Á
+// 
 // 
 //
 //--------------------------------------------------
@@ -11,9 +9,9 @@
 #include "keycheck.h"
 #include "player.h"
 #include "enemy.h"
-#include"shot.h"
-#include"unti.h"
-#include"awa.h"
+#include "shot.h"
+#include "unti.h"
+#include "awa.h"
 #include "unti.h"
 #include "map.h"
 #include "ikayaki.h"

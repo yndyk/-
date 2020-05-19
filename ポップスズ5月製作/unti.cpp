@@ -1,7 +1,7 @@
 //-------------------------------------
 //
-// UpdateUnti()のsrand(time(NULL))をmain.cppに処理を移行
-// ウンチがプレイヤーに当たってないときの処理の追加(仮)
+// 当たり判定の可視化
+// 
 //
 //-----------------------------------
 
@@ -11,6 +11,7 @@
 #include "main.h"
 #include "player.h"
 #include "unti.h"
+#include "hitCheck.h"
 
 int UntiImage;
 CHARACTER unti[UNTI_MAX];
@@ -30,6 +31,7 @@ void initUnti()
 	{
 		unti[i].pos = { 64 + rand() % 18 + 1 * 32, 0 - 32 * 3 };
 		unti[i].size = { UNTI_SIZE_X,UNTI_SIZE_Y };
+		unti[i].offSet = { unti[i].size.x / 2, unti[i].size.y / 2 };
 		unti[i].flag = false;
 		unti[i].speed = { 6,6 };
 		unti[i].count = false;
@@ -70,10 +72,7 @@ void UpdetaUnti()
 		//当たり判定
 		if (player.flag)
 		{
-			if ((player.pos.x < unti[i].pos.x + unti[i].size.x
-				&& unti[i].pos.x < player.pos.x + player.size.x
-				&& player.pos.y < unti[i].pos.y + unti[i].size.y
-				&& unti[i].pos.y < player.pos.y + player.size.y))
+			if (HitCheckRectToRect(player, i, unti))		// 矩形と矩形の当たり判定
 			{
 				unti[i].flag = false;
 				player.damageflag = true;
@@ -95,9 +94,19 @@ void DrawUnti()
 	{
 		if (unti[i].flag == true)
 		{
-			DrawGraph(unti[i].pos.x, unti[i].pos.y, UntiImage, true);
+			DrawGraph(unti[i].pos.x - unti[i].offSet.x,
+				unti[i].pos.y - unti[i].offSet.y,
+				UntiImage, true);
 			//DrawFormatString(30, 60, 0xff0000, "%d", UntiCount, true);
+			// 当たり判定の可視化
+			DrawBox(unti[i].pos.x - unti[i].offSet.x,
+				unti[i].pos.y - unti[i].offSet.y,
+				unti[i].pos.x + unti[i].offSet.x,
+				unti[i].pos.y + unti[i].offSet.y,
+				0x000000, false);
 		}
+
+		
 		/*DrawFormatString(0, 50, 0xff0000, "UntiCount:%d", UntiCount);
 		DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", unti[i].pos.y);
 		DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", unti[i].pos.x);

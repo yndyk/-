@@ -1,15 +1,16 @@
 //-----------------------------------------------------
 // 
-// プレイヤーの描画をオフセット分ずらした
-// プレイヤーの当たり判定の可視化
-// プレイヤーの当たり判定処理時の条件の追加
+// 
+// 
+// 
 // 
 //-----------------------------------------------------
 
 #include "main.h"
-#include"keycheck.h"
-#include"player.h"
-#include"enemy.h"
+#include "keycheck.h"
+#include "player.h"
+#include "enemy.h"
+#include "hitCheck.h"
 
 int playerImage[2];
 int playerdamageImage;
@@ -79,10 +80,7 @@ void UpdetaPlayer()
 	{
 		if (enemy[i].flag)				// 条件追加
 		{
-			if ((player.pos.x < enemy[i].pos.x + enemy[i].size.x
-				&& enemy[i].pos.x < player.pos.x + player.size.x
-				&& player.pos.y < enemy[i].pos.y + enemy[i].size.y
-				&& enemy[i].pos.y < player.pos.y + player.size.y))
+			if (HitCheckRectToRect(player, i, enemy))		// 矩形と矩形の当たり判定
 			{
 				player.flag = false;
 				enemy[i].flag = false;
@@ -157,10 +155,12 @@ void DrawPlayer()
 		player.damageflag = false;
 		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
 		//DrawFormatString(0, 100, 0xff0000, "flag:%d", player.flag);
+		
+		// 当たり判定の可視化
 		DrawBox(player.pos.x - player.offSet.x,
 			player.pos.y - player.offSet.y,
 			player.pos.x + player.offSet.x,
-			player.pos.y + player.offSet.y, 0x000000, false);			// 当たり判定の可視化
+			player.pos.y + player.offSet.y, 0x000000, false);
 		DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
 		DrawBox(0, 440, player.hp / 60, 450, 0x000000, false);
 }

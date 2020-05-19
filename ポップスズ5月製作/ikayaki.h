@@ -1,6 +1,6 @@
 //-------------------------------
 // 
-// 
+// HitCheckIkayaki()�̍폜
 //
 //-------------------------------
 
@@ -14,5 +14,4 @@ void SysInitIkayaki();
 void InitIkayaki();
 void UpdateIkayaki(XY, bool, int);
 void DrawIkayaki(int);
-void HitCheckIkayaki(int);
 void DeleteIkayaki();
