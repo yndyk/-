@@ -1,6 +1,5 @@
 //-----------------------------------------------------
-// 
-// HitCheckCircleToCircle()‚Ìˆ—‚ğ’Ç‰Á‚µ‚Ü‚µ‚½
+// HitCheckCircleToCircle()“à‚Ì
 // 
 //-----------------------------------------------------
 
@@ -34,7 +33,7 @@ bool HitCheckCircleToCircle(CHARACTER a, int num, CHARACTER* b)
 	bool hitFlag = false;
 	XY_F length = { fabsf(a.pos.x - b[num].pos.x), fabsf(a.pos.y - b[num].pos.y) };			// ’†SŠÔ‹——£‚ÌX,Y¬•ª
 	distance = sqrtf(length.x * length.x + length.y * length.y);
-	if (minDistance < distance)
+	if (minDistance > distance)
 	{
 		hitFlag = true;
 	}

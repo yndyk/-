@@ -27,10 +27,14 @@ CHARACTER enemy[ENEMY_MAX];
 TYPE_MODE enemyType;//これで種類を管理する
 int enemyTime[ENEMY_MAX];//エネミー描画切り替え時間
 int enemyScore;//スコア管理
+XY_F length[ENEMY_MAX];
+float distance[ENEMY_MAX];
+int searchDistance;
+XY tmpSpeed[ENEMY_MAX];
+
 //ロード
 void SysInitEnemy()
 {
-
 	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
 	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
   	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
@@ -63,6 +67,7 @@ void InitEnemy()
 		enemy[i].size = { 32,32 };
 		enemy[i].offSet = { enemy[i].size.x / 2, enemy[i].size.y / 2 };
 		enemy[i].hp = 3;			// エネミーの残機
+		enemy[i].r = 16;
 		enemy[i].changeFlag = false;
 		enemy[i].div = DIV_RAHGT;
 		enemy[i].refrectFlagX = false;			// x軸進行方向反転フラグ　true:反転　false:そのまま
@@ -71,7 +76,9 @@ void InitEnemy()
 		enemy[i].damageflag = false;
 		enemy[i].score = 0;
 		enemyTime[i] = TIME_FRAME * 3;//ダメージの描画時間
+		searchDistance = player.r + enemy[i].r + 96;	// 敵の索敵距離(この範囲内に入ると敵が自分に向かってくる)
 	}
+
 	enemyAllDeadFlag = false;
 	enemyScore = 0;
 }
@@ -83,22 +90,25 @@ void UpdetaEnemy()
 	{
 		if (enemy[i].flag)
 		{
-			//弾の当たり判定 
+			//弾の当たり判定
+			if (shot.flag)
+			{
 				if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
 				{
 					shot.flag = false;
+					//enemy[i].flag = false;
 					enemy[i].damageflag = true;
 					shot.pos.x = player.pos.x;
 					shot.pos.y = player.pos.y;
 					enemyScore += enemy[i].score;//スコアを加算
 					enemy[i].hp -= 1;// 
 				}
-
-				//移動
-				if (enemyTime[i] == TIME_FRAME * 3)	// ダメージを受けると動きが止まる(この条件を消せば攻撃を食らっても動きが止まらない)
-				{
-					MoveEnemy(i);// 敵の移動制御
-				}
+			}
+			//移動
+			if (enemyTime[i] == TIME_FRAME * 3)	// ダメージを受けると動きが止まる(この条件を消せば攻撃を食らっても動きが止まらない)
+			{
+				MoveEnemy(i);// 敵の移動制御
+			}
 		}
 		else
 		{
@@ -115,11 +125,11 @@ void UpdetaEnemy()
 				enemy[8].point == 1)
 			{
 				enemyAllDeadFlag = true;
-				
 			}
+
 			if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか
 			{
-				if (enemy[i].type == TYPE_1) 
+				if (enemy[i].type == TYPE_1)
 				{
 					UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
 				}
@@ -127,16 +137,14 @@ void UpdetaEnemy()
 				{
 					UpdateIkatenn(enemy[i].pos, enemy[i].changeFlag, i);
 				}
-				if(enemy[i].type == TYPE_3)
+				if (enemy[i].type == TYPE_3)
 				{
 					UpdetaSurume(enemy[i].pos, enemy[i].changeFlag, i);
 				}
 			}
-			
 		}
-
 	}
-} 
+}
 
 //描画
 void DrawEnemy()
@@ -174,13 +182,15 @@ void DrawEnemy()
 			default:
 				break;
 			}
-
+		
 			// 当たり判定の可視化
 			DrawBox(enemy[i].pos.x - enemy[i].offSet.x,
 				enemy[i].pos.y - enemy[i].offSet.y,
 				enemy[i].pos.x + enemy[i].offSet.x,
 				enemy[i].pos.y + enemy[i].offSet.y,
 				0x000000, false);
+			if (stageID == STAGE3)
+				DrawCircle(enemy[i].pos.x, enemy[i].pos.y, enemy[i].r + player.r + 96, 0x000000, false);
 
 			DrawFormatString(enemy[i].pos.x, enemy[i].pos.y - 32, 0xff0000, "%d", enemy[i].hp);	// 残機の可視化
 		}
@@ -190,14 +200,16 @@ void DrawEnemy()
 		//DrawFormatString(100, 100 + i * 18, 0xff0000, "df:%d", enemy[i].damageflag);
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "cf:%d", enemy[i].changeFlag);
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "f:%d", enemy[i].flag);
-
+		//DrawFormatString(0, 50, 0xff0000, "sd:%.2f", searchDistance);
+		//DrawFormatString(0, 100 + i * 18, 0xff0000, "d:%.2f", distance[i]);
+		//DrawFormatString(200, 100 + i * 18, 0xff0000, "s:%d", enemy[i].speed);
 		DrawIkayaki(i);
 		DrawIkatenn(i);
 		DrawSurume(i);
 	}
 	//スコア表示
-	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
-	/*DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
+	/*DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
+	DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
 	DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
 	DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
 	DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
@@ -268,18 +280,40 @@ void MoveEnemy(int num)
 			RefrectMoveXY(num);
 			enemy[num].movePattern = rand() % 2;
 		}
+		int tmpR = player.r + enemy[num].r;
 
 		// ここに敵の一定範囲内に入ったらプレイヤーのほうに移動してくる処理を書く
+		length[num] = { fabsf(player.pos.x - enemy[num].pos.x) + tmpR, fabsf(player.pos.y - enemy[num].pos.y) + tmpR };			// 中心間距離のX,Y成分
+		distance[num] = sqrtf(length[num].x * length[num].x + length[num].y * length[num].y);
+		tmpSpeed[num] = enemy[num].speed;
 
+		if (distance[num] - searchDistance < 0)
+		{
+			if (player.pos.x - enemy[num].pos.x > 0)
+			{
+				if (enemy[num].speed.x < 0)
+					enemy[num].speed.x = -1 * tmpSpeed[num].x;
+			}
+			else
+			{
+				if (enemy[num].speed.x > 0)
+					enemy[num].speed.x = -1 * tmpSpeed[num].x;
+			}
+			if (abs(enemy[num].pos.x - player.pos.x) < 2)
+				enemy[num].speed.x = 0;
 
-		if (enemy[num].movePattern == 0)
-			enemy[num].pos.y += enemy[num].speed.y;
-		if (enemy[num].movePattern == 1)
 			enemy[num].pos.x += enemy[num].speed.x;
-
+		}
+		else
+		{
+			
+			if (enemy[num].movePattern == 0)
+				enemy[num].pos.y += enemy[num].speed.y;
+			if (enemy[num].movePattern == 1)
+				enemy[num].pos.x += enemy[num].speed.x;
+		}
+		enemy[num].speed = tmpSpeed[num];
 	}
-
-
 }
 
 void RefrectMoveXY(int num)
