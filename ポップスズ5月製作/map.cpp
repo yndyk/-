@@ -10,6 +10,8 @@
 #include "awa.h"
 #include "unti.h"
 #include "ikayaki.h"
+#include"ikatenn.h"
+#include"surume.h"
 
 int MapImage;
 int MapImage2;//2ステージ
@@ -40,7 +42,9 @@ void StageUpdate()
 			InitIkayaki();
 			BubbleDelete();
 			DeleteUnti();
+			DeleteIkatenn();
 			DeleteIkayaki();
+			DeleteSurume();
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE2;
 		}
@@ -52,7 +56,9 @@ void StageUpdate()
 			InitIkayaki();
 			BubbleDelete();
 			DeleteUnti();
+			DeleteIkatenn();
 			DeleteIkayaki();
+			DeleteSurume();
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE3;
 		}

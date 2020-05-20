@@ -16,6 +16,8 @@
 #include "map.h"
 #include "ikayaki.h"
 #include <time.h>
+#include"ikatenn.h"
+#include"surume.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -154,6 +156,8 @@ bool SystmeInit(void)//システム初期化
 	 SysinitUnti();
 	 SysInitBubble();
 	 SysInitIkayaki();
+	 SysInitIkatenn();
+	 SysInitSurume();
 	 leftTime = TIME_FRAME * 31;
 	 return true;
 }
@@ -175,6 +179,8 @@ void GameInit(void)//ゲームループ内の初期化
 	initUnti();
 	InitBubble();
 	InitIkayaki();
+	InitIkatenn();
+	InitSurume();
 }
 
 void GameTitlr(void)//タイトル画面処理

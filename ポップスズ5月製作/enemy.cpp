@@ -17,6 +17,8 @@
 #include "map.h"
 #include <math.h>
 #include "hitCheck.h"
+#include"ikatenn.h"
+#include"surume.h"
 
 int enemyImage[3][2];//エネミー3種類,2パターン
 int enemyDamageImage[3];//エネミーダメージ3種類
@@ -117,13 +119,24 @@ void UpdetaEnemy()
 			}
 			if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか
 			{
-				UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
+				if (enemy[i].type == TYPE_1) 
+				{
+					UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
+				}
+				if (enemy[i].type == TYPE_2)
+				{
+					UpdateIkatenn(enemy[i].pos, enemy[i].changeFlag, i);
+				}
+				if(enemy[i].type == TYPE_3)
+				{
+					UpdetaSurume(enemy[i].pos, enemy[i].changeFlag, i);
+				}
 			}
 			
 		}
 
 	}
-}
+} 
 
 //描画
 void DrawEnemy()
@@ -179,6 +192,8 @@ void DrawEnemy()
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "f:%d", enemy[i].flag);
 
 		DrawIkayaki(i);
+		DrawIkatenn(i);
+		DrawSurume(i);
 	}
 	//スコア表示
 	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);

@@ -11,11 +11,13 @@
 #include "hitCheck.h"
 
 int ikayakiImage;
+
 CHARACTER ikayaki[IKAYAKI_MAX];
 
 void SysInitIkayaki()
 {
 	ikayakiImage = LoadGraph("bmp/ÉCÉJèƒÇ´.png");
+	
 }
 
 void InitIkayaki()
@@ -84,6 +86,8 @@ void DrawIkayaki(int num)
 			ikayaki[num].pos.y + ikayaki[num].offSet.y,
 			0x000000, false);
 	}
+
+	
 
 	//DrawFormatString(0, 100 + num * 18, 0xff0000, "f;%d", ikayaki[num].flag);
 	//DrawFormatString(50, 100 + num * 18, 0xff0000, "x:%d", ikayaki[num].pos.x);
