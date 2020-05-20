@@ -66,6 +66,7 @@ typedef struct
 	bool refrectFlagX;		// x軸反射フラグ
 	bool refrectFlagY;		// y軸反射フラグ
 	int movePattern;		// 移動パターン
+	int score;				//スコア変数
 }CHARACTER;
 
 #define SCREEN_SIZE_X 640

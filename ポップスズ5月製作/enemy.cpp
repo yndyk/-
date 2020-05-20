@@ -23,7 +23,8 @@ int enemyDamageImage[3];//エネミーダメージ3種類
 bool enemyAllDeadFlag;
 CHARACTER enemy[ENEMY_MAX];
 TYPE_MODE enemyType;//これで種類を管理する
-int enemyTime;
+int enemyTime;//エネミー描画切り替え時間
+int enemyScore;//スコア管理
 //ロード
 void SysInitEnemy()
 {
@@ -63,9 +64,11 @@ void InitEnemy()
 		enemy[i].refrectFlagY = false;			// y軸進行方向反転フラグ
 		enemy[i].movePattern = 0;
 		enemy[i].damageflag = false;
+		enemy[i].score = 0;
 	}
 	enemyAllDeadFlag = false;
 	enemyTime = TIME_FRAME * 3;//ダメージの描画時間
+	enemyScore = 0;
 }
 
 //更新
@@ -77,7 +80,6 @@ void UpdetaEnemy()
 		{
 			//移動
 			MoveEnemy(i);// 敵の移動制御
-			
 			//弾の当たり判定
 			if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
 			{
@@ -86,6 +88,7 @@ void UpdetaEnemy()
 				enemy[i].damageflag = true;
 				shot.pos.x = player.pos.x;
 				shot.pos.y = player.pos.y;
+				enemyScore += enemy[i].score;//スコアを加算
 				//クリア判定
 				if (enemy[i].flag == false)
 				{
@@ -104,7 +107,6 @@ void UpdetaEnemy()
 					}
 				}
 			}
-			
 		}
 
 		else
@@ -159,18 +161,19 @@ void DrawEnemy()
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
 		//DrawFormatString(100, 100 + i * 18, 0xff0000, "flag:%d", enemy[i].refrectFlag);
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "ptn:%d", enemy[i].movePattern);
-
-		
-
 		DrawIkayaki(i);
 	}
+	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
+	DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
+	DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
+	DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
+	DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
+	DrawFormatString(40, 120, 0xff0000, "%d", enemy[4].score, true);
+	DrawFormatString(40, 140, 0xff0000, "%d", enemy[5].score, true);
+	DrawFormatString(40, 160, 0xff0000, "%d", enemy[6].score, true);
+	DrawFormatString(40, 180, 0xff0000, "%d", enemy[7].score, true);
+	DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);
 	
-	/*DrawFormatString(30, 30, 0xffff00, "%d", enemy[0].point, true);
-	DrawFormatString(30, 40, 0xffff00, "%d", enemy[1].point, true);
-	DrawFormatString(30, 50, 0xffff00, "%d", enemy[2].point, true);
-	DrawFormatString(30, 60, 0xffff00, "%d", enemy[3].point, true);
-	DrawFormatString(30, 70, 0xffff00, "%d", enemy[4].point, true);
-	DrawFormatString(30, 80, 0xffff00, "%d", enemy[5].point, true);*/
 }
 
 void MoveEnemy(int num)
@@ -275,28 +278,33 @@ void TypeEnemy()
 		case TYPE_1:
 			enemy[i].size = { 32,32 };
 			enemy[i].type = TYPE_1;
+ 			enemy[i].score = 100;
 			break;
 		case TYPE_2:
 			enemy[i].size = { 32,32 };
 			enemy[i].type = TYPE_2;
+			enemy[i].score = 150;
 			break;
 		case TYPE_3:
 			enemy[i].size = { 32,64 };
 			enemy[i].type = TYPE_3;
+			enemy[i].score = 170;
 			break;
 		default:
 			break;
 		}
 	}
-	enemy[0].type = TYPE_1;
-	enemy[1].type = TYPE_2;
-	enemy[2].type = TYPE_3;
-	enemy[3].type = TYPE_1;
-	enemy[4].type = TYPE_2;
-	enemy[5].type = TYPE_3;
-	enemy[6].type = TYPE_1;
-	enemy[7].type = TYPE_2;
-	enemy[8].type = TYPE_3;
+
+	enemy[0].type = TYPE_1; enemy[0].score = 100;
+	enemy[1].type = TYPE_2; enemy[1].score = 150;
+	enemy[2].type = TYPE_3; enemy[2].score = 170;
+	enemy[3].type = TYPE_1; enemy[3].score = 100;
+	enemy[4].type = TYPE_2; enemy[4].score = 150;
+	enemy[5].type = TYPE_3; enemy[5].score = 170;
+	enemy[6].type = TYPE_1; enemy[6].score = 100;
+	enemy[7].type = TYPE_2; enemy[7].score = 150;
+	enemy[8].type = TYPE_3; enemy[8].score = 170;
+
 }
 //ダメージ描画切り替え
 void DamageEnemy()
