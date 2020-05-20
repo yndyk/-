@@ -29,6 +29,7 @@ void InitPlayer()
 	player.size = { 32, 32 };
 	player.offSet = { player.size.x / 2, player.size.y / 2 };
 	player.speed = { 5,5 };
+	player.r = 16;
 	player.div = DIV_RAHGT;
 	player.hp = TIME_FRAME *PLAYER_HP_MAX;
 	player.flag = true;
@@ -161,6 +162,7 @@ void DrawPlayer()
 			player.pos.y - player.offSet.y,
 			player.pos.x + player.offSet.x,
 			player.pos.y + player.offSet.y, 0x000000, false);
+		//DrawCircle(player.pos.x, player.pos.y, player.r, 0x000000, false);
 		DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
 		DrawBox(0, 440, player.hp / 60, 450, 0x000000, false);
 }
