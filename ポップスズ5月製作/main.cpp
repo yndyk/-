@@ -49,7 +49,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 		KeyCheck();
 	
 		//ƒƒCƒ“ˆ—
-		switch (gamemode)
+ 		switch (gamemode)
 		{
 		case GMODE_INIT:
 			GameInit();
