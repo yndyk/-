@@ -1,9 +1,9 @@
 //-----------------------------------------------------
 // 
-// 敵の初期座標の取得乱数の変更
-// 描画をオフセット分ずらした
-// 当たり判定の可視化
-// イカ焼きに代わるフラグをエネミーがダメージを受けた描画のあとにtrueにするに変更
+// 残機の可視化
+// 残機の追加
+// enemyTimeを配列に変更
+// 
 // 
 //-----------------------------------------------------
 
@@ -23,7 +23,7 @@ int enemyDamageImage[3];//エネミーダメージ3種類
 bool enemyAllDeadFlag;
 CHARACTER enemy[ENEMY_MAX];
 TYPE_MODE enemyType;//これで種類を管理する
-int enemyTime;//エネミー描画切り替え時間
+int enemyTime[ENEMY_MAX];//エネミー描画切り替え時間
 int enemyScore;//スコア管理
 //ロード
 void SysInitEnemy()
@@ -58,6 +58,7 @@ void InitEnemy()
 		enemy[i].point = 0;
 		enemy[i].size = { 32,32 };
 		enemy[i].offSet = { enemy[i].size.x / 2, enemy[i].size.y / 2 };
+		enemy[i].hp = 3;			// エネミーの残機
 		enemy[i].changeFlag = false;
 		enemy[i].div = DIV_RAHGT;
 		enemy[i].refrectFlagX = false;			// x軸進行方向反転フラグ　true:反転　false:そのまま
@@ -65,9 +66,9 @@ void InitEnemy()
 		enemy[i].movePattern = 0;
 		enemy[i].damageflag = false;
 		enemy[i].score = 0;
+		enemyTime[i] = TIME_FRAME * 3;//ダメージの描画時間
 	}
 	enemyAllDeadFlag = false;
-	enemyTime = TIME_FRAME * 3;//ダメージの描画時間
 	enemyScore = 0;
 }
 
@@ -76,42 +77,46 @@ void UpdetaEnemy()
 {
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
-		if (enemy[i].flag == true)
+		if (enemy[i].flag)
 		{
-			//移動
-			MoveEnemy(i);// 敵の移動制御
 			//弾の当たり判定
-			if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
+			if (shot.flag)
 			{
-				shot.flag = false;
-				enemy[i].flag = false;
-				enemy[i].damageflag = true;
-				shot.pos.x = player.pos.x;
-				shot.pos.y = player.pos.y;
-				enemyScore += enemy[i].score;//スコアを加算
-				//クリア判定
-				if (enemy[i].flag == false)
+				if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
 				{
-					enemy[i].point = 1;
-					if (enemy[0].point == 1 &&
-						enemy[1].point == 1 &&
-						enemy[2].point == 1 &&
-						enemy[3].point == 1 &&
-						enemy[4].point == 1 &&
-						enemy[5].point == 1 &&
-						enemy[6].point == 1 &&
-						enemy[7].point == 1 &&
-						enemy[8].point == 1)
-					{
-						enemyAllDeadFlag = true;
-					}
+					shot.flag = false;
+					//enemy[i].flag = false;
+					enemy[i].damageflag = true;
+					shot.pos.x = player.pos.x;
+					shot.pos.y = player.pos.y;
+					enemyScore += enemy[i].score;//スコアを加算
+					enemy[i].hp -= 1;// 
 				}
 			}
+			//移動
+			if (enemyTime[i] == TIME_FRAME * 3)	// ダメージを受けると動きが止まる(この条件を消せば攻撃を食らっても動きが止まらない)
+			{
+				MoveEnemy(i);// 敵の移動制御
+			}
 		}
-
 		else
 		{
-			if (enemy[i].changeFlag)
+			//クリア判定
+			enemy[i].point = 1;
+			if (enemy[0].point == 1 &&
+				enemy[1].point == 1 &&
+				enemy[2].point == 1 &&
+				enemy[3].point == 1 &&
+				enemy[4].point == 1 &&
+				enemy[5].point == 1 &&
+				enemy[6].point == 1 &&
+				enemy[7].point == 1 &&
+				enemy[8].point == 1)
+			{
+				enemyAllDeadFlag = true;
+			}
+
+			if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか
 			{
 				UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
 			}
@@ -134,17 +139,23 @@ void DrawEnemy()
 			case DIV_RAHGT:
 				enemy[i].count++;	
 				//エネミータイプ
-				DrawGraph(enemy[i].pos.x - enemy[i].offSet.x,
-					enemy[i].pos.y - enemy[i].offSet.y,
-					enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
-				DamageEnemy();
+				if (!enemy[i].damageflag)
+				{
+					DrawGraph(enemy[i].pos.x - enemy[i].offSet.x,
+						enemy[i].pos.y - enemy[i].offSet.y,
+						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
+				}
+				DamageEnemy(i);
 				break;
 			case DIV_LEFT:
 				enemy[i].count++;	
-				DrawTurnGraph(enemy[i].pos.x - enemy[i].offSet.x,
-					enemy[i].pos.y - enemy[i].offSet.y,
-					enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
-				DamageEnemy();
+				if (!enemy[i].damageflag)
+				{
+					DrawTurnGraph(enemy[i].pos.x - enemy[i].offSet.x,
+						enemy[i].pos.y - enemy[i].offSet.y,
+						enemyImage[enemy[i].type][enemy[i].count / 50 % 2], true);
+				}
+				DamageEnemy(i);
 				break;
 			default:
 				break;
@@ -156,24 +167,35 @@ void DrawEnemy()
 				enemy[i].pos.x + enemy[i].offSet.x,
 				enemy[i].pos.y + enemy[i].offSet.y,
 				0x000000, false);
+
+			DrawFormatString(enemy[i].pos.x, enemy[i].pos.y - 32, 0xff0000, "%d", enemy[i].hp);	// 残機の可視化
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
-		//DrawFormatString(100, 100 + i * 18, 0xff0000, "flag:%d", enemy[i].refrectFlag);
-		//DrawFormatString(150, 100 + i * 18, 0xff0000, "ptn:%d", enemy[i].movePattern);
+		//DrawFormatString(50, 100 + i * 18, 0xff0000, "eT;%d", enemyTime[i]);
+		//DrawFormatString(100, 100 + i * 18, 0xff0000, "df:%d", enemy[i].damageflag);
+		//DrawFormatString(150, 100 + i * 18, 0xff0000, "cf:%d", enemy[i].changeFlag);
+		//DrawFormatString(150, 100 + i * 18, 0xff0000, "f:%d", enemy[i].flag);
+
 		DrawIkayaki(i);
+
+		//DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
+		//DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
+		//DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
+		//DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
+		//DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
+		//DrawFormatString(40, 120, 0xff0000, "%d", enemy[4].score, true);
+		//DrawFormatString(40, 140, 0xff0000, "%d", enemy[5].score, true);
+		//DrawFormatString(40, 160, 0xff0000, "%d", enemy[6].score, true);
+		//DrawFormatString(40, 180, 0xff0000, "%d", enemy[7].score, true);
+		//DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);
 	}
-	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
-	DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
-	DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
-	DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
-	DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
-	DrawFormatString(40, 120, 0xff0000, "%d", enemy[4].score, true);
-	DrawFormatString(40, 140, 0xff0000, "%d", enemy[5].score, true);
-	DrawFormatString(40, 160, 0xff0000, "%d", enemy[6].score, true);
-	DrawFormatString(40, 180, 0xff0000, "%d", enemy[7].score, true);
-	DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);
-	
+	/*DrawFormatString(30, 30, 0xffff00, "%d", enemy[0].point, true);
+	DrawFormatString(30, 40, 0xffff00, "%d", enemy[1].point, true);
+	DrawFormatString(30, 50, 0xffff00, "%d", enemy[2].point, true);
+	DrawFormatString(30, 60, 0xffff00, "%d", enemy[3].point, true);
+	DrawFormatString(30, 70, 0xffff00, "%d", enemy[4].point, true);
+	DrawFormatString(30, 80, 0xffff00, "%d", enemy[5].point, true);*/
 }
 
 void MoveEnemy(int num)
@@ -278,7 +300,7 @@ void TypeEnemy()
 		case TYPE_1:
 			enemy[i].size = { 32,32 };
 			enemy[i].type = TYPE_1;
- 			enemy[i].score = 100;
+			enemy[i].score = 100;
 			break;
 		case TYPE_2:
 			enemy[i].size = { 32,32 };
@@ -304,27 +326,29 @@ void TypeEnemy()
 	enemy[6].type = TYPE_1; enemy[6].score = 100;
 	enemy[7].type = TYPE_2; enemy[7].score = 150;
 	enemy[8].type = TYPE_3; enemy[8].score = 170;
-
 }
-//ダメージ描画切り替え
-void DamageEnemy()
+//被ダメージ時の処理
+void DamageEnemy(int num)
 {
-	for (int i = 0; i < ENEMY_MAX; i++)
+	if (enemy[num].damageflag)
 	{
-		if (enemy[i].damageflag == true)
+		DrawGraph(enemy[num].pos.x - enemy[num].offSet.x,
+			enemy[num].pos.y - enemy[num].offSet.y,
+			enemyDamageImage[enemy[num].type], true);
+		enemyTime[num]--;
+		if (enemyTime[num] < 0 && enemy[num].hp > 0)		// 
 		{
-			DrawGraph(enemy[i].pos.x, enemy[i].pos.y,
-				enemyDamageImage[enemy[i].type], true);
-			enemyTime--;
-		}
-		if (enemyTime == 0)
-		{
-			enemy[i].damageflag = false;
-			enemy[i].changeFlag = true;
-			enemyTime = 60 * 3;
+			enemy[num].damageflag = false;
+			enemyTime[num] = TIME_FRAME * 3;
+			enemy[num].hp = 3;
 		}
 	}
-	DrawFormatString(499, 0, 0xff0000, "%d", enemyTime / TIME_FRAME);
+	if (enemy[num].hp == 0)
+	{
+		enemy[num].flag = false;
+		enemy[num].changeFlag = true;
+	}
+	DrawFormatString(499, num * 18, 0xff0000, "eT;%d", enemyTime[num] / TIME_FRAME);
 }
 
 
