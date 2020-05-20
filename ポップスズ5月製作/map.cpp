@@ -58,7 +58,7 @@ void StageUpdate()
 			DeleteUnti();
 			DeleteIkatenn();
 			DeleteIkayaki();
-			DeleteSurume();
+			DeleteSurume(); 
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE3;
 		}
