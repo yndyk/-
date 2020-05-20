@@ -28,6 +28,7 @@ int enemyScore;//スコア管理
 //ロード
 void SysInitEnemy()
 {
+
 	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
 	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
   	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
@@ -35,6 +36,7 @@ void SysInitEnemy()
 	enemyDamageImage[1] = LoadGraph("bmp/イカメカダメージ.png");
 	enemyDamageImage[2] = LoadGraph("bmp/長足イカダメージ.png");
 }
+
 //初期化
 void InitEnemy()
 {
@@ -89,7 +91,7 @@ void UpdetaEnemy()
 				shot.pos.x = player.pos.x;
 				shot.pos.y = player.pos.y;
 				enemyScore += enemy[i].score;//スコアを加算
-				//クリア判定
+				 //クリア判定
 				if (enemy[i].flag == false)
 				{
 					enemy[i].point = 1;
@@ -104,6 +106,7 @@ void UpdetaEnemy()
 						enemy[8].point == 1)
 					{
 						enemyAllDeadFlag = true;
+
 					}
 				}
 			}
@@ -163,8 +166,10 @@ void DrawEnemy()
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "ptn:%d", enemy[i].movePattern);
 		DrawIkayaki(i);
 	}
+
+	//スコア表示
 	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
-	DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
+	/*DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
 	DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
 	DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
 	DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
@@ -172,7 +177,7 @@ void DrawEnemy()
 	DrawFormatString(40, 140, 0xff0000, "%d", enemy[5].score, true);
 	DrawFormatString(40, 160, 0xff0000, "%d", enemy[6].score, true);
 	DrawFormatString(40, 180, 0xff0000, "%d", enemy[7].score, true);
-	DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);
+	DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);*/
 	
 }
 
@@ -294,7 +299,7 @@ void TypeEnemy()
 			break;
 		}
 	}
-
+	//エネミータイプとスコア
 	enemy[0].type = TYPE_1; enemy[0].score = 100;
 	enemy[1].type = TYPE_2; enemy[1].score = 150;
 	enemy[2].type = TYPE_3; enemy[2].score = 170;
