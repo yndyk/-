@@ -81,75 +81,47 @@ void UpdetaEnemy()
 	{
 		if (enemy[i].flag)
 		{
-			//弾の当たり判定
-			if (shot.flag)
-			{
-				//<<<<<< < HEAD
-					shot.flag = false;
-				enemy[i].flag = false;
-				enemy[i].damageflag = true;
-				shot.pos.x = player.pos.x;
-				shot.pos.y = player.pos.y;
-				enemyScore += enemy[i].score;//スコアを加算
-				 //クリア判定
-				if (enemy[i].flag == false)
+			//弾の当たり判定 
+				if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
 				{
-					enemy[i].point = 1;
-					if (enemy[0].point == 1 &&
-						enemy[1].point == 1 &&
-						enemy[2].point == 1 &&
-						enemy[3].point == 1 &&
-						enemy[4].point == 1 &&
-						enemy[5].point == 1 &&
-						enemy[6].point == 1 &&
-						enemy[7].point == 1 &&
-						enemy[8].point == 1)
-					{
-						enemyAllDeadFlag = true;
-
-					}
-					//====== =
-						if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
-						{
-							shot.flag = false;
-							//enemy[i].flag = false;
-							enemy[i].damageflag = true;
-							shot.pos.x = player.pos.x;
-							shot.pos.y = player.pos.y;
-							enemyScore += enemy[i].score;//スコアを加算
-							enemy[i].hp -= 1;// 
-							//>>>>>> > 1464d368f60ec7f6b4770a796038029754d506b0
-						}
+					shot.flag = false;
+					enemy[i].damageflag = true;
+					shot.pos.x = player.pos.x;
+					shot.pos.y = player.pos.y;
+					enemyScore += enemy[i].score;//スコアを加算
+					enemy[i].hp -= 1;// 
 				}
+
 				//移動
 				if (enemyTime[i] == TIME_FRAME * 3)	// ダメージを受けると動きが止まる(この条件を消せば攻撃を食らっても動きが止まらない)
 				{
 					MoveEnemy(i);// 敵の移動制御
 				}
-			}
-			else
-			{
-				//クリア判定
-				enemy[i].point = 1;
-				if (enemy[0].point == 1 &&
-					enemy[1].point == 1 &&
-					enemy[2].point == 1 &&
-					enemy[3].point == 1 &&
-					enemy[4].point == 1 &&
-					enemy[5].point == 1 &&
-					enemy[6].point == 1 &&
-					enemy[7].point == 1 &&
-					enemy[8].point == 1)
-				{
-					enemyAllDeadFlag = true;
-				}
-
-				if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか
-				{
-					UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
-				}
-			}
 		}
+		else
+		{
+			//クリア判定
+			enemy[i].point = 1;
+			if (enemy[0].point == 1 &&
+				enemy[1].point == 1 &&
+				enemy[2].point == 1 &&
+				enemy[3].point == 1 &&
+				enemy[4].point == 1 &&
+				enemy[5].point == 1 &&
+				enemy[6].point == 1 &&
+				enemy[7].point == 1 &&
+				enemy[8].point == 1)
+			{
+				enemyAllDeadFlag = true;
+				
+			}
+			if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか
+			{
+				UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
+			}
+			
+		}
+
 	}
 }
 
@@ -166,7 +138,7 @@ void DrawEnemy()
 			switch (enemy[i].div)
 			{
 			case DIV_RAHGT:
-				enemy[i].count++;	
+				enemy[i].count++;
 				//エネミータイプ
 				if (!enemy[i].damageflag)
 				{
@@ -177,7 +149,7 @@ void DrawEnemy()
 				DamageEnemy(i);
 				break;
 			case DIV_LEFT:
-				enemy[i].count++;	
+				enemy[i].count++;
 				if (!enemy[i].damageflag)
 				{
 					DrawTurnGraph(enemy[i].pos.x - enemy[i].offSet.x,
@@ -189,7 +161,7 @@ void DrawEnemy()
 			default:
 				break;
 			}
-		
+
 			// 当たり判定の可視化
 			DrawBox(enemy[i].pos.x - enemy[i].offSet.x,
 				enemy[i].pos.y - enemy[i].offSet.y,
@@ -207,20 +179,7 @@ void DrawEnemy()
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "f:%d", enemy[i].flag);
 
 		DrawIkayaki(i);
-
-		//DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
-		//DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
-		//DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
-		//DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
-		//DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
-		//DrawFormatString(40, 120, 0xff0000, "%d", enemy[4].score, true);
-		//DrawFormatString(40, 140, 0xff0000, "%d", enemy[5].score, true);
-		//DrawFormatString(40, 160, 0xff0000, "%d", enemy[6].score, true);
-		//DrawFormatString(40, 180, 0xff0000, "%d", enemy[7].score, true);
-		//DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);
 	}
-//<<<<<<< HEAD
-
 	//スコア表示
 	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
 	/*DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
@@ -232,15 +191,6 @@ void DrawEnemy()
 	DrawFormatString(40, 160, 0xff0000, "%d", enemy[6].score, true);
 	DrawFormatString(40, 180, 0xff0000, "%d", enemy[7].score, true);
 	DrawFormatString(40, 200, 0xff0000, "%d", enemy[8].score, true);*/
-	
-//=======
-	/*DrawFormatString(30, 30, 0xffff00, "%d", enemy[0].point, true);
-	DrawFormatString(30, 40, 0xffff00, "%d", enemy[1].point, true);
-	DrawFormatString(30, 50, 0xffff00, "%d", enemy[2].point, true);
-	DrawFormatString(30, 60, 0xffff00, "%d", enemy[3].point, true);
-	DrawFormatString(30, 70, 0xffff00, "%d", enemy[4].point, true);
-	DrawFormatString(30, 80, 0xffff00, "%d", enemy[5].point, true);*/
-//>>>>>>> 1464d368f60ec7f6b4770a796038029754d506b0
 }
 
 void MoveEnemy(int num)
