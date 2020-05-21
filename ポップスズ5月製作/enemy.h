@@ -10,7 +10,7 @@
 extern CHARACTER enemy[ENEMY_MAX];
 extern bool enemyAllDeadFlag;
 extern TYPE_MODE enemyType;
-
+extern int enemyScore;
 
 void SysInitEnemy();
 void InitEnemy();

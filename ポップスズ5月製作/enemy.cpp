@@ -41,6 +41,7 @@ void SysInitEnemy()
 	enemyDamageImage[0] = LoadGraph("bmp/イカプレーンダメージ.png");
 	enemyDamageImage[1] = LoadGraph("bmp/イカメカダメージ.png");
 	enemyDamageImage[2] = LoadGraph("bmp/長足イカダメージ.png");
+	enemyScore = 0;
 }
 
 //初期化
@@ -80,7 +81,7 @@ void InitEnemy()
 	}
 
 	enemyAllDeadFlag = false;
-	enemyScore = 0;
+	
 }
 
 //更新
@@ -208,8 +209,8 @@ void DrawEnemy()
 		DrawSurume(i);
 	}
 	//スコア表示
-	/*DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
-	DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
+	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
+	/*DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
 	DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
 	DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);
 	DrawFormatString(40, 100, 0xff0000, "%d", enemy[3].score, true);
@@ -380,7 +381,7 @@ void DamageEnemy(int num)
 			enemy[num].pos.y - enemy[num].offSet.y,
 			enemyDamageImage[enemy[num].type], true);
 		enemyTime[num]--;
-		if (enemyTime[num] < 0 && enemy[num].hp > 0)		// 
+		if (enemyTime[num] < 0 && enemy[num].hp > 0)
 		{
 			enemy[num].damageflag = false;
 			enemyTime[num] = TIME_FRAME * 3;

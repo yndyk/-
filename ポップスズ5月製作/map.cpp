@@ -40,6 +40,8 @@ void StageUpdate()
 			InitEnemy();
 			InitPlayer();
 			InitIkayaki();
+			InitIkatenn();
+			InitSurume();
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkatenn();
@@ -54,6 +56,8 @@ void StageUpdate()
 			InitEnemy();
 			InitPlayer();
 			InitIkayaki();
+			InitIkatenn();
+			InitSurume();
 			BubbleDelete();
 			DeleteUnti();
 			DeleteIkatenn();

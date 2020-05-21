@@ -9,6 +9,7 @@
 #include "ikayaki.h"
 #include "player.h"
 #include "hitCheck.h"
+#include"enemy.h"
 
 int ikayakiImage;
 
@@ -68,6 +69,7 @@ void UpdateIkayaki(XY pos,bool flag, int num)	// pos:座標　flag:フラグ　num:配列
 			{
 				player.hp = TIME_FRAME * PLAYER_HP_MAX;
 			}
+			enemyScore += 300;
 		}
 	}
 }

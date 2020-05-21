@@ -2,6 +2,7 @@
 #include "ikatenn.h"
 #include "player.h"
 #include "hitCheck.h"
+#include"enemy.h"
 
 CHARACTER ikatenn[IKATENN_MAX];
 int ikatennImage;
@@ -60,6 +61,7 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 			{
 				player.hp = TIME_FRAME * PLAYER_HP_MAX;
 			}
+			enemyScore += 300;
 		}
 	}
 }
