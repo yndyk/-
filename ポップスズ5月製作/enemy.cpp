@@ -77,11 +77,10 @@ void InitEnemy()
 		enemy[i].damageflag = false;
 		enemy[i].score = 0;
 		enemyTime[i] = TIME_FRAME * 3;//ダメージの描画時間
-		searchDistance = player.r + enemy[i].r + 96;	// 敵の索敵距離(この範囲内に入ると敵が自分に向かってくる)
+		searchDistance = 96;	// 敵の索敵距離(この範囲内に入ると敵が自分に向かってくる) 要調整！
 	}
 
 	enemyAllDeadFlag = false;
-	
 }
 
 //更新
@@ -191,7 +190,7 @@ void DrawEnemy()
 				enemy[i].pos.y + enemy[i].offSet.y,
 				0x000000, false);
 			if (stageID == STAGE3)
-				DrawCircle(enemy[i].pos.x, enemy[i].pos.y, enemy[i].r + player.r + 96, 0x000000, false);
+				DrawCircle(enemy[i].pos.x, enemy[i].pos.y, searchDistance, 0x000000, false);
 
 			DrawFormatString(enemy[i].pos.x, enemy[i].pos.y - 32, 0xff0000, "%d", enemy[i].hp);	// 残機の可視化
 		}
@@ -284,11 +283,11 @@ void MoveEnemy(int num)
 		int tmpR = player.r + enemy[num].r;
 
 		// ここに敵の一定範囲内に入ったらプレイヤーのほうに移動してくる処理を書く
-		length[num] = { fabsf(player.pos.x - enemy[num].pos.x) + tmpR, fabsf(player.pos.y - enemy[num].pos.y) + tmpR };			// 中心間距離のX,Y成分
+		length[num] = { (float)(player.pos.x - enemy[num].pos.x), (float)(player.pos.y - enemy[num].pos.y) };			// 中心間距離のX,Y成分
 		distance[num] = sqrtf(length[num].x * length[num].x + length[num].y * length[num].y);
 		tmpSpeed[num] = enemy[num].speed;
 
-		if (distance[num] - searchDistance < 0)
+		if (distance[num] - searchDistance < player.r)
 		{
 			if (player.pos.x - enemy[num].pos.x > 0)
 			{
@@ -301,7 +300,22 @@ void MoveEnemy(int num)
 					enemy[num].speed.x = -1 * tmpSpeed[num].x;
 			}
 			if (abs(enemy[num].pos.x - player.pos.x) < 2)
+			{
 				enemy[num].speed.x = 0;
+				if (player.pos.y - enemy[num].pos.y > 0)
+				{
+					if (enemy[num].speed.y < 0)
+						enemy[num].speed.y = -1 * tmpSpeed[num].y;
+				}
+				else
+				{
+					if (enemy[num].speed.y > 0)
+						enemy[num].speed.y = -1 * tmpSpeed[num].y;
+				}
+				if (abs(player.pos.y - enemy[num].pos.y) < 2)
+					enemy[num].speed.y = 0;
+				enemy[num].pos.y += enemy[num].speed.y;
+			}
 
 			enemy[num].pos.x += enemy[num].speed.x;
 		}
