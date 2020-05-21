@@ -125,7 +125,7 @@ void UpdetaEnemy()
 				enemy[7].point == 1 &&
 				enemy[8].point == 1)
 			{
-				enemyAllDeadFlag = true;
+				//enemyAllDeadFlag = true;
 			}
 
 			if (enemy[i].changeFlag)		// ƒCƒJÄ‚«‚É‘ã‚í‚é‚©‚Ç‚¤‚©
