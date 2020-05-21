@@ -12,6 +12,7 @@
 #include "ikayaki.h"
 #include"ikatenn.h"
 #include"surume.h"
+#include"box.h"
 
 int MapImage;
 int MapImage2;//2ステージ
@@ -47,6 +48,7 @@ void StageUpdate()
 			DeleteIkatenn();
 			DeleteIkayaki();
 			DeleteSurume();
+			InitBox();
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE2;
 		}
@@ -63,6 +65,7 @@ void StageUpdate()
 			DeleteIkatenn();
 			DeleteIkayaki();
 			DeleteSurume(); 
+			InitBox();
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE3;
 		}

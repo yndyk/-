@@ -19,6 +19,7 @@
 #include "hitCheck.h"
 #include"ikatenn.h"
 #include"surume.h"
+#include"box.h"
 
 int enemyImage[3][2];//エネミー3種類,2パターン
 int enemyDamageImage[3];//エネミーダメージ3種類
@@ -124,7 +125,13 @@ void UpdetaEnemy()
 				enemy[7].point == 1 &&
 				enemy[8].point == 1)
 			{
+				
 				//enemyAllDeadFlag = true;
+				//ここでステージ切り替えをする
+				if (HitBox(player, box))
+				{
+					enemyAllDeadFlag = true;
+				}
 			}
 
 			if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか

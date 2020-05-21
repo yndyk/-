@@ -11,11 +11,11 @@
 #include "player.h"
 #include "enemy.h"
 #include "hitCheck.h"
+#include"box.h"
 
 int playerImage[2];
 int playerdamageImage;
 CHARACTER player;
-int BoxFlag;
 
 //ロード
 void SysInitPlayer()
@@ -36,7 +36,6 @@ void InitPlayer()
 	player.flag = true;
 	player.damageflag = false;
 	player.count = 0;
-	BoxFlag = false;
 }
 
 //更新
@@ -88,7 +87,7 @@ void UpdetaPlayer()
 				player.flag = false;
 				enemy[i].flag = false;
 				player.damageflag = true;
-				BoxFlag = true;
+				
 				player.hp -= 1;
 				if (player.hp == 0)
 				{
@@ -105,8 +104,13 @@ void UpdetaPlayer()
 					enemy[6].point == 1 &&
 					enemy[7].point == 1 &&
 					enemy[8].point == 1)
-				{				
-						//enemyAllDeadFlag = true;
+				{		
+					
+					if (HitBox(player, box))//ここでステージ切り替えをする
+					{
+						enemyAllDeadFlag = true;
+					}
+					//enemyAllDeadFlag = true;
 				}
 			}
 		}
@@ -158,11 +162,6 @@ void DrawPlayer()
 
 		player.damageflag = false;
 		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
-		//DrawFormatString(0, 100, 0xff0000, "flag:%d", player.flag);
-		if (BoxFlag == true) 
-		{
-			DrawBox(320, 430, 340, 450, 0xff0000, true);
-		}
 		// 当たり判定の可視化
 		DrawBox(player.pos.x - player.offSet.x,
 			player.pos.y - player.offSet.y,
