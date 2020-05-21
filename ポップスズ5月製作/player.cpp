@@ -168,7 +168,7 @@ void DrawPlayer()
 			player.pos.y - player.offSet.y,
 			player.pos.x + player.offSet.x,
 			player.pos.y + player.offSet.y, 0x000000, false);
-		//DrawCircle(player.pos.x, player.pos.y, player.r, 0x000000, false);
+		DrawCircle(player.pos.x, player.pos.y, player.r, 0x000000, false);
 		DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
 		DrawBox(0, 440, player.hp / 60, 450, 0x000000, false);
 }
