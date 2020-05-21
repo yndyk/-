@@ -15,7 +15,7 @@ void SysInitBox()
 void InitBox() 
 {
 	box.pos = { 320,400 };
-	box.size = { 32,32 };
+	box.size = { 64,64 };
 	box.offSet = { box.size.x / 2,box.size.y / 2 };
 	box.flag = false;
 }
