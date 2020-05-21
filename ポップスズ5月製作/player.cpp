@@ -11,7 +11,7 @@
 #include "player.h"
 #include "enemy.h"
 #include "hitCheck.h"
-#include"box.h"
+#include "box.h"
 
 int playerImage[2];
 int playerdamageImage;
@@ -87,13 +87,13 @@ void UpdetaPlayer()
 				player.flag = false;
 				enemy[i].flag = false;
 				player.damageflag = true;
-				
+
 				player.hp -= 1;
 				if (player.hp == 0)
 				{
 					gamemode = GMODE_OVER;
 				}
-				
+
 				enemy[i].point = 1;
 				if (enemy[0].point == 1 &&
 					enemy[1].point == 1 &&
@@ -104,8 +104,7 @@ void UpdetaPlayer()
 					enemy[6].point == 1 &&
 					enemy[7].point == 1 &&
 					enemy[8].point == 1)
-				{		
-					
+				{
 					if (HitBox(player, box))//ここでステージ切り替えをする
 					{
 						enemyAllDeadFlag = true;
@@ -162,6 +161,7 @@ void DrawPlayer()
 
 		player.damageflag = false;
 		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
+		
 		// 当たり判定の可視化
 		DrawBox(player.pos.x - player.offSet.x,
 			player.pos.y - player.offSet.y,

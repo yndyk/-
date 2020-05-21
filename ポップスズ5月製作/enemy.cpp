@@ -92,17 +92,20 @@ void UpdetaEnemy()
 		if (enemy[i].flag)
 		{
 			//弾の当たり判定
-			if (shot.flag)
+			for (int j = 0; j < SHOT_MAX; j++)
 			{
-				if (HitCheckRectToRect(shot, i, enemy))			// 矩形と矩形の当たり判定
+				if (shot[j].flag)
 				{
-					shot.flag = false;
-					//enemy[i].flag = false;
-					enemy[i].damageflag = true;
-					shot.pos.x = player.pos.x;
-					shot.pos.y = player.pos.y;
-					enemyScore += enemy[i].score;//スコアを加算
-					enemy[i].hp -= 1;// 
+					if (HitCheckShotToEnemy(shot, j, enemy, i))			// 矩形と矩形の当たり判定
+					{
+						shot[j].flag = false;
+						//enemy[i].flag = false;
+						enemy[i].damageflag = true;
+						shot[j].pos.x = player.pos.x;
+						shot[j].pos.y = player.pos.y;
+						enemyScore += enemy[i].score;//スコアを加算
+						enemy[i].hp -= 1;// 
+					}
 				}
 			}
 			//移動
@@ -125,7 +128,6 @@ void UpdetaEnemy()
 				enemy[7].point == 1 &&
 				enemy[8].point == 1)
 			{
-				
 				//enemyAllDeadFlag = true;
 				//ここでステージ切り替えをする
 				if (HitBox(player, box))
@@ -258,7 +260,7 @@ void MoveEnemy(int num)
 	}
 
 	// stageID = 0(左右移動のみ)
-	if (ID == STAGE1)
+	if (ID == STAGE1)	// ここをエネミータイプに書き換えればエネミーごとの移動処理になる
 	{
 		RefrectMoveXY(num);			// 移動方向反転
 		enemy[num].pos.x += enemy[num].speed.x;

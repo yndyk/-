@@ -12,3 +12,4 @@
 bool HitCheckRectToRect(CHARACTER, int, CHARACTER*);
 bool HitCheckRectToCircle(CHARACTER, int, CHARACTER*);
 bool HitCheckCircleToCircle(CHARACTER, int, CHARACTER*);
+bool HitCheckShotToEnemy(CHARACTER*, int, CHARACTER*, int);
