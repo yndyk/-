@@ -35,7 +35,6 @@ bool HitBox(CHARACTER a, CHARACTER b )
 
 }
 
-
 //•`‰æ
 void DrawBox()
 {

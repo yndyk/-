@@ -39,9 +39,11 @@ void SysInitEnemy()
 	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
 	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
   	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
+	
 	enemyDamageImage[0] = LoadGraph("bmp/イカプレーンダメージ.png");
 	enemyDamageImage[1] = LoadGraph("bmp/イカメカダメージ.png");
 	enemyDamageImage[2] = LoadGraph("bmp/長足イカダメージ.png");
+	
 	enemyScore = 0;
 }
 

@@ -19,6 +19,7 @@
 #include"ikatenn.h"
 #include"surume.h"
 #include"box.h"
+#include"Benemy.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -159,7 +160,8 @@ bool SystmeInit(void)//システム初期化
 	 SysInitIkayaki();
 	 SysInitIkatenn();
 	 SysInitSurume();
-	 SysInitBox;
+	 SysInitBox();
+	 SysInitBenemy();
 	 leftTime = TIME_FRAME * 31;
 	 return true;
 }
@@ -184,6 +186,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitIkatenn();
 	InitSurume();
 	InitBox();
+	InitBenemy();
 }
 
 void GameTitlr(void)//タイトル画面処理
@@ -214,6 +217,7 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaShot();
 		UpdetaUnti();//ここでうんちの処理をする
 		UpdetaBuble();
+		UpdetaBenemy();
 		leftTime--;
 	}
 
@@ -250,6 +254,7 @@ void GameDraw(void)//描画設定
 	DrawBuble();
 	DrawUnti();
 	DrawBox();
+	DrawBenemy();
 	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / TIME_FRAME);
 }
 

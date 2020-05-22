@@ -36,7 +36,7 @@ void InitShot()
 //çXêV
 void UpdetaShot()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE) && shotCnt % 45 == 0)
+	if (CheckHitKey(KEY_INPUT_SPACE) && shotCnt % 30 == 0)
 	{
 		for (int i = 0; i < SHOT_MAX; i++)
 		{

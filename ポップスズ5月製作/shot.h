@@ -1,5 +1,5 @@
 #pragma once
-#define SHOT_MAX 5
+#define SHOT_MAX 15
 
 extern CHARACTER shot[SHOT_MAX];
 

@@ -13,6 +13,7 @@
 #include"ikatenn.h"
 #include"surume.h"
 #include"box.h"
+#include"Benemy.h"
 
 int MapImage;
 int MapImage2;//2ステージ
@@ -48,6 +49,7 @@ void StageUpdate()
 			DeleteIkatenn();
 			DeleteIkayaki();
 			DeleteSurume();
+			InitBenemy();
 			InitBox();
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE2;
@@ -66,6 +68,7 @@ void StageUpdate()
 			DeleteIkayaki();
 			DeleteSurume(); 
 			InitBox();
+			InitBenemy();
 			leftTime = TIME_FRAME * 31;
 			stageID = STAGE3;
 		}
@@ -74,6 +77,7 @@ void StageUpdate()
 		if (enemyAllDeadFlag) {	// ここに敵をすべて倒したときの処理を書く
 
 			gamemode = GMODE_CLERA;
+			enemyScore = 0;
 			stageID = STAGE1;//初期化する
 		}
 		break;
