@@ -5,6 +5,7 @@
 #include"box.h"
 #include"player.h"
 #include"enemy.h"
+#include "score.h"
 
 int BenemyImage[2];
 int BenemyDamegeImage;
@@ -51,8 +52,13 @@ void UpdetaBenemy()
 			if (HitCheckRectToRect(benemy, i, shot))
 			{
 				benemy.flag = true;
+<<<<<<< HEAD
 				enemyScore += 600;
 				benemy.damageflag = true;
+=======
+				SetScore(SCORE, 600);//ƒXƒRƒA‰ÁŽZ
+				//enemyScore += 600;
+>>>>>>> 28abf4f68fbe06b3e20bc78c9d806a974a002681
 			}
 			if(HitBox(benemy,player))
 			{

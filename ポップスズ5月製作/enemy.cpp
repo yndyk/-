@@ -20,6 +20,7 @@
 #include"ikatenn.h"
 #include"surume.h"
 #include"box.h"
+#include "score.h"
 
 int enemyImage[3][2];//エネミー3種類,2パターン
 int enemyDamageImage[3];//エネミーダメージ3種類
@@ -39,11 +40,11 @@ void SysInitEnemy()
 	LoadDivGraph("bmp/イカプレーン.png", 2, 2, 1, 32, 32, enemyImage[0], true);
 	LoadDivGraph("bmp/イカメカ.png", 2, 2, 1, 32, 32, enemyImage[1], true);
   	LoadDivGraph("bmp/長足イカ.png", 2, 2, 1, 32, 64, enemyImage[2], true);
-	
+
 	enemyDamageImage[0] = LoadGraph("bmp/イカプレーンダメージ.png");
 	enemyDamageImage[1] = LoadGraph("bmp/イカメカダメージ.png");
 	enemyDamageImage[2] = LoadGraph("bmp/長足イカダメージ.png");
-	
+
 	enemyScore = 0;
 }
 
@@ -105,7 +106,8 @@ void UpdetaEnemy()
 						enemy[i].damageflag = true;
 						shot[j].pos.x = player.pos.x;
 						shot[j].pos.y = player.pos.y;
-						enemyScore += enemy[i].score;//スコアを加算
+						//enemyScore += enemy[i].score;//スコアを加算
+						SetScore(SCORE, enemy[i].score);//スコア加算
 						enemy[i].hp -= 1;// 
 					}
 				}
@@ -219,7 +221,7 @@ void DrawEnemy()
 		DrawSurume(i);
 	}
 	//スコア表示
-	DrawFormatString(60, 30, 0xff0000, "%d", enemyScore, true);
+	//DrawFormatString(60, 30, 0xff0000, "score:%d", enemyScore, true);
 	/*DrawFormatString(40, 40, 0xff0000, "%d", enemy[0].score, true);
 	DrawFormatString(40, 60, 0xff0000, "%d", enemy[1].score, true);
 	DrawFormatString(40, 80, 0xff0000, "%d", enemy[2].score, true);

@@ -20,6 +20,7 @@
 #include"surume.h"
 #include"box.h"
 #include"Benemy.h"
+#include "score.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -162,6 +163,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitSurume();
 	 SysInitBox();
 	 SysInitBenemy();
+	 ScoreSysInit();
 	 leftTime = TIME_FRAME * 31;
 	 return true;
 }
@@ -255,6 +257,7 @@ void GameDraw(void)//描画設定
 	DrawUnti();
 	DrawBox();
 	DrawBenemy();
+	ScoreDraw();
 	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / TIME_FRAME);
 }
 
