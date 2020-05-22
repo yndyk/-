@@ -16,6 +16,7 @@ void SysInitBenemy()
 {
 	LoadDivGraph("bmp/アンモナイト.png", 2, 2, 1, 32, 32, BenemyImage, true);
 	BenemyDamegeImage = LoadGraph("bmp/アンモナイトダメージ.png");
+	BenemyTime = 0;//ダメージの描画時間
 }
 //初期化
 void InitBenemy()
@@ -28,7 +29,8 @@ void InitBenemy()
 	benemy.count = 0;
 	benemy.div = DIV_RAHGT;
 	benemy.damageflag = false;
-	BenemyTime = TIME_FRAME * 3;//ダメージの描画時間
+	benemy.hp = 5;
+	
 }
 //更新
 void UpdetaBenemy()
@@ -52,21 +54,17 @@ void UpdetaBenemy()
 			if (HitCheckRectToRect(benemy, i, shot))
 			{
 				benemy.flag = true;
-<<<<<<< HEAD
-				enemyScore += 600;
 				benemy.damageflag = true;
-=======
 				SetScore(SCORE, 600);//スコア加算
-				//enemyScore += 600;
->>>>>>> 28abf4f68fbe06b3e20bc78c9d806a974a002681
-			}
-			if(HitBox(benemy,player))
-			{
-				benemy.flag = true;
-				benemy.damageflag = true;
-			}
+			}		
+		}
+		if (HitBox(benemy, player))
+		{
+			benemy.flag = true;
+			benemy.damageflag = true;
 		}
 	}
+	
 }
 //描画
 void DrawBenemy()
@@ -77,29 +75,35 @@ void DrawBenemy()
 		{
 		case DIV_RAHGT:
 			benemy.count++;
-			DrawGraph(benemy.pos.x, benemy.pos.y,
-				BenemyImage[benemy.count / 50 % 2], true);
-			if(benemy.damageflag == true)
-			{
-				DrawGraph(benemy.pos.x, benemy.pos.y,
-					BenemyDamegeImage, true);
-			}
+				DrawGraph(benemy.pos.x - benemy.offSet.x,
+					benemy.pos.y - benemy.offSet.y,
+					BenemyImage[benemy.count / 50 % 2], true);
 			break;
 		case DIV_LEFT:
 			benemy.count++;
-			DrawTurnGraph(benemy.pos.x, benemy.pos.y,
-				BenemyImage[benemy.count / 50 % 2], true);
-			if (benemy.damageflag == true)
-			{
-				DrawTurnGraph(benemy.pos.x, benemy.pos.y,
-					BenemyDamegeImage, true);
-			}
+				DrawTurnGraph(benemy.pos.x - benemy.offSet.x,
+					benemy.pos.y - benemy.offSet.y,
+					BenemyImage[benemy.count / 50 % 2], true);
 			break;
 		default:
 			break;
 		}
 	}
+	if (benemy.damageflag == true)
+	{
+		DrawGraph(benemy.pos.x - benemy.offSet.x,
+			benemy.pos.y - benemy.offSet.y,
+			BenemyDamegeImage, true);
+		BenemyTime++;
+		if (BenemyTime == 130)
+		{
+			benemy.damageflag == false;
+		}
+	}
+	
+	DrawFormatString(0, 360, 0xff0000, "テスト;%d", BenemyTime);
 }
+
 void DamegeBenemy()
 {
 	if (benemy.damageflag)
@@ -112,7 +116,7 @@ void DamegeBenemy()
 		{
 			benemy.damageflag = false;
 			BenemyTime = TIME_FRAME * 3;
-			benemy.hp = 3;
+			benemy.hp = 5;
 		}
 	}
 	if (benemy.hp == 0)
@@ -120,5 +124,5 @@ void DamegeBenemy()
 		benemy.flag = false;
 		benemy.changeFlag = true;
 	}
-	DrawFormatString(499, num * 18, 0xff0000, "eT;%d", enemyTime[num] / TIME_FRAME);
+	
 }
