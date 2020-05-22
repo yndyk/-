@@ -21,6 +21,7 @@
 #include"box.h"
 #include"Benemy.h"
 #include "score.h"
+#include "file.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -189,6 +190,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitSurume();
 	InitBox();
 	InitBenemy();
+	ScoreInit();
 }
 
 void GameTitlr(void)//タイトル画面処理
@@ -239,11 +241,15 @@ void GameMain(void)//ゲーム画面処理
 
 void GameClera(void)//クリア画面処理
 {
+	SetScore(HIGH_SCORE, GetScore(SCORE));
+	HighScoreDraw();
 	DrawString(0, 0, "GAME_CLERA", 0xffff00, true);
 }
 
 void GameOver(void)
 {
+	SetScore(HIGH_SCORE, GetScore(SCORE));
+	HighScoreDraw();
 	DrawString(0, 0, "GAME_OVER", 0xffff00, true);
 }
 
