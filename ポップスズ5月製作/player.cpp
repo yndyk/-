@@ -78,6 +78,7 @@ void UpdetaPlayer()
 	{
 		player.pos.y = 0;
 	}
+
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
 		if (enemy[i].flag)				// ðŒ’Ç‰Á
