@@ -3,6 +3,7 @@
 #include "player.h"
 #include "hitCheck.h"
 #include"enemy.h"
+#include "score.h"
 
 CHARACTER surume[SURUME_MAX];
 int surumeImage;
@@ -60,7 +61,8 @@ void UpdetaSurume(XY pos, bool flag, int num)
 			{
 				player.hp = TIME_FRAME * PLAYER_HP_MAX;
 			}
-			enemyScore += 300;
+			//enemyScore += 300;
+			SetScore(SCORE, 300);//ÉXÉRÉAâ¡éZ
 		}
 	}
 }
