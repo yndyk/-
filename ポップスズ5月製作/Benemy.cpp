@@ -36,8 +36,10 @@ void InitBenemy()
 void UpdetaBenemy()
 {
 	//ˆÚ“®
+	
 	if (benemy.flag == false) 
 	{
+		BenemyTime++;
 		benemy.pos.x += benemy.speed.x;
 		if (benemy.pos.x >= 590)
 		{
@@ -62,6 +64,14 @@ void UpdetaBenemy()
 		{
 			benemy.flag = true;
 			benemy.damageflag = true;
+		}
+	}
+	if (benemy.damageflag == true)
+	{
+		benemy.pos.y += 2;
+		if (HitBox(benemy, player))
+		{
+			benemy.damageflag = false;
 		}
 	}
 	
@@ -89,17 +99,15 @@ void DrawBenemy()
 			break;
 		}
 	}
+
 	if (benemy.damageflag == true)
 	{
 		DrawGraph(benemy.pos.x - benemy.offSet.x,
 			benemy.pos.y - benemy.offSet.y,
 			BenemyDamegeImage, true);
-		BenemyTime++;
-		if (BenemyTime == 130)
-		{
-			benemy.damageflag == false;
-		}
 	}
+
+	
 	
 	DrawFormatString(0, 360, 0xff0000, "ƒeƒXƒg;%d", BenemyTime);
 }
