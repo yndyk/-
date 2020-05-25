@@ -16,7 +16,7 @@ void SysInitBenemy()
 {
 	LoadDivGraph("bmp/アンモナイト.png", 2, 2, 1, 32, 32, BenemyImage, true);
 	BenemyDamegeImage = LoadGraph("bmp/アンモナイトダメージ.png");
-	BenemyTime = 0;//ダメージの描画時間
+	
 }
 //初期化
 void InitBenemy()
@@ -30,18 +30,20 @@ void InitBenemy()
 	benemy.div = DIV_RAHGT;
 	benemy.damageflag = false;
 	benemy.hp = 5;
-	
+	benemy.movePattern = 0;
+	benemy.refrectFlagX = false;
+	benemy.refrectFlagY = false;
+	BenemyTime = TIME_FRAME*3;//ダメージの描画時間
 }
 //更新
 void UpdetaBenemy()
 {
 	//移動
-	
 	if (benemy.flag == false) 
 	{
 		BenemyTime++;
 		benemy.pos.x += benemy.speed.x;
-		if (benemy.pos.x >= 590)
+		/*if (benemy.pos.x >= 590)
 		{
 			benemy.speed.x = -benemy.speed.x;
 			benemy.div = DIV_RAHGT;
@@ -50,7 +52,7 @@ void UpdetaBenemy()
 		{
 			benemy.speed.x = -benemy.speed.x;
 			benemy.div = DIV_LEFT;
-		}
+		}*/
 		for (int i = 0; i < SHOT_MAX; i++)
 		{
 			if (HitCheckRectToRect(benemy, i, shot))
@@ -63,18 +65,10 @@ void UpdetaBenemy()
 		if (HitBox(benemy, player))
 		{
 			benemy.flag = true;
-			benemy.damageflag = true;
 		}
+		moveBenemy();//動き
 	}
-	if (benemy.damageflag == true)
-	{
-		benemy.pos.y += 2;
-		if (HitBox(benemy, player))
-		{
-			benemy.damageflag = false;
-		}
-	}
-	
+	DamegeBenemy();
 }
 //描画
 void DrawBenemy()
@@ -85,52 +79,103 @@ void DrawBenemy()
 		{
 		case DIV_RAHGT:
 			benemy.count++;
-				DrawGraph(benemy.pos.x - benemy.offSet.x,
-					benemy.pos.y - benemy.offSet.y,
-					BenemyImage[benemy.count / 50 % 2], true);
+			DrawGraph(benemy.pos.x - benemy.offSet.x,
+				benemy.pos.y - benemy.offSet.y,
+				BenemyImage[benemy.count / 50 % 2], true);
 			break;
 		case DIV_LEFT:
 			benemy.count++;
-				DrawTurnGraph(benemy.pos.x - benemy.offSet.x,
-					benemy.pos.y - benemy.offSet.y,
-					BenemyImage[benemy.count / 50 % 2], true);
+			DrawTurnGraph(benemy.pos.x - benemy.offSet.x,
+				benemy.pos.y - benemy.offSet.y,
+				BenemyImage[benemy.count / 50 % 2], true);
 			break;
 		default:
 			break;
 		}
 	}
-
+	//
 	if (benemy.damageflag == true)
 	{
 		DrawGraph(benemy.pos.x - benemy.offSet.x,
 			benemy.pos.y - benemy.offSet.y,
 			BenemyDamegeImage, true);
 	}
-
-	
-	
-	DrawFormatString(0, 360, 0xff0000, "テスト;%d", BenemyTime);
+	DrawFormatString(0, 360, 0xff0000, "テスト;%d", benemy.hp);
 }
 
 void DamegeBenemy()
 {
-	if (benemy.damageflag)
+	//ダメージ受けた後
+	if (benemy.damageflag == true)
 	{
-		DrawGraph(benemy.pos.x - benemy.offSet.x,
-			benemy.pos.y - benemy.offSet.y,
-			BenemyDamegeImage, true);
-		BenemyTime--;
-		if (BenemyTime < 0 && benemy.hp > 0)
+		benemy.pos.y += 2;
+		if(BenemyTime <= 0)
+		{
+			benemy.flag = false;
+		}
+		
+		if (benemy.pos.y == SCREEN_SIZE_Y)
 		{
 			benemy.damageflag = false;
-			BenemyTime = TIME_FRAME * 3;
-			benemy.hp = 5;
 		}
 	}
-	if (benemy.hp == 0)
+	
+}
+//移動制限
+void moveBenemy()
+{
+	if (benemy.refrectFlagX == false && benemy.refrectFlagX == false) 
 	{
-		benemy.flag = false;
-		benemy.changeFlag = true;
+		if (benemy.pos.x < 50)
+		{
+			benemy.pos.x = 50;
+			benemy.refrectFlagX = true;
+		}
+		if (benemy.pos.x + benemy.size.x > SCREEN_SIZE_X - 50)
+		{
+			benemy.pos.x = SCREEN_SIZE_X - 50 - benemy.size.x;
+			benemy.refrectFlagX = true;
+		}
+
+		if (benemy.pos.y < 50)
+		{
+			benemy.pos.y = 50;
+			benemy.refrectFlagY = true;
+		}
+		if (benemy.pos.y + benemy.size.y > SCREEN_SIZE_Y - 50)
+		{
+			benemy.pos.y = SCREEN_SIZE_Y - 50 - benemy.size.y;
+			benemy.refrectFlagY = true;
+		}
 	}
 	
+	BrefrectMoveXY();
+
+	if (benemy.count % 90 == 0)
+	{
+		benemy.movePattern = rand() % 2;
+	}
+	if (benemy.movePattern == 0)
+		benemy.pos.y += benemy.speed.y;
+	if (benemy.movePattern == 1)
+		benemy.pos.x += benemy.speed.x;
+}
+//大まかな動き
+void BrefrectMoveXY()
+{
+	if (benemy.refrectFlagX)
+	{
+		benemy.speed.x = -1 * benemy.speed.x;
+		if (benemy.speed.x < 0)				// 速度が負の時
+			benemy.div = DIV_LEFT;
+		if (benemy.speed.x > 0)				// 速度が正の時
+			benemy.div = DIV_RAHGT;
+		benemy.refrectFlagX = false;
+	}
+	if (benemy.refrectFlagY)
+	{
+		benemy.speed.y = -1 * benemy.speed.y;
+
+		benemy.refrectFlagY = false;
+	}
 }

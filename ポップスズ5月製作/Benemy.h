@@ -7,3 +7,5 @@ void InitBenemy();
 void UpdetaBenemy();
 void DrawBenemy();
 void DamegeBenemy();
+void moveBenemy();
+void BrefrectMoveXY();

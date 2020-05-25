@@ -414,6 +414,7 @@ void DamageEnemy(int num)
 			enemy[num].hp = 3;
 		}
 	}
+
 	if (enemy[num].hp == 0)
 	{
 		enemy[num].flag = false;
