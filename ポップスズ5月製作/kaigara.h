@@ -5,7 +5,7 @@
 // 
 //-----------------------------------------------------
 
-#define SHELL_MAX 2
+#define SHELL_MAX 1
 
 void SysInitShell();
 void InitShell();
