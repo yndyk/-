@@ -22,7 +22,15 @@ void SysInitBenemy()
 void InitBenemy()
 {
 	benemy.pos = { 50 + (rand() % 16) * 32, (rand() % 11) * 32 };
-	benemy.speed = { 5,5 };
+	benemy.speed = { 3,3 };
+	if (rand() % 5 == 0)
+	{
+		benemy.speed.x = -1 * benemy.speed.x;
+	}
+	if (rand() % 5 == 0)
+	{
+		benemy.speed.y = -1 * benemy.speed.y;
+	}
 	benemy.size = { 32,32 };
 	benemy.offSet = { benemy.size.x / 2,benemy.size.y / 2 };
 	benemy.flag = false;
