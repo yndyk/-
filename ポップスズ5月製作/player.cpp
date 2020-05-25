@@ -12,6 +12,7 @@
 #include "enemy.h"
 #include "hitCheck.h"
 #include "box.h"
+#include "kaigara.h"
 
 int playerImage[2];
 int playerdamageImage;
@@ -78,7 +79,6 @@ void UpdetaPlayer()
 	{
 		player.pos.y = 0;
 	}
-
 	for (int i = 0; i < ENEMY_MAX; i++)
 	{
 		if (enemy[i].flag)				// ðŒ’Ç‰Á
@@ -90,10 +90,6 @@ void UpdetaPlayer()
 				player.damageflag = true;
 
 				player.hp -= 1;
-				if (player.hp == 0)
-				{
-					gamemode = GMODE_OVER;
-				}
 
 				enemy[i].point = 1;
 				if (enemy[0].point == 1 &&
@@ -115,6 +111,12 @@ void UpdetaPlayer()
 			}
 		}
 	}
+
+	if (player.hp / TIME_FRAME == 0)
+	{
+		gamemode = GMODE_OVER;
+	}
+
 	if (gamemode == GMODE_OVER)
 	{
 		player.flag = false;
@@ -125,6 +127,7 @@ void UpdetaPlayer()
 	}
 	player.hp--;
 	player.count++;
+	UpdetaShell(player);
 }
 
 //•`‰æ
