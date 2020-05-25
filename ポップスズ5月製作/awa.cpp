@@ -35,7 +35,7 @@ void InitBubble()
 		bubble[i].offSet = { bubble[i].size.x / 2, bubble[i].size.y / 2 };
 		bubble[i].pos = { 64 + rand() % 18 + 1 * 32, SCREEN_SIZE_Y - 32 * 3 };
 		bubble[i].speed = { 1,1 };
-		bubble[i].hp = 60 * 20;			// 泡により回復するライフの量
+		bubble[i].hp = TIME_FRAME * 20;			// 泡により回復するライフの量
 		bubble[i].flag = false;		// 表示するかしないか
 		bubble[i].count = 0;
 	}

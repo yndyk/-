@@ -1,5 +1,6 @@
 //-----------------------------------------------------
-// HitCheckCircleToCircle()内の
+// 
+// 1:1の当たり判定処理の追加
 // 
 //-----------------------------------------------------
 
@@ -49,6 +50,20 @@ bool HitCheckShotToEnemy(CHARACTER *a, int num1, CHARACTER *b, int num2)
 	distance.y = abs(a[num1].offSet.y + b[num2].offSet.y);
 	if (abs(a[num1].pos.x - b[num2].pos.x) < distance.x &&			// 中心間距離が最小距離以下になったら当たった
 		abs(a[num1].pos.y - b[num2].pos.y) < distance.y)
+	{
+		hitFlag = true;
+	}
+	return hitFlag;
+}
+
+bool HitCheck(CHARACTER a, CHARACTER b)
+{
+	XY distance;		// 当たらない最小距離
+	bool hitFlag = false;	// ヒット判定用
+	distance.x = abs(a.offSet.x + b.offSet.x);
+	distance.y = abs(a.offSet.y + b.offSet.y);
+	if (abs(a.pos.x - b.pos.x) < distance.x &&			// 中心間距離が最小距離以下になったら当たった
+		abs(a.pos.y - b.pos.y) < distance.y)
 	{
 		hitFlag = true;
 	}
