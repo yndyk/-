@@ -37,6 +37,8 @@ bool pauseFlag;//ポーズのフラグ
 int leftTime;//時間
 GAMEMODE gamemode;
 
+//サウンド
+int Sound;
 //WinMain関数の使用
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -85,6 +87,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					fadeOut = true;
 			}
 			GameTitlr();
+			PlaySoundMem(Sound, DX_PLAYTYPE_LOOP);
 			break;
 		case GMODE_MAIN:
 			if (fadein)//フェードイン
@@ -94,6 +97,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					fadein = false;
 				}
 			}
+			
 			GameMain();
 			break;
 		case GMODE_CLERA:
@@ -126,6 +130,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					fadein = true;
 				}
 			}
+
 			GameOver();
 			break;
 		default:
@@ -166,6 +171,8 @@ bool SystmeInit(void)//システム初期化
 	 SysInitBenemy();
 	 ScoreSysInit();
 	 leftTime = TIME_FRAME * 31;
+	 //音
+ 	 Sound = LoadSoundMem("音素材/アワ.mp3");
 	 return true;
 }
 
@@ -223,6 +230,7 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaBuble();
 		UpdetaBenemy();
 		leftTime--;
+		
 	}
 
 	//ポーズ中だったら色半分

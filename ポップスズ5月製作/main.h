@@ -76,6 +76,7 @@ typedef struct
 #define PI 3.141592
 extern GAMEMODE gamemode;
 extern int leftTime;
+extern int Sound;
 
 //プロトタイプ宣言
 void GameInit(void);

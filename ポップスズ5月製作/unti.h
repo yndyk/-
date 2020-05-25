@@ -5,7 +5,7 @@
 #define UNTI_MAX 5
 
 extern CHARACTER unti[UNTI_MAX];
-
+extern int UntiSound;
 void SysinitUnti();
 void initUnti();
 void UpdetaUnti();

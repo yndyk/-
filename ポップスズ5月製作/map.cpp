@@ -79,6 +79,8 @@ void StageUpdate()
 			gamemode = GMODE_CLERA;
 			enemyScore = 0;
 			stageID = STAGE1;//‰Šú‰»‚·‚é
+			StopSoundMem(UntiSound);
+			StopSoundMem(Sound);
 		}
 		break;
 	}

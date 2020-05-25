@@ -17,6 +17,7 @@ int UntiImage;
 CHARACTER unti[UNTI_MAX];
 int Untinum;
 int UntiCount;
+int UntiSound;
 
 //ロード
 void SysinitUnti()
@@ -39,6 +40,7 @@ void initUnti()
 	}
 	UntiCount = 0;
 	Untinum = 0;
+	UntiSound = LoadSoundMem("音素材/ウンチ.mp3");
 }
 
 //更新
@@ -59,6 +61,7 @@ void UpdetaUnti()
 				unti[i].flag = false;
 				unti[i].pos = { 64 + (rand() % 18 + 1) * 32, 0 + 32 };
 			}
+			StopSoundMem(UntiSound);
 		}
 
 		if(unti[i].pos.y > SCREEN_SIZE_Y)
@@ -78,6 +81,7 @@ void UpdetaUnti()
 				player.damageflag = true;
 				player.hp -= TIME_FRAME * 1;
 				player.flag = false;
+				PlaySoundMem(UntiSound, DX_PLAYTYPE_LOOP);
 			}
 		}
 		else

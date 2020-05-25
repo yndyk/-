@@ -13,6 +13,7 @@
 #include "hitCheck.h"
 #include "box.h"
 #include "kaigara.h"
+#include"Unti.h"
 
 int playerImage[2];
 int playerdamageImage;
@@ -124,6 +125,8 @@ void UpdetaPlayer()
 		{
 			enemy[i].flag = false;
 		}
+		StopSoundMem(UntiSound);
+		StopSoundMem(Sound);
 	}
 	player.hp--;
 	player.count++;

@@ -13,6 +13,7 @@ int ShotImage;
 bool DivFlag;//ï˚å¸
 CHARACTER shot[SHOT_MAX];
 int shotCnt;
+int ShotSound;
 //ÉçÅ[Éh
 void SysInitShot()
 {
@@ -58,6 +59,7 @@ void UpdetaShot()
 				break;
 			}
 		}
+
 	}
 
 	for (int i = 0; i < SHOT_MAX; i++)
