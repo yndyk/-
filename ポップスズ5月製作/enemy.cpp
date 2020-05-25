@@ -33,6 +33,7 @@ XY_F length[ENEMY_MAX];
 float distance[ENEMY_MAX];
 int searchDistance;
 XY tmpSpeed[ENEMY_MAX];
+int ChngSound;
 
 //ロード
 void SysInitEnemy()
@@ -85,6 +86,8 @@ void InitEnemy()
 	}
 
 	enemyAllDeadFlag = false;
+	//サウンド
+	ChngSound = LoadSoundMem("音素材/料理（仮）.mp3");
 }
 
 //更新
@@ -153,6 +156,8 @@ void UpdetaEnemy()
 				{
 					UpdetaSurume(enemy[i].pos, enemy[i].changeFlag, i);
 				}
+				
+				StopSoundMem(ChngSound);
 			}
 		}
 	}

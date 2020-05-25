@@ -14,6 +14,7 @@
 #include"surume.h"
 #include"box.h"
 #include"Benemy.h"
+#include"shot.h"
 
 int MapImage;
 int MapImage2;//2ステージ
@@ -81,6 +82,8 @@ void StageUpdate()
 			stageID = STAGE1;//初期化する
 			StopSoundMem(UntiSound);
 			StopSoundMem(Sound);
+			StopSoundMem(ShotSound);
+			StopSoundMem(ChngSound);
 		}
 		break;
 	}

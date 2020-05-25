@@ -81,7 +81,7 @@ void UpdetaUnti()
 				player.damageflag = true;
 				player.hp -= TIME_FRAME * 1;
 				player.flag = false;
-				PlaySoundMem(UntiSound, DX_PLAYTYPE_LOOP);
+				PlaySoundMem(UntiSound, DX_PLAYTYPE_BACK);
 			}
 		}
 		else

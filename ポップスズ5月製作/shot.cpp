@@ -13,7 +13,7 @@ int ShotImage;
 bool DivFlag;//方向
 CHARACTER shot[SHOT_MAX];
 int shotCnt;
-int ShotSound;
+int ShotSound; 
 //ロード
 void SysInitShot()
 {
@@ -32,7 +32,7 @@ void InitShot()
 		DivFlag = false;//falseが右、trueが左
 	}
 	shotCnt = 0;
-
+	ShotSound = LoadSoundMem("音素材/ショット.mp3");
 }
 //更新
 void UpdetaShot()
@@ -59,7 +59,7 @@ void UpdetaShot()
 				break;
 			}
 		}
-
+		PlaySoundMem(ShotSound, DX_PLAYTYPE_BACK);
 	}
 
 	for (int i = 0; i < SHOT_MAX; i++)

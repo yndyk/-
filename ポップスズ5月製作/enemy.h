@@ -11,6 +11,7 @@ extern CHARACTER enemy[ENEMY_MAX];
 extern bool enemyAllDeadFlag;
 extern TYPE_MODE enemyType;
 extern int enemyScore;
+extern int ChngSound;
 
 void SysInitEnemy();
 void InitEnemy();

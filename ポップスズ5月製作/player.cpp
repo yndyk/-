@@ -14,6 +14,7 @@
 #include "box.h"
 #include "kaigara.h"
 #include"Unti.h"
+#include"shot.h"
 
 int playerImage[2];
 int playerdamageImage;
@@ -127,6 +128,8 @@ void UpdetaPlayer()
 		}
 		StopSoundMem(UntiSound);
 		StopSoundMem(Sound);
+		StopSoundMem(ShotSound);
+		StopSoundMem(ChngSound);
 	}
 	player.hp--;
 	player.count++;
