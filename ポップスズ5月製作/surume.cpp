@@ -7,7 +7,7 @@
 
 CHARACTER surume[SURUME_MAX];
 int surumeImage;
-
+ 
 //ÉçÅ[Éh
 void SysInitSurume()
 {
