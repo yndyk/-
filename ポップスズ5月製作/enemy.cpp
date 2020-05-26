@@ -109,8 +109,11 @@ void UpdetaEnemy()
 						enemy[i].damageflag = true;
 						shot[j].pos.x = player.pos.x;
 						shot[j].pos.y = player.pos.y;
-						SetScore(SCORE, enemy[i].score);//スコア加算
-						enemy[i].hp -= 1;// 
+						enemy[i].hp -= 1;
+						if (enemy[i].hp == 0)
+						{
+							SetScore(SCORE, enemy[i].score);//スコア加算
+						}
 					}
 				}
 			}
