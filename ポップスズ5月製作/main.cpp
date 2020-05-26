@@ -28,6 +28,7 @@
 
 //タイトル
 int TitieImage;
+int GImage[2];
 int bright;	//明るさ
 int gameCouner;//メイン画面のカウンター
 
@@ -80,7 +81,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 			{
 				if (!FadeOutScreen(5)) 
 				{
-					gamemode = GMODE_MAIN;
+					gamemode = GMODE_OPERATION;
 					fadeOut = false;
 					fadein = true;
 				}
@@ -91,6 +92,31 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					fadeOut = true;
 			}
 			GameTitlr();
+			break;
+		case GMODE_OPERATION:
+			if (fadein)//フェードイン
+			{
+				if (!FadeinScreen(5))
+				{
+					fadein = false;
+				}
+			}
+			else
+			if (fadeOut)//フェードアウト
+			{
+				if (!FadeOutScreen(5))
+				{
+					gamemode = GMODE_MAIN;
+					fadeOut = false;
+					fadein = true;
+				}
+			}
+			else
+			{
+				if (trgKey[START])
+					fadeOut = true;
+			}
+			GameOperation();
 			PlaySoundMem(Sound, DX_PLAYTYPE_LOOP);
 			break;
 		case GMODE_MAIN:
@@ -135,7 +161,6 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					StopSoundMem(OverSound);
 				}
 			}
-			
 			GameOver();
 			break;
 		default:
@@ -162,6 +187,7 @@ bool SystmeInit(void)//システム初期化
 
 //グラフィック
 	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
+	 LoadDivGraph("bmp/game_state.png",2,1,2,304,32,GImage,true);
 	 StageSysinit();
 	 SysInitPlayer();
 	 SysInitEnemy();
@@ -262,6 +288,7 @@ void GameClera(void)//クリア画面処理
 {
 	SetScore(HIGH_SCORE, GetScore(SCORE));
 	HighScoreDraw();
+	DrawGraph(200, 240, GImage[0], true);
 	DrawString(0, 0, "GAME_CLERA", 0xffff00, true);
 }
 
@@ -269,6 +296,7 @@ void GameOver(void)
 {
 	SetScore(HIGH_SCORE, GetScore(SCORE));
 	HighScoreDraw();
+	DrawGraph(200, 240, GImage[1], true);
 	DrawString(0, 0, "GAME_OVER", 0xffff00, true);
 }
 
@@ -319,3 +347,10 @@ bool FadeOutScreen(int fadeStep)//フェードアウト処理
 		return false;
 	}
 }
+
+void GameOperation(void)
+{
+	DrawFormatString(0, 0, 0xff0000, "十字キーで移動",true);
+	DrawFormatString(0, 20, 0xff0000, "スペースキーで攻撃", true);
+}
+

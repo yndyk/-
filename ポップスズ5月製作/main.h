@@ -13,6 +13,7 @@ enum GAMEMODE
 {
 	GMODE_INIT,
 	GMODE_MAIN,
+	GMODE_OPERATION,
 	GMODE_TITLE,
 	GMODE_CLERA,
 	GMODE_OVER
@@ -79,6 +80,7 @@ extern int leftTime;
 extern int Sound;
 extern int OverSound;
 extern int ClearSound;
+
 //プロトタイプ宣言
 void GameInit(void);
 bool SystmeInit(void);
@@ -87,6 +89,8 @@ void GameMain(void);
 void GameDraw(void);
 void GameClera(void);
 void GameOver(void);
+void GameOperation(void);
 bool FadeOutScreen(int fadeStep);
 bool FadeinScreen(int fadeStep);
+
 
