@@ -130,6 +130,7 @@ void UpdetaPlayer()
 		StopSoundMem(Sound);
 		StopSoundMem(ShotSound);
 		StopSoundMem(ChngSound);
+		PlaySoundMem(OverSound, DX_PLAYTYPE_LOOP);//ƒTƒEƒ“ƒh
 	}
 	player.hp--;
 	player.count++;

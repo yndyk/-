@@ -45,10 +45,11 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 	if (ikatenn[num].flag)
 	{
 		ikatenn[num].pos.y += ikatenn[num].speed.y;
-
+		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		if (ikatenn[num].pos.y > SCREEN_SIZE_Y)
 		{
 			ikatenn[num].flag = false;
+			
 		}
 
 		if (HitCheckRectToRect(player, num, ikatenn))		// 矩形と矩形の当たり判定
@@ -84,7 +85,7 @@ void DrawIkatenn(int num)
 			ikatenn[num].pos.x + ikatenn[num].offSet.x,
 			ikatenn[num].pos.y + ikatenn[num].offSet.y,
 			0x000000, false);
-		PlaySoundMem(ChngSound, DX_PLAYTYPE_LOOP);//サウンド
+		
 	}
 }
 

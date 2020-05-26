@@ -156,7 +156,6 @@ void UpdetaEnemy()
 				{
 					UpdetaSurume(enemy[i].pos, enemy[i].changeFlag, i);
 				}
-				
 				StopSoundMem(ChngSound);
 			}
 		}

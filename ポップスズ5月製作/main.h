@@ -77,6 +77,7 @@ typedef struct
 extern GAMEMODE gamemode;
 extern int leftTime;
 extern int Sound;
+extern int OverSound;
 
 //プロトタイプ宣言
 void GameInit(void);

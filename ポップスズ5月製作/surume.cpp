@@ -49,6 +49,7 @@ void UpdetaSurume(XY pos, bool flag, int num)
 		if (surume[num].pos.y > SCREEN_SIZE_Y)
 		{
 			surume[num].flag = false;
+			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 
 		if (HitCheckRectToRect(player, num, surume))		// 矩形と矩形の当たり判定
@@ -66,14 +67,14 @@ void UpdetaSurume(XY pos, bool flag, int num)
 			SetScore(SCORE, 300);//スコア加算
 			
 		}
-		PlaySoundMem(ChngSound, DX_PLAYTYPE_LOOP);//サウンド
+		
 	}
 }
 
 //描画
 void DrawSurume(int num)
 {
-	if (surume[num].flag)
+	if(surume[num].flag)
 	{
 		DrawGraph(surume[num].pos.x - surume[num].offSet.x,
 			surume[num].pos.y - surume[num].offSet.y,
