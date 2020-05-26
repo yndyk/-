@@ -38,7 +38,7 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 			ikatenn[num].pos = pos;
 			ikatenn[num].flag = flag;
 			ikatenn[num].onlyOnce = true;
-			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
+			
 		}
 	}
 	
@@ -66,9 +66,7 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 			}
 			//enemyScore += 300;
 			SetScore(SCORE, 300);//スコア加算
-			
 		}
-		
 	}
 }
 
@@ -86,7 +84,7 @@ void DrawIkatenn(int num)
 			ikatenn[num].pos.x + ikatenn[num].offSet.x,
 			ikatenn[num].pos.y + ikatenn[num].offSet.y,
 			0x000000, false);
-		
+		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 	}
 }
 

@@ -38,7 +38,6 @@ void UpdetaSurume(XY pos, bool flag, int num)
 			surume[num].pos = pos;
 			surume[num].flag = flag;
 			surume[num].onlyOnce = true;
-			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 	}
 
@@ -86,7 +85,7 @@ void DrawSurume(int num)
 			surume[num].pos.x + surume[num].offSet.x,
 			surume[num].pos.y + surume[num].offSet.y,
 			0x000000, false);
-		
+		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 	}
 }
 
