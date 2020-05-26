@@ -15,6 +15,7 @@
 #include "kaigara.h"
 #include"Unti.h"
 #include"shot.h"
+#include"map.h"
 
 int playerImage[2];
 int playerdamageImage;
@@ -131,6 +132,7 @@ void UpdetaPlayer()
 		StopSoundMem(ShotSound);
 		StopSoundMem(ChngSound);
 		PlaySoundMem(OverSound, DX_PLAYTYPE_LOOP);//ƒTƒEƒ“ƒh
+		stageID = STAGE1;//‰Šú‰»‚·‚é
 	}
 	player.hp--;
 	player.count++;

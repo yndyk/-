@@ -6,11 +6,17 @@
 #include"player.h"
 #include"enemy.h"
 #include "score.h"
+#include <math.h>
 
 int BenemyImage[2];
 int BenemyDamegeImage;
 CHARACTER benemy;
 int BenemyTime;
+XY_F length;
+float distance;
+int BsearchDistance;
+XY tmpSpeed;
+
 //ロード
 void SysInitBenemy()
 {
@@ -42,6 +48,7 @@ void InitBenemy()
 	benemy.refrectFlagX = false;
 	benemy.refrectFlagY = false;
 	BenemyTime = TIME_FRAME*3;//ダメージの描画時間
+	BsearchDistance = 96;	// 敵の索敵距離(この範囲内に入ると敵が自分に向かってくる) 要調整！
 }
 //更新
 void UpdetaBenemy()
@@ -108,6 +115,12 @@ void DrawBenemy()
 			benemy.pos.y - benemy.offSet.y,
 			BenemyDamegeImage, true);
 	}
+	DrawBox(benemy.pos.x - benemy.offSet.x,
+		benemy.pos.y - benemy.offSet.y,
+		benemy.pos.x + benemy.offSet.x,
+		benemy.pos.y + benemy.offSet.y,
+		0x000000, false);
+	DrawCircle(benemy.pos.x, benemy.pos.y, BsearchDistance, 0x000000, false);
 	DrawFormatString(0, 360, 0xff0000, "テスト;%d", benemy.hp);
 }
 
@@ -127,11 +140,11 @@ void DamegeBenemy()
 			benemy.damageflag = false;
 		}
 	}
-	
 }
 //移動制限
 void moveBenemy()
 {
+	//移動制限
 	if (benemy.refrectFlagX == false && benemy.refrectFlagX == false) 
 	{
 		if (benemy.pos.x < 50)
@@ -157,16 +170,70 @@ void moveBenemy()
 		}
 	}
 	
-	BrefrectMoveXY();
-
+	//BrefrectMoveXY();
+	////移動
+	//if (benemy.count % 90 == 0)
+	//{
+	//	benemy.movePattern = rand() % 2;
+	//}
+	//if (benemy.movePattern == 0)
+	//	benemy.pos.y += benemy.speed.y;
+	//if (benemy.movePattern == 1)
+	//	benemy.pos.x += benemy.speed.x;
 	if (benemy.count % 90 == 0)
 	{
+		BrefrectMoveXY();
 		benemy.movePattern = rand() % 2;
 	}
-	if (benemy.movePattern == 0)
-		benemy.pos.y += benemy.speed.y;
-	if (benemy.movePattern == 1)
-		benemy.pos.x += benemy.speed.x;
+	int tmpR = player.r + benemy.r;
+
+	// ここに敵の一定範囲内に入ったらプレイヤーのほうに移動してくる処理を書く
+	length = { (float)(player.pos.x - benemy.pos.x), (float)(player.pos.y - benemy.pos.y) };			// 中心間距離のX,Y成分
+	distance = sqrtf(length.x * length.x + length.y * length.y);
+	tmpSpeed= benemy.speed;
+
+	if (distance - BsearchDistance < player.r)
+	{
+		if (player.pos.x - benemy.pos.x > 0)
+		{
+			if (benemy.speed.x < 0)
+				benemy.speed.x = -1 * tmpSpeed.x;
+		}
+		else
+		{
+			if (benemy.speed.x > 0)
+				benemy.speed.x = -1 * tmpSpeed.x;
+		}
+		if (abs(benemy.pos.x - player.pos.x) < 2)
+		{
+			benemy.speed.x = 0;
+			if (player.pos.y - benemy.pos.y > 0)
+			{
+				if (benemy.speed.y < 0)
+					benemy.speed.y = -1 * tmpSpeed.y;
+			}
+			else
+			{
+				if (benemy.speed.y > 0)
+					benemy.speed.y = -1 * tmpSpeed.y;
+			}
+			if (abs(player.pos.y - benemy.pos.y) < 2)
+				benemy.speed.y = 0;
+			//ここから下の処理内容を+から－に変更
+			benemy.pos.y -= benemy.speed.y;
+		}
+
+		benemy.pos.x -= benemy.speed.x;
+	}
+	else
+	{
+		if (benemy.movePattern == 0)
+			benemy.pos.y -= benemy.speed.y;
+		if (benemy.movePattern == 1)
+			benemy.pos.x -= benemy.speed.x;
+	}
+	benemy.speed = tmpSpeed;
+
 }
 //大まかな動き
 void BrefrectMoveXY()
