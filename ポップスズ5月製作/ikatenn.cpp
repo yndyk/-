@@ -38,14 +38,15 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 			ikatenn[num].pos = pos;
 			ikatenn[num].flag = flag;
 			ikatenn[num].onlyOnce = true;
+			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 	}
-
+	
 
 	if (ikatenn[num].flag)
 	{
 		ikatenn[num].pos.y += ikatenn[num].speed.y;
-		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
+		
 		if (ikatenn[num].pos.y > SCREEN_SIZE_Y)
 		{
 			ikatenn[num].flag = false;

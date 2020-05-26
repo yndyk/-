@@ -42,6 +42,7 @@ GAMEMODE gamemode;
 //サウンド
 int Sound;
 int OverSound;
+int ClearSound;
 //WinMain関数の使用
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -131,6 +132,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 					gamemode = GMODE_INIT;
 					fadeOut = false;
 					fadein = true;
+					StopSoundMem(OverSound);
 				}
 			}
 			
@@ -179,6 +181,7 @@ bool SystmeInit(void)//システム初期化
 	 //音
  	 Sound = LoadSoundMem("音素材/アワ.mp3");
 	 OverSound = LoadSoundMem("音素材/オーバー.mp3");
+	 ClearSound = LoadSoundMem("音素材/クリア.mp3");
 	 return true;
 }
 

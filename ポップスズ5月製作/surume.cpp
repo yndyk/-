@@ -38,10 +38,11 @@ void UpdetaSurume(XY pos, bool flag, int num)
 			surume[num].pos = pos;
 			surume[num].flag = flag;
 			surume[num].onlyOnce = true;
+			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 	}
 
-
+	
 	if (surume[num].flag)
 	{
 		surume[num].pos.y += surume[num].speed.y;
@@ -49,7 +50,7 @@ void UpdetaSurume(XY pos, bool flag, int num)
 		if (surume[num].pos.y > SCREEN_SIZE_Y)
 		{
 			surume[num].flag = false;
-			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
+			
 		}
 
 		if (HitCheckRectToRect(player, num, surume))		// 矩形と矩形の当たり判定

@@ -78,7 +78,7 @@ extern GAMEMODE gamemode;
 extern int leftTime;
 extern int Sound;
 extern int OverSound;
-
+extern int ClearSound;
 //プロトタイプ宣言
 void GameInit(void);
 bool SystmeInit(void);

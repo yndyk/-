@@ -46,10 +46,11 @@ void UpdateIkayaki(XY pos,bool flag, int num)	// pos:座標　flag:フラグ　num:配列
 			ikayaki[num].pos = pos;
 			ikayaki[num].flag = flag;
 			ikayaki[num].onlyOnce = true;
+			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 	}
 
-		
+
 	if (ikayaki[num].flag)
 	{
 		ikayaki[num].pos.y += ikayaki[num].speed.y;
@@ -57,7 +58,7 @@ void UpdateIkayaki(XY pos,bool flag, int num)	// pos:座標　flag:フラグ　num:配列
 		if (ikayaki[num].pos.y > SCREEN_SIZE_Y)
 		{
 			ikayaki[num].flag = false;
-			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
+			
 		}
 
 		if (HitCheckRectToRect(player, num, ikayaki))		// 矩形と矩形の当たり判定

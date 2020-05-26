@@ -84,6 +84,7 @@ void StageUpdate()
 			StopSoundMem(Sound);
 			StopSoundMem(ShotSound);
 			StopSoundMem(ChngSound);
+			PlaySoundMem(ClearSound, DX_PLAYTYPE_BACK);//ƒTƒEƒ“ƒh
 		}
 		break;
 	}
