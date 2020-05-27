@@ -43,7 +43,6 @@ void initUnti()
 	UntiSound = LoadSoundMem("音素材/ウンチ.mp3");
 }
 
-
 //更新
 void UpdetaUnti()
 {
