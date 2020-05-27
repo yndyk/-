@@ -36,7 +36,7 @@ void initUnti()
 		unti[i].flag = false;
 		unti[i].speed = { 6,6 };
 		unti[i].count = false;
-		
+		unti[i].hp = TIME_FRAME * 20;
 	}
 	UntiCount = 0;
 	Untinum = 0;
@@ -79,8 +79,15 @@ void UpdetaUnti()
 			{
 				unti[i].flag = false;
 				player.damageflag = true;
-				player.hp -= TIME_FRAME * 1;
 				player.flag = false;
+				if(player.hp <= 0)
+				{
+					unti[i].flag = false;
+				}
+				else if(player.hp > 0)
+				{
+					player.hp -= 10;
+				}
 				PlaySoundMem(UntiSound, DX_PLAYTYPE_BACK);
 			}
 		}

@@ -24,7 +24,6 @@ bool HitCheckRectToRect(CHARACTER a, int num, CHARACTER* b)
 
 bool HitCheckRectToCircle(CHARACTER a, int num, CHARACTER* b)
 {
-
 	return false;
 }
 
