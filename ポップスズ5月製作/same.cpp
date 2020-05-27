@@ -42,6 +42,7 @@ void UpdetaSame()
 		}
 	}
 
+
 	if(same.pos.x > SCREEN_SIZE_X)
 	{
 		same.flag = false;
