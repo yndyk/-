@@ -3,18 +3,42 @@
 #include <stdio.h>
 #include "score.h"
 
-static char FileName[] = "HighScore.txt";	// ハイスコアを格納するファイル名
+#define BUFFER 256
 
-int HighScoreLoad(void)
+const char *file = "scoreData.dat";	// ハイスコアを格納するファイル名
+int HighScore = 0;
+
+
+int HighScoreLoad()
 {
     FILE *fp;
-    int HighScore;
 
-    if ((fopen_s(&fp, "HighScore.txt", "rb")) == 0)
-        HighScore = 999;
+    fopen_s(&fp, file, "rb");
+    char stlen[BUFFER];
+    while (fgets(stlen, BUFFER, fp) != NULL)
+    {
+        printf("%s", stlen);
+        int num = atoi(stlen);
+        if (num > HighScore)
+        {
+            HighScore = num;
+        }
+        else
+        {
+            HighScore = 0;
+        }
+            
+    }
+
+    if (fp  == NULL)
+    {
+        printf("%sのオープンに失敗しました。\n", file);
+        getchar();
+    }
     else
     {
-        fscanf_s(fp, "%d", &HighScore);
+        fprintf(fp, "%d", HighScore);
+        //fwrite(&HighScore, sizeof(int), 1, fp);
         fclose(fp);
     }
 
@@ -26,14 +50,14 @@ void HighScoreSave(int newScore)
     FILE* fp;
     char mes[80];
 
-    if ((fopen_s(&fp, "HighScore.txt", "wb")) == 0)
+    if ((fopen_s(&fp, file, "w")) != 0)
     {
-        //wsprintf(mes, "データファイルのオープンに失敗しました。保存を中止しました。\n");
-        //OutputDebugString(mes);
-        
+        wsprintf(mes, "データファイルのオープンに失敗しました。保存を中止しました。\n");
+        OutputDebugString(mes);
         return;
     }
 
-    fprintf_s(fp, "%d", newScore);
+    fprintf(fp, "%d", newScore);
+    //fwrite(&newScore, sizeof(int), 1, fp);
     fclose(fp);
 }
