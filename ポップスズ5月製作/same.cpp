@@ -4,9 +4,11 @@
 #include"main.h"
 #include"player.h"
 #include"same.h"
+#include"hitCheck.h"
 
 CHARACTER same;
 int SameCount;
+
 //ロード
 void SysInitSame()
 {  
@@ -27,23 +29,58 @@ void InitSame()
 //更新
 void UpdetaSame()
 {
-	same.pos.x += same.speed.x;
-	if(same.pos.x < 0)
+	srand(time(NULL));
+	SameCount++;
+	ApprSame();
+	if (same.flag == true) 
+	{
+		same.pos.x += same.speed.x;
+		if (same.pos.x + same.size.x < 0)
+		{
+			same.flag = false;
+			same.pos = { 0 + 32 ,64 + (rand() % 18 + 1) * 32 };
+		}
+	}
+
+	if(same.pos.x > SCREEN_SIZE_X)
+	{
+		same.flag = false;
+	}
+	
+	if (!player.damageflag && same.flag)
+	{
+		if (HitCheck(player, same))
+		{
+			player.damageflag = true;
+			player.flag = false;
+
+		}
+	}
+	else
+	{
+		player.flag = true;
+	}
+	/*if(same.pos.x < 0)
 	{
 		same.speed.x = -same.speed.x;
 	}
+
 	if (same.pos.x >= 590)
 	{
 		same.speed.x = -same.speed.x;
-	}
+	}*/
 }
 
 //描画
 void DrawSame()
 {
-	DrawBox(same.pos.x - same.offSet.x, same.pos.y - same.offSet.y,
-		same.pos.x + same.offSet.x, same.pos.y + same.offSet.y,
-		0xff0000, true);
+	if (same.flag == true)
+	{
+		DrawBox(same.pos.x - same.offSet.x, same.pos.y - same.offSet.y,
+			same.pos.x + same.offSet.x, same.pos.y + same.offSet.y,
+			0xff0000, true);
+	}
+	DrawFormatString(0, 250, 0xff0000, "%d",SameCount, true);
 }
 
 void ApprSame()
