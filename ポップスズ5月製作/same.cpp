@@ -5,6 +5,9 @@
 #include"player.h"
 #include"same.h"
 #include"hitCheck.h"
+#include"unti.h"
+#include"enemy.h"
+#include"shot.h"
 
 CHARACTER same;
 int SameCount;
@@ -22,6 +25,7 @@ void InitSame()
 	same.size = { 96,64 };
 	same.speed = {4,4};
 	same.offSet = { same.size.x / 2,same.size.y / 2 };
+	same.hp -= TIME_FRAME  * 30;
 	same.flag = false;
 	SameCount = 0;
 }
@@ -32,6 +36,7 @@ void UpdetaSame()
 	srand(time(NULL));
 	SameCount++;
 	ApprSame();
+	//ˆÚ“®
 	if (same.flag == true) 
 	{
 		same.pos.x += same.speed.x;
@@ -41,7 +46,6 @@ void UpdetaSame()
 			same.pos = { 0 + 32 ,64 + (rand() % 18 + 1) * 32 };
 		}
 	}
-
 
 	if(same.pos.x > SCREEN_SIZE_X)
 	{
@@ -54,22 +58,21 @@ void UpdetaSame()
 		{
 			player.damageflag = true;
 			player.flag = false;
-
+			if (player.hp <= 0)
+			{
+			same.flag = false;
+			}
+			else if (player.hp > 0)
+			{
+				player.hp -= 2 * TIME_FRAME;
+			}
 		}
 	}
 	else
 	{
 		player.flag = true;
 	}
-	/*if(same.pos.x < 0)
-	{
-		same.speed.x = -same.speed.x;
-	}
 
-	if (same.pos.x >= 590)
-	{
-		same.speed.x = -same.speed.x;
-	}*/
 }
 
 //•`‰æ
