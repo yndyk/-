@@ -73,7 +73,7 @@ void UpdetaUnti()
 	for (int i = 0; i < UNTI_MAX; i++)
 	{
 		//“–‚½‚è”»’è
-		if (player.flag)
+		if (player.flag && unti[i].flag)
 		{
 			if (HitCheckRectToRect(player, i, unti))		// ‹éŒ`‚Æ‹éŒ`‚Ì“–‚½‚è”»’è
 			{
@@ -86,7 +86,7 @@ void UpdetaUnti()
 				}
 				else if(player.hp > 0)
 				{
-					player.hp -= 10;
+					player.hp -= 10 * TIME_FRAME;
 				}
 				PlaySoundMem(UntiSound, DX_PLAYTYPE_BACK);
 			}

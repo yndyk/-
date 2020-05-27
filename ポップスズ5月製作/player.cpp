@@ -92,7 +92,7 @@ void UpdetaPlayer()
 				enemy[i].flag = false;
 				player.damageflag = true;
 
-				player.hp -= 1;
+				player.hp -= TIME_FRAME * 10;
 
 				enemy[i].point = 1;
 				if (enemy[0].point == 1 &&
@@ -115,10 +115,11 @@ void UpdetaPlayer()
 		}
 	}
 
-	if (player.hp / TIME_FRAME == 0)
+	if (player.hp / TIME_FRAME <= 0)
 	{
 		gamemode = GMODE_OVER;
 	}
+
 
 	if (gamemode == GMODE_OVER)
 	{
@@ -174,7 +175,8 @@ void DrawPlayer()
 
 		player.damageflag = false;
 		DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
-		
+		DrawFormatString(30, 50, 0xff0000, "cnt:%d", player.count);
+
 		// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
 		DrawBox(player.pos.x - player.offSet.x,
 			player.pos.y - player.offSet.y,
