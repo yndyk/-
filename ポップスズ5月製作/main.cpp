@@ -24,6 +24,7 @@
 #include "file.h"
 #include "kaigara.h"
 #include "sinju.h"
+#include "same.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -202,6 +203,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitBenemy();
 	 SysInitShell();
 	 SysInitPearl();
+	 SysInitSame();
 	 ScoreSysInit();
 	 leftTime = TIME_FRAME * 31;
 	 //音
@@ -235,6 +237,7 @@ void GameInit(void)//ゲームループ内の初期化
 	InitShell();
 	InitPearl();
 	ScoreInit();
+	InitSame();
 }
 
 void GameTitlr(void)//タイトル画面処理
@@ -266,6 +269,7 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaUnti();//ここでうんちの処理をする
 		UpdetaBuble();
 		UpdetaBenemy();
+		UpdetaSame();
 		leftTime--;
 		
 	}
@@ -312,6 +316,7 @@ void GameDraw(void)//描画設定
 	DrawBenemy();
 	DrawShell();
 	ScoreDraw();
+	DrawSame();
 	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / TIME_FRAME);
 }
 
