@@ -73,7 +73,7 @@ void UpdetaUnti()
 	for (int i = 0; i < UNTI_MAX; i++)
 	{
 		//“–‚½‚è”»’è
-		if (player.flag && unti[i].flag)
+		if (!player.damageflag && unti[i].flag)
 		{
 			if (HitCheckRectToRect(player, i, unti))		// ‹éŒ`‚Æ‹éŒ`‚Ì“–‚½‚è”»’è
 			{
