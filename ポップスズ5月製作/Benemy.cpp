@@ -58,16 +58,6 @@ void UpdetaBenemy()
 	{
 		BenemyTime++;
 		benemy.pos.x += benemy.speed.x;
-		/*if (benemy.pos.x >= 590)
-		{
-			benemy.speed.x = -benemy.speed.x;
-			benemy.div = DIV_RAHGT;
-		}
-		if (benemy.pos.x < 0)
-		{
-			benemy.speed.x = -benemy.speed.x;
-			benemy.div = DIV_LEFT;
-		}*/
 		for (int i = 0; i < SHOT_MAX; i++)
 		{
 			if (HitCheckRectToRect(benemy, i, shot))

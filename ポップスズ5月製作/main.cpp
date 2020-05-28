@@ -243,7 +243,6 @@ void GameInit(void)//ゲームループ内の初期化
 void GameTitlr(void)//タイトル画面処理
 {
 	DrawGraph(10, 200, TitieImage, true);
-	//DrawString(SCREEN_SIZE_X/2, SCREEN_SIZE_Y / 2, "フェンビー", 0xffff00, true);
 }
 
 void GameMain(void)//ゲーム画面処理
