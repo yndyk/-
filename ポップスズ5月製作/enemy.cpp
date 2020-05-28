@@ -72,7 +72,7 @@ void InitEnemy()
 		enemy[i].point = 0;
 		enemy[i].size = { 32,32 };
 		enemy[i].offSet = { enemy[i].size.x / 2, enemy[i].size.y / 2 };
-		enemy[i].hp = 3;			// エネミーの残機
+		enemy[i].hp = 5;			// エネミーの残機
 		enemy[i].r = 16;
 		enemy[i].changeFlag = false;
 		enemy[i].div = DIV_RAHGT;
