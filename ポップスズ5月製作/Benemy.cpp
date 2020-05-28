@@ -184,6 +184,7 @@ void moveBenemy()
 		BrefrectMoveXY();
 		benemy.movePattern = rand() % 3;
 	}
+
 	int tmpR = player.r + benemy.r;
 
 	// ‚±‚±‚É“G‚Ìˆê’è”ÍˆÍ“à‚É“ü‚Á‚½‚çƒvƒŒƒCƒ„[‚Ì‚Ù‚¤‚ÉˆÚ“®‚µ‚Ä‚­‚éˆ—‚ğ‘‚­
