@@ -24,6 +24,7 @@ void SysInitBenemy()
 	BenemyDamegeImage = LoadGraph("bmp/アンモナイトダメージ.png");
 	
 }
+
 //初期化
 void InitBenemy()
 {
@@ -50,6 +51,7 @@ void InitBenemy()
 	BenemyTime = TIME_FRAME*3;//ダメージの描画時間
 	BsearchDistance = 96;	// 敵の索敵距離(この範囲内に入ると敵が自分に向かってくる) 要調整！
 }
+
 //更新
 void UpdetaBenemy()
 {
@@ -75,6 +77,7 @@ void UpdetaBenemy()
 	}
 	DamegeBenemy();
 }
+
 //描画
 void DrawBenemy()
 {
@@ -101,9 +104,23 @@ void DrawBenemy()
 	//
 	if (benemy.damageflag == true)
 	{
-		DrawGraph(benemy.pos.x - benemy.offSet.x,
-			benemy.pos.y - benemy.offSet.y,
-			BenemyDamegeImage, true);
+		switch (benemy.div)
+		{
+		case DIV_RAHGT:
+			benemy.count++;
+			DrawGraph(benemy.pos.x - benemy.offSet.x,
+				benemy.pos.y - benemy.offSet.y,
+				BenemyDamegeImage, true);
+			break;
+		case DIV_LEFT:
+			benemy.count++;
+			DrawTurnGraph(benemy.pos.x - benemy.offSet.x,
+				benemy.pos.y - benemy.offSet.y,
+				BenemyDamegeImage, true);
+			break;
+		default:
+			break;
+		}
 	}
 	DrawBox(benemy.pos.x - benemy.offSet.x,
 		benemy.pos.y - benemy.offSet.y,
@@ -131,6 +148,7 @@ void DamegeBenemy()
 		}
 	}
 }
+
 //移動制限
 void moveBenemy()
 {
@@ -160,17 +178,7 @@ void moveBenemy()
 		}
 	}
 	
-	//BrefrectMoveXY();
-	////移動
-	//if (benemy.count % 90 == 0)
-	//{
-	//	benemy.movePattern = rand() % 2;
-	//}
-	//if (benemy.movePattern == 0)
-	//	benemy.pos.y += benemy.speed.y;
-	//if (benemy.movePattern == 1)
-	//	benemy.pos.x += benemy.speed.x;
-	if (benemy.count % 90 == 0)
+	if (benemy.count % 60 == 0)
 	{
 		BrefrectMoveXY();
 		benemy.movePattern = rand() % 2;
@@ -223,8 +231,8 @@ void moveBenemy()
 			benemy.pos.x -= benemy.speed.x;
 	}
 	benemy.speed = tmpSpeed;
-
 }
+
 //大まかな動き
 void BrefrectMoveXY()
 {
