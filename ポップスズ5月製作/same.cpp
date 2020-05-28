@@ -11,17 +11,18 @@
 
 CHARACTER same;
 int SameCount;
+int SameImage[2];
 
 //ÉçÅ[Éh
 void SysInitSame()
 {  
-	
+	LoadDivGraph("bmp/shark.png", 2, 2, 1, 96, 64, SameImage, true);
 }
 
 //èâä˙âª
 void InitSame()
 {
-	same.pos = { 0 - 32 * 3 , 64 + rand() % 18 + 1 * 32 };
+	same.pos = { 0 - 96 * 3 , 64 + rand() % 18 + 1 * 32 };
 	same.size = { 96,64 };
 	same.speed = {4,4};
 	same.offSet = { same.size.x / 2,same.size.y / 2 };
@@ -43,7 +44,7 @@ void UpdetaSame()
 		if (same.pos.x + same.size.x < 0)
 		{
 			same.flag = false;
-			same.pos = { 0 + 32 ,64 + (rand() % 18 + 1) * 32 };
+			same.pos = { 0 + 96 ,64 + (rand() % 18 + 1) * 32 };
 		}
 	}
 
@@ -58,13 +59,14 @@ void UpdetaSame()
 		{
 			player.damageflag = true;
 			player.flag = false;
+			same.flag = false;
 			if (player.hp <= 0)
 			{
 			same.flag = false;
 			}
 			else if (player.hp > 0)
 			{
-				player.hp -= 2 * TIME_FRAME;
+				player.hp -= 40 * TIME_FRAME;
 			}
 		}
 	}
@@ -82,11 +84,21 @@ void DrawSame()
 	{
 		DrawBox(same.pos.x - same.offSet.x, same.pos.y - same.offSet.y,
 			same.pos.x + same.offSet.x, same.pos.y + same.offSet.y,
-			0xff0000, true);
+			0xff0000, false);
+
+		DrawGraph(same.pos.x - same.offSet.x,
+			same.pos.y - same.offSet.y, 
+			SameImage[0], true);
+	}
+	else
+	{
+		DrawGraph(same.pos.x - same.offSet.x,
+			same.pos.y - same.offSet.y,
+			SameImage[1], true);
 	}
 	DrawFormatString(0, 250, 0xff0000, "%d",SameCount, true);
 }
-
+//èoåªèåè
 void ApprSame()
 {
 	if (SameCount % 120 == 0) 
@@ -94,7 +106,7 @@ void ApprSame()
 		if (same.flag == false)
 		{
 			same.flag = true;
-			same.pos = { 0 + 32, 64 + (rand() % 18 + 1) * 32 };
+			same.pos = { 0 + 96, 64 + (rand() % 18 + 1) * 32 };
 		}
 	}
 }
