@@ -17,6 +17,7 @@ float distance;
 int BsearchDistance;
 XY tmpSpeed;
 
+
 //ÉçÅ[Éh
 void SysInitBenemy()
 {
@@ -181,7 +182,7 @@ void moveBenemy()
 	if (benemy.count % 60 == 0)
 	{
 		BrefrectMoveXY();
-		benemy.movePattern = rand() % 2;
+		benemy.movePattern = rand() % 3;
 	}
 	int tmpR = player.r + benemy.r;
 

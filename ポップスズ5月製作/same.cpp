@@ -12,11 +12,13 @@
 CHARACTER same;
 int SameCount;
 int SameImage[2];
+int SameSound;
 
 //ロード
 void SysInitSame()
 {  
 	LoadDivGraph("bmp/shark.png", 2, 2, 1, 96, 64, SameImage, true);
+	SameSound = LoadSoundMem("音素材/サメ2.mp3");
 }
 
 //初期化
@@ -46,6 +48,7 @@ void UpdetaSame()
 			same.flag = false;
 			same.pos = { 0 + 96 ,64 + (rand() % 18 + 1) * 32 };
 		}
+		StopSoundMem(UntiSound);
 	}
 
 	if(same.pos.x > SCREEN_SIZE_X)
@@ -68,13 +71,13 @@ void UpdetaSame()
 			{
 				player.hp -= 40 * TIME_FRAME;
 			}
+			PlaySoundMem(SameSound, DX_PLAYTYPE_BACK);
 		}
 	}
 	else
 	{
 		player.flag = true;
 	}
-
 }
 
 //描画
@@ -98,6 +101,7 @@ void DrawSame()
 	}
 	DrawFormatString(0, 250, 0xff0000, "%d",SameCount, true);
 }
+
 //出現条件
 void ApprSame()
 {
