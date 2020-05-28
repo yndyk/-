@@ -48,21 +48,21 @@ void InitPlayer()
 void UpdetaPlayer()
 {
 	//ˆÚ“®
-	if (CheckHitKey(KEY_INPUT_RIGHT))
+	if (newKey[P1_RIGHT])
 	{
 		player.pos.x += player.speed.x;
 		player.div = DIV_LEFT;
 	}
-	if (CheckHitKey(KEY_INPUT_LEFT))
+	if (newKey[P1_LEFT])
 	{
 		player.pos.x -= player.speed.x;
 		player.div = DIV_RAHGT;
 	}
-	if (CheckHitKey(KEY_INPUT_UP))
+	if (newKey[P1_UP])
 	{
 		player.pos.y -= player.speed.y;
 	}
-	if (CheckHitKey(KEY_INPUT_DOWN))
+	if (newKey[P1_DOWN])
 	{
 		player.pos.y += player.speed.y;
 	}

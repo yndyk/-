@@ -56,7 +56,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 	gamemode = GMODE_INIT;
 	
 	//ゲームループ
-	while (ProcessMessage() == 0 && CheckHitKey(KEY_INPUT_ESCAPE) == 0)
+	while (ProcessMessage() == 0 && newKey[QUIT] == 0)
 	{
 		ClsDrawScreen();
 
@@ -250,7 +250,7 @@ void GameMain(void)//ゲーム画面処理
 	//PAUSEが押されたら
 	//pauseFlagを切替得る
 	
-	if(trgKey[P1_A])
+	if(trgKey[PAUSE])
 	{
 		pauseFlag = !pauseFlag;//!をつけると否定になる
 	}

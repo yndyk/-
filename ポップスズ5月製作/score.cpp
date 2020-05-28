@@ -20,6 +20,7 @@ void ScoreSysInit()
 void ScoreInit()
 {
 	score = 0;//ƒXƒRƒA‚Ì‰Šú‰»
+	high_score = HighScoreLoad();
 }
 
 void SetScore(SCOREDATA data, int val)	// ‰ÁŽZ‚·‚é‘ÎÛ‚Æ—Ê
@@ -30,6 +31,7 @@ void SetScore(SCOREDATA data, int val)	// ‰ÁŽZ‚·‚é‘ÎÛ‚Æ—Ê
 		if (val >= high_score)
 		{
 			high_score = val;
+			HighScoreSave(high_score);
 		}
 		break;
 	case SCORE:
