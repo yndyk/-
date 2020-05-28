@@ -5,18 +5,13 @@ enum KEY_MODE {
 	P1_RIGHT,
 	P1_DOWN,
 	P1_LEFT,
-	P1_A,
+	P1_SHOT,
 	P1_B,
-
-	P2_UP,
-	P2_RIGHT,
-	P2_DOWN,
-	P2_LEFT,
-	P2_A,
-	P2_B,
 
 	START,
 	PAUSE,
+	
+	QUIT,
 
 	KEY_MAX
 };

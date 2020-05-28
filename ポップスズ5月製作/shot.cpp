@@ -37,7 +37,7 @@ void InitShot()
 //çXêV
 void UpdetaShot()
 {
-	if (CheckHitKey(KEY_INPUT_SPACE) && shotCnt % 30 == 0)
+	if (trgKey[P1_SHOT])
 	{
 		for (int i = 0; i < SHOT_MAX; i++)
 		{
@@ -59,8 +59,9 @@ void UpdetaShot()
 				break;
 			}
 		}
-		PlaySoundMem(ShotSound, DX_PLAYTYPE_BACK);
+	PlaySoundMem(ShotSound, DX_PLAYTYPE_BACK);
 	}
+	
 
 	for (int i = 0; i < SHOT_MAX; i++)
 	{
