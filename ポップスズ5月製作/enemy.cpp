@@ -394,6 +394,7 @@ void TypeEnemy()
 			break;
 		}
 	}
+
 	//エネミータイプとスコア
 	enemy[0].type = TYPE_1; enemy[0].score = 100;
 	enemy[1].type = TYPE_2; enemy[1].score = 150;
