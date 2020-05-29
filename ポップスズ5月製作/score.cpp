@@ -7,6 +7,7 @@ int number_r[10];
 int scoreBoard[2];
 int scoreBoard_r[2];
 int high_score = 0;
+int before_high_score = 0;	// ハイスコア一時格納用
 int score;
 
 void ScoreSysInit()
@@ -21,6 +22,7 @@ void ScoreInit()
 {
 	score = 0;//スコアの初期化
 	high_score = HighScoreLoad();
+	before_high_score = high_score;
 }
 
 void SetScore(SCOREDATA data, int val)	// 加算する対象と量
@@ -73,6 +75,15 @@ void ScoreDraw()
 	{
 		DrawGraph((SCREEN_SIZE_X + i * 16) -  16 * 6, 0, number[(buf[i] - '0')], true);
 	}
+
+	//char buf1[100];
+	//int num1;
+
+	//num1 = sprintf_s(buf1, "%*d", 6, high_score);
+	//for (int i = 0; i < num1; i++)
+	//{
+	//	DrawGraph(i*16, 0, number[(buf1[i] - '0')], true);
+	//}
 }
 
 void HighScoreDraw()
@@ -80,11 +91,27 @@ void HighScoreDraw()
 	char buf[100];
 	int num;
 
-	DrawGraph(SCREEN_SIZE_X / 2 - 137 / 2, SCREEN_SIZE_Y / 5 * 2, scoreBoard_r[0], true);
+	if (score > before_high_score)
+	{
+		DrawGraph(SCREEN_SIZE_X / 2 - 137 / 2, SCREEN_SIZE_Y / 10 * 6, scoreBoard_r[0], true);
 
-	num = sprintf_s(buf, "%d", high_score);
+		//num = sprintf_s(buf, "%d", high_score);
+		//for (int i = 0; i < num; i++)
+		//{
+		//	DrawGraph((SCREEN_SIZE_X / 2 + i * 16) - num / 2 * 16, SCREEN_SIZE_Y / 10 * 6 + 32, number_r[(buf[i] - '0')], true);
+		//}
+	}
+	else
+	{
+		//スコア
+		DrawGraph(SCREEN_SIZE_X / 2 - 76 / 2, SCREEN_SIZE_Y / 10 * 6, scoreBoard_r[1], true);
+
+	}
+	//スコア表示
+	num = sprintf_s(buf, "%d", score);
 	for (int i = 0; i < num; i++)
 	{
-		DrawGraph((SCREEN_SIZE_X / 2 + i * 16) - num / 2 * 16, SCREEN_SIZE_Y / 5 * 2 + 32, number_r[(buf[i] - '0')], true);
+		DrawGraph((SCREEN_SIZE_X / 2 + i * 16) - num * 16 / 2, SCREEN_SIZE_Y / 10 * 6 + 32, number_r[(buf[i] - '0')], true);
 	}
+
 }
