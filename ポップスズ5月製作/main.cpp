@@ -32,6 +32,7 @@ int TitieImage;
 int GImage[2];
 int OperationImage;
 int OperationImage2;
+int huriganaImage;
 int bright;	//明るさ
 int gameCouner;//メイン画面のカウンター
 
@@ -193,6 +194,7 @@ bool SystmeInit(void)//システム初期化
 	LoadDivGraph("bmp/game_state.png",2,1,2,304,32,GImage,true);
 	OperationImage = LoadGraph("bmp/操作説明1.png");
 	OperationImage2 = LoadGraph("bmp/操作説明2.png");
+	huriganaImage = LoadGraph("bmp/フリガナ.png");
 	 StageSysinit();
 	 SysInitPlayer();
 	 SysInitEnemy();
@@ -362,5 +364,6 @@ void GameOperation(void)
 	DrawGraph(200, 180, OperationImage, true);
 	DrawGraph(200, 270, OperationImage2, true);
 	DrawString(280, 400, "START_SPACE", 0x00ffff, true);
+	DrawGraph(375, 160, huriganaImage, true);
 }
 
