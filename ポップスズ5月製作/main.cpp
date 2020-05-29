@@ -191,7 +191,7 @@ bool SystmeInit(void)//システム初期化
 
 //グラフィック
 	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
-	LoadDivGraph("bmp/game_state.png",2,1,2,304,32,GImage,true);
+	LoadDivGraph("bmp/game_state.png",2,1,2,306,34,GImage,true);
 	OperationImage = LoadGraph("bmp/操作説明1.png");
 	OperationImage2 = LoadGraph("bmp/操作説明2.png");
 	huriganaImage = LoadGraph("bmp/フリガナ.png");
@@ -298,7 +298,7 @@ void GameClera(void)//クリア画面処理
 {
 	SetScore(HIGH_SCORE, GetScore(SCORE));
 	HighScoreDraw();
-	DrawGraph((SCREEN_SIZE_X - 304) / 2, SCREEN_SIZE_Y / 10 * 4, GImage[0], true);
+	DrawGraph((SCREEN_SIZE_X - 306) / 2, SCREEN_SIZE_Y / 10 * 4, GImage[0], true);
 	DrawString(0, 0, "GAME_CLERA", 0xffff00, true);
 }
 
@@ -306,7 +306,7 @@ void GameOver(void)
 {
 	SetScore(HIGH_SCORE, GetScore(SCORE));
 	HighScoreDraw();
-	DrawGraph((SCREEN_SIZE_X - 280) / 2, SCREEN_SIZE_Y / 10 * 4, GImage[1], true);
+	DrawGraph((SCREEN_SIZE_X - 282) / 2, SCREEN_SIZE_Y / 10 * 4, GImage[1], true);
 	DrawString(0, 0, "GAME_OVER", 0xffff00, true);
 }
 
