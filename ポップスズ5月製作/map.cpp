@@ -100,8 +100,7 @@ void StageDraw()
 
 	DrawGraph(0, 0, image, true);
 
-	DrawFormatString(0, 0, 0xff0000, "stageID:%d", stageID);
-
+	//DrawFormatString(0, 0, 0xff0000, "stageID:%d", stageID);
 }
 
 int GetStageID()
