@@ -93,7 +93,8 @@ void UpdetaPlayer()
 				player.flag = false;
 				player.damageflag = true;
 				damageCnt = 0;
-				enemy[i].flag = false;
+				enemy[i].damageflag = true;
+				enemy[i].hp--;
 
 				player.hp -= TIME_FRAME * 10;
 

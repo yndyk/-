@@ -420,7 +420,7 @@ void DamageEnemy(int num)
 		{
 			enemy[num].damageflag = false;
 			enemyTime[num] = TIME_FRAME * 3;
-			enemy[num].hp = 3;
+			enemy[num].hp = 5;
 		}
 	}
 
