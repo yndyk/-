@@ -30,6 +30,8 @@
 //タイトル
 int TitieImage;
 int GImage[2];
+int OperationImage;
+int OperationImage2;
 int bright;	//明るさ
 int gameCouner;//メイン画面のカウンター
 
@@ -188,7 +190,9 @@ bool SystmeInit(void)//システム初期化
 
 //グラフィック
 	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
-	 LoadDivGraph("bmp/game_state.png",2,1,2,304,32,GImage,true);
+	LoadDivGraph("bmp/game_state.png",2,1,2,304,32,GImage,true);
+	OperationImage = LoadGraph("bmp/操作説明1.png");
+	OperationImage2 = LoadGraph("bmp/操作説明2.png");
 	 StageSysinit();
 	 SysInitPlayer();
 	 SysInitEnemy();
@@ -243,6 +247,7 @@ void GameInit(void)//ゲームループ内の初期化
 void GameTitlr(void)//タイトル画面処理
 {
 	DrawGraph(10, 200, TitieImage, true);
+	DrawString(280, 400, "START_SPACE", 0x00ffff, true);
 }
 
 void GameMain(void)//ゲーム画面処理
@@ -354,7 +359,8 @@ bool FadeOutScreen(int fadeStep)//フェードアウト処理
 
 void GameOperation(void)
 {
-	DrawFormatString(0, 0, 0xff0000, "十字キーで移動",true);
-	DrawFormatString(0, 20, 0xff0000, "スペースキーで攻撃", true);
+	DrawGraph(200, 180, OperationImage, true);
+	DrawGraph(200, 270, OperationImage2, true);
+	DrawString(280, 400, "START_SPACE", 0x00ffff, true);
 }
 
