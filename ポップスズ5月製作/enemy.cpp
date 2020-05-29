@@ -405,6 +405,7 @@ void TypeEnemy()
 	enemy[7].type = TYPE_2; enemy[7].score = 150;
 	enemy[8].type = TYPE_3; enemy[8].score = 170;
 }
+
 //”íƒ_ƒ[ƒW‚Ìˆ—
 void DamageEnemy(int num)
 {

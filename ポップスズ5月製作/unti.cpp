@@ -48,7 +48,7 @@ void UpdetaUnti()
 {
 	srand(time(NULL));
 	UntiCount++;
-		//ウンチのランダム出現
+	//ウンチのランダム出現
 	ApperUnti();
 	for (int i = 0; i < UNTI_MAX; i++)
 	{
@@ -91,9 +91,10 @@ void UpdetaUnti()
 				PlaySoundMem(UntiSound, DX_PLAYTYPE_BACK);
 			}
 		}
+
 		else
 		{
-			player.flag = true;			// とりあえずの処理(ウンチが当たったときにプレイヤーが表示されなくなるバグがあったため)
+			player.flag = true;	// とりあえずの処理(ウンチが当たったときにプレイヤーが表示されなくなるバグがあったため)
 		}
 	}
 }
@@ -117,7 +118,6 @@ void DrawUnti()
 				0x000000, false);
 		}
 
-		
 		/*DrawFormatString(0, 50, 0xff0000, "UntiCount:%d", UntiCount);
 		DrawFormatString(0, 120 + i * 18, 0xff0000, "y:%d", unti[i].pos.y);
 		DrawFormatString(70, 120 + i * 18, 0xff0000, "x:%d", unti[i].pos.x);
@@ -140,7 +140,7 @@ void DeleteUnti()
 
 void ApperUnti()
 {
-	if (UntiCount % 120 == 0)
+	if (UntiCount % 100 == 0)
 	{
 		for (int i = 0; i < UNTI_MAX; i++)
 		{

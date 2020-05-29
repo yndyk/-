@@ -66,7 +66,9 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 			}
 			//enemyScore += 300;
 			SetScore(SCORE, 300);//ÉXÉRÉAâ¡éZ
+
 		}
+		
 	}
 }
 

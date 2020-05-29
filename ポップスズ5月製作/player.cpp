@@ -34,7 +34,7 @@ void InitPlayer()
 	player.pos = { 500,430 };
 	player.size = { 32, 32 };
 	player.offSet = { player.size.x / 2, player.size.y / 2 };
-	player.speed = { 5,5 };
+	player.speed = { 2,2 };
 	player.r = 16;
 	player.div = DIV_RAHGT;
 	player.hp = TIME_FRAME *PLAYER_HP_MAX;
@@ -112,7 +112,6 @@ void UpdetaPlayer()
 					{
 						enemyAllDeadFlag = true;
 					}
-					//enemyAllDeadFlag = true;
 				}
 			}
 		}
