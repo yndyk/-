@@ -12,6 +12,7 @@ extern bool enemyAllDeadFlag;
 extern TYPE_MODE enemyType;
 extern int enemyScore;
 extern int ChngSound;
+extern bool NextFlag;
 
 void SysInitEnemy();
 void InitEnemy();

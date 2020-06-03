@@ -34,6 +34,7 @@ float distance[ENEMY_MAX];
 int searchDistance;
 XY tmpSpeed[ENEMY_MAX];
 int ChngSound;
+bool NextFlag;
 
 //ロード
 void SysInitEnemy()
@@ -86,6 +87,7 @@ void InitEnemy()
 	}
 
 	enemyAllDeadFlag = false;
+	NextFlag = false;
 	//サウンド
 	ChngSound = LoadSoundMem("音素材/料理（仮）.mp3");
 }
@@ -143,6 +145,7 @@ void UpdetaEnemy()
 				{
 					enemyAllDeadFlag = true;
 				}
+				NextFlag = true;
 			}
 
 			if (enemy[i].changeFlag)		// イカ焼きに代わるかどうか

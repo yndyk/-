@@ -38,9 +38,14 @@ bool HitBox(CHARACTER a, CHARACTER b )
 //•`‰æ
 void DrawBox()
 {
-	DrawBox(box.pos.x - box.offSet.x,
-		box.pos.y - box.offSet.y,
-		box.pos.x + box.offSet.x,
-		box.pos.y + box.offSet.y, 0x000000, false);
+	if (NextFlag == true) 
+	{
+		DrawBox(box.pos.x - box.offSet.x,
+			box.pos.y - box.offSet.y,
+			box.pos.x + box.offSet.x,
+			box.pos.y + box.offSet.y, 0x000000, false);
+		DrawString(box.pos.x - 20, box.pos.y-10, "NEXT", 0xff0000, true);
+		DrawString(box.pos.x - 30, box.pos.y+10, "STAGE", 0xff0000, true);
+	}
 }
 
