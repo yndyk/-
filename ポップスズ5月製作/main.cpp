@@ -191,7 +191,7 @@ bool SystmeInit(void)//システム初期化
 
 //グラフィック
 	 TitieImage = LoadGraph("bmp/タイトルロゴ0512.png");
-	LoadDivGraph("bmp/game_state.png",2,1,2,306,34,GImage,true);
+	 LoadDivGraph("bmp/game_state.png", 2, 1, 2, 306, 34, GImage, true);
 	OperationImage = LoadGraph("bmp/操作説明1.png");
 	OperationImage2 = LoadGraph("bmp/操作説明2.png");
 	huriganaImage = LoadGraph("bmp/フリガナ.png");
