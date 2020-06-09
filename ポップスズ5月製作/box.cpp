@@ -6,10 +6,11 @@
 #include <math.h>
 
 CHARACTER box;
+int boxImage;
 //ÉçÅ[Éh
 void SysInitBox()
 {
-	
+	boxImage = LoadGraph("nextstage.png");
 }
 //èâä˙âª
 void InitBox() 
@@ -44,6 +45,9 @@ void DrawBox()
 			box.pos.y - box.offSet.y,
 			box.pos.x + box.offSet.x,
 			box.pos.y + box.offSet.y, 0x000000, false);
+		DrawGraph(box.pos.x - box.offSet.x,
+			box.pos.y - box.offSet.y,
+			boxImage,true);
 		DrawString(box.pos.x - 20, box.pos.y-10, "NEXT", 0xff0000, true);
 		DrawString(box.pos.x - 30, box.pos.y+10, "STAGE", 0xff0000, true);
 	}
