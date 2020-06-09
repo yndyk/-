@@ -10,7 +10,7 @@ int boxImage;
 //ÉçÅ[Éh
 void SysInitBox()
 {
-	boxImage = LoadGraph("nextstage.png");
+	boxImage = LoadGraph("bmp/nextstage.png");
 }
 //èâä˙âª
 void InitBox() 
@@ -48,8 +48,8 @@ void DrawBox()
 		DrawGraph(box.pos.x - box.offSet.x,
 			box.pos.y - box.offSet.y,
 			boxImage,true);
-		DrawString(box.pos.x - 20, box.pos.y-10, "NEXT", 0xff0000, true);
-		DrawString(box.pos.x - 30, box.pos.y+10, "STAGE", 0xff0000, true);
+		/*DrawString(box.pos.x - 20, box.pos.y-10, "NEXT", 0xff0000, true);
+		DrawString(box.pos.x - 30, box.pos.y+10, "STAGE", 0xff0000, true);*/
 	}
 }
 
