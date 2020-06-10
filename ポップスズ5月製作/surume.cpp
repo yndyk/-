@@ -24,13 +24,14 @@ void InitSurume()
 		surume[i].flag = false;
 		surume[i].size = { 32, 32 };
 		surume[i].offSet = { surume[i].size.x / 2, surume[i].size.y / 2 };
-		surume[i].hp = 30;		// イカ焼き取得時に回復するライフの量
+		surume[i].hp = 30;	// スルメ取得時に回復するライフの量
 		surume[i].onlyOnce = false;
 	}
 }
 //更新
 void UpdetaSurume(XY pos, bool flag, int num)
 {
+	
 	if (!surume[num].onlyOnce)
 	{
 		if (!surume[num].flag)
@@ -40,7 +41,7 @@ void UpdetaSurume(XY pos, bool flag, int num)
 			surume[num].onlyOnce = true;
 		}
 	}
-
+	
 	
 	if (surume[num].flag)
 	{

@@ -12,6 +12,7 @@ void SysInitIkatenn()
 {
 	ikatennImage = LoadGraph("bmp/イカ天.png");
 }
+
 //初期化
 void InitIkatenn() 
 {
@@ -31,6 +32,7 @@ void InitIkatenn()
 //更新
 void UpdateIkatenn(XY pos, bool flag, int num)
 {
+	
 	if (!ikatenn[num].onlyOnce)
 	{
 		if (!ikatenn[num].flag)
@@ -66,7 +68,7 @@ void UpdateIkatenn(XY pos, bool flag, int num)
 			}
 			//enemyScore += 300;
 			SetScore(SCORE, 300);//スコア加算
-
+			
 		}
 		
 	}
