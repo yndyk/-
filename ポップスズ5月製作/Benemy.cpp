@@ -17,13 +17,11 @@ float distance;
 int BsearchDistance;
 XY tmpSpeed;
 
-
 //ロード
 void SysInitBenemy()
 {
 	LoadDivGraph("bmp/アンモナイト.png", 2, 2, 1, 32, 32, BenemyImage, true);
 	BenemyDamegeImage = LoadGraph("bmp/アンモナイトダメージ.png");
-	
 }
 
 //初期化

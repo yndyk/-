@@ -26,7 +26,7 @@ void InitSame()
 {
 	same.pos = { 0 - 96 * 3 , 64 + rand() % 18 + 1 * 32 };
 	same.size = { 96,64 };
-	same.speed = {4,4};
+	same.speed = {6,6};
 	same.offSet = { same.size.x / 2,same.size.y / 2 };
 	same.hp -= TIME_FRAME  * 30;
 	same.flag = false;
