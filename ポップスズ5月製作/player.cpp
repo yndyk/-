@@ -187,15 +187,15 @@ void DrawPlayer()
 
 	//player.damageflag = false;
 	DrawFormatString(30, 30, 0xff0000, "%d", player.hp / TIME_FRAME, true);
-	DrawFormatString(30, 50, 0xff0000, "cnt:%d", damageCnt);
-	DrawFormatString(30, 70, 0xff0000, "flag:%d", player.damageflag);
+	/*DrawFormatString(30, 50, 0xff0000, "cnt:%d", damageCnt);
+	DrawFormatString(30, 70, 0xff0000, "flag:%d", player.damageflag);*/
 
 	// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-	DrawBox(player.pos.x - player.offSet.x,
+	/*DrawBox(player.pos.x - player.offSet.x,
 		player.pos.y - player.offSet.y,
 		player.pos.x + player.offSet.x,
-		player.pos.y + player.offSet.y, 0x000000, false);
-	DrawCircle(player.pos.x, player.pos.y, player.r, 0x000000, false);
+		player.pos.y + player.offSet.y, 0x000000, false);*/
+	//DrawCircle(player.pos.x, player.pos.y, player.r, 0x000000, false);
 	DrawBox(0, 440, player.hp / 60, 450 , 0xff0000, true);
 	DrawBox(0, 440, player.hp / 60, 450, 0x000000, false);
 }

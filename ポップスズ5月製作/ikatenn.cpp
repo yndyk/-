@@ -83,11 +83,11 @@ void DrawIkatenn(int num)
 			ikatenn[num].pos.y - ikatenn[num].offSet.y,
 			ikatennImage, true);
 		// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-		DrawBox(ikatenn[num].pos.x - ikatenn[num].offSet.x,
+		/*DrawBox(ikatenn[num].pos.x - ikatenn[num].offSet.x,
 			ikatenn[num].pos.y - ikatenn[num].offSet.y,
 			ikatenn[num].pos.x + ikatenn[num].offSet.x,
 			ikatenn[num].pos.y + ikatenn[num].offSet.y,
-			0x000000, false);
+			0x000000, false);*/
 		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//ƒTƒEƒ“ƒh
 	}
 }

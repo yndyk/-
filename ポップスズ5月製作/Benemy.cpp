@@ -121,13 +121,13 @@ void DrawBenemy()
 			break;
 		}
 	}
-	DrawBox(benemy.pos.x - benemy.offSet.x,
+	/*DrawBox(benemy.pos.x - benemy.offSet.x,
 		benemy.pos.y - benemy.offSet.y,
 		benemy.pos.x + benemy.offSet.x,
 		benemy.pos.y + benemy.offSet.y,
 		0x000000, false);
 	DrawCircle(benemy.pos.x, benemy.pos.y, BsearchDistance, 0x000000, false);
-	DrawFormatString(0, 360, 0xff0000, "テスト;%d", benemy.hp);
+	DrawFormatString(0, 360, 0xff0000, "テスト;%d", benemy.hp);*/
 }
 
 void DamegeBenemy()

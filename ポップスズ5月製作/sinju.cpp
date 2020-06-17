@@ -61,11 +61,11 @@ void DrawPearl()
 		DrawGraph(pearl.pos.x - pearl.offSet.x, pearl.pos.y - pearl.offSet.y, pearlImage, true);
 
 
-		DrawBox(pearl.pos.x - pearl.offSet.x,
+		/*DrawBox(pearl.pos.x - pearl.offSet.x,
 			pearl.pos.y - pearl.offSet.y,
 			pearl.pos.x + pearl.offSet.x,
 			pearl.pos.y + pearl.offSet.y,
-			0x000000, false);
+			0x000000, false);*/
 	}
 
 	//DrawFormatString(50, 50, 0xff0000, "cnt:%d", pearlCnt);

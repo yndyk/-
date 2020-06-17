@@ -101,11 +101,11 @@ void DrawBuble()
 				bubble[i].pos.y - bubble[i].offSet.y,
 				bubbleImage, true);
 			// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-			DrawBox(bubble[i].pos.x - bubble[i].offSet.x,
+			/*DrawBox(bubble[i].pos.x - bubble[i].offSet.x,
 				bubble[i].pos.y - bubble[i].offSet.y,
 				bubble[i].pos.x + bubble[i].offSet.x,
 				bubble[i].pos.y + bubble[i].offSet.y,
-				0x000000, false);
+				0x000000, false);*/
 		}
 
 		

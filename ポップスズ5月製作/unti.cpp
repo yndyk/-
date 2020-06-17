@@ -111,11 +111,11 @@ void DrawUnti()
 				UntiImage, true);
 			//DrawFormatString(30, 60, 0xff0000, "%d", UntiCount, true);
 			// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-			DrawBox(unti[i].pos.x - unti[i].offSet.x,
+			/*DrawBox(unti[i].pos.x - unti[i].offSet.x,
 				unti[i].pos.y - unti[i].offSet.y,
 				unti[i].pos.x + unti[i].offSet.x,
 				unti[i].pos.y + unti[i].offSet.y,
-				0x000000, false);
+				0x000000, false);*/
 		}
 
 		/*DrawFormatString(0, 50, 0xff0000, "UntiCount:%d", UntiCount);

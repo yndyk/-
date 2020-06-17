@@ -85,9 +85,9 @@ void DrawSame()
 {
 	if (same.flag == true)
 	{
-		DrawBox(same.pos.x - same.offSet.x, same.pos.y - same.offSet.y,
+		/*DrawBox(same.pos.x - same.offSet.x, same.pos.y - same.offSet.y,
 			same.pos.x + same.offSet.x, same.pos.y + same.offSet.y,
-			0xff0000, false);
+			0xff0000, false);*/
 
 		DrawGraph(same.pos.x - same.offSet.x,
 			same.pos.y - same.offSet.y, 
@@ -99,7 +99,7 @@ void DrawSame()
 			same.pos.y - same.offSet.y,
 			SameImage[1], true);
 	}
-	DrawFormatString(0, 250, 0xff0000, "%d",SameCount, true);
+	//DrawFormatString(0, 250, 0xff0000, "%d",SameCount, true);
 }
 
 //èoåªèåè

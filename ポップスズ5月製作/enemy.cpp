@@ -206,15 +206,15 @@ void DrawEnemy()
 			}
 		
 			// 当たり判定の可視化
-			DrawBox(enemy[i].pos.x - enemy[i].offSet.x,
+			/*DrawBox(enemy[i].pos.x - enemy[i].offSet.x,
 				enemy[i].pos.y - enemy[i].offSet.y,
 				enemy[i].pos.x + enemy[i].offSet.x,
 				enemy[i].pos.y + enemy[i].offSet.y,
-				0x000000, false);
-			if (stageID == STAGE3)
-				DrawCircle(enemy[i].pos.x, enemy[i].pos.y, searchDistance, 0x000000, false);
+				0x000000, false);*/
+			/*if (stageID == STAGE3)
+				DrawCircle(enemy[i].pos.x, enemy[i].pos.y, searchDistance, 0x000000, false);*/
 
-			DrawFormatString(enemy[i].pos.x, enemy[i].pos.y - 32, 0xff0000, "%d", enemy[i].hp);	// 残機の可視化
+			//DrawFormatString(enemy[i].pos.x, enemy[i].pos.y - 32, 0xff0000, "%d", enemy[i].hp);	// 残機の可視化
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
@@ -432,7 +432,7 @@ void DamageEnemy(int num)
 		enemy[num].flag = false;
 		enemy[num].changeFlag = true;
 	}
-	DrawFormatString(499, num * 18, 0xff0000, "eT;%d", enemyTime[num] / TIME_FRAME);
+	//DrawFormatString(499, num * 18, 0xff0000, "eT;%d", enemyTime[num] / TIME_FRAME);
 }
 
 

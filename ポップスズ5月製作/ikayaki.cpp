@@ -89,11 +89,11 @@ void DrawIkayaki(int num)
 				  ikayaki[num].pos.y - ikayaki[num].offSet.y,
 				  ikayakiImage, true);
 		// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-		DrawBox(ikayaki[num].pos.x - ikayaki[num].offSet.x,
+		/*DrawBox(ikayaki[num].pos.x - ikayaki[num].offSet.x,
 			ikayaki[num].pos.y - ikayaki[num].offSet.y,
 			ikayaki[num].pos.x + ikayaki[num].offSet.x,
 			ikayaki[num].pos.y + ikayaki[num].offSet.y,
-			0x000000, false);
+			0x000000, false);*/
 		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//ƒTƒEƒ“ƒh
 	}
 

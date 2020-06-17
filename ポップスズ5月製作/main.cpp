@@ -299,7 +299,7 @@ void GameClera(void)//クリア画面処理
 	SetScore(HIGH_SCORE, GetScore(SCORE));
 	HighScoreDraw();
 	DrawGraph((SCREEN_SIZE_X - 306) / 2, SCREEN_SIZE_Y / 10 * 4, GImage[0], true);
-	DrawString(0, 0, "GAME_CLERA", 0xffff00, true);
+	//DrawString(0, 0, "GAME_CLERA", 0xffff00, true);
 }
 
 void GameOver(void)
@@ -307,7 +307,7 @@ void GameOver(void)
 	SetScore(HIGH_SCORE, GetScore(SCORE));
 	HighScoreDraw();
 	DrawGraph((SCREEN_SIZE_X - 282) / 2, SCREEN_SIZE_Y / 10 * 4, GImage[1], true);
-	DrawString(0, 0, "GAME_OVER", 0xffff00, true);
+	//DrawString(0, 0, "GAME_OVER", 0xffff00, true);
 }
 
 void GameDraw(void)//描画設定
@@ -323,7 +323,7 @@ void GameDraw(void)//描画設定
 	DrawShell();
 	ScoreDraw();
 	DrawSame();
-	DrawFormatString(399, 0, 0xff0000, "%d", leftTime / TIME_FRAME);
+	//DrawFormatString(399, 0, 0xff0000, "%d", leftTime / TIME_FRAME);
 }
 
 bool FadeinScreen(int fadeStep)//フェードイン処理

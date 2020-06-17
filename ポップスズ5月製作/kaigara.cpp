@@ -81,11 +81,11 @@ void DrawShell()
 		DrawGraph(shell.pos.x - shell.offSet.x, shell.pos.y - shell.offSet.y, shellImage, true);
 
 
-		DrawBox(shell.pos.x - shell.offSet.x,
+		/*DrawBox(shell.pos.x - shell.offSet.x,
 			shell.pos.y - shell.offSet.y,
 			shell.pos.x + shell.offSet.x,
 			shell.pos.y + shell.offSet.y,
-			0x000000, false);
+			0x000000, false);*/
 
 		//DrawFormatString(50, 50, 0xff0000, "cnt:%d", shellCnt);
 		//DrawFormatString(50, 70, 0xff0000, "x:%d", shell.pos.x);

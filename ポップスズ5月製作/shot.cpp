@@ -92,11 +92,11 @@ void DrawShot()
 				ShotImage, true);
 
 			// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-			DrawBox(shot[i].pos.x - shot[i].offSet.x,
+			/*DrawBox(shot[i].pos.x - shot[i].offSet.x,
 				shot[i].pos.y - shot[i].offSet.y,
 				shot[i].pos.x + shot[i].offSet.x,
 				shot[i].pos.y + shot[i].offSet.y,
-				0x000000, false);
+				0x000000, false);*/
 		}
 	}
 }

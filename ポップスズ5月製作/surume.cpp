@@ -80,11 +80,11 @@ void DrawSurume(int num)
 			surume[num].pos.y - surume[num].offSet.y,
 			surumeImage, true);
 		// “–‚½‚è”»’è‚Ì‰ÂŽ‹‰»
-		DrawBox(surume[num].pos.x - surume[num].offSet.x,
+		/*DrawBox(surume[num].pos.x - surume[num].offSet.x,
 			surume[num].pos.y - surume[num].offSet.y,
 			surume[num].pos.x + surume[num].offSet.x,
 			surume[num].pos.y + surume[num].offSet.y,
-			0x000000, false);
+			0x000000, false);*/
 		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//ƒTƒEƒ“ƒh
 	}
 }
