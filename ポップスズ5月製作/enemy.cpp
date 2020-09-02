@@ -116,6 +116,7 @@ void UpdetaEnemy()
 						{
 							SetScore(SCORE, enemy[i].score);//スコア加算
 						}
+						
 					}
 				}
 			}
@@ -128,7 +129,10 @@ void UpdetaEnemy()
 		else
 		{
 			//クリア判定
-			enemy[i].point = 1;
+			if (enemy[i].point < 1)
+			{
+				enemy[i].point += 1;
+			}
 			if (enemy[0].point == 1 &&
 				enemy[1].point == 1 &&
 				enemy[2].point == 1 &&
@@ -215,9 +219,21 @@ void DrawEnemy()
 				DrawCircle(enemy[i].pos.x, enemy[i].pos.y, searchDistance, 0x000000, false);*/
 
 			//DrawFormatString(enemy[i].pos.x, enemy[i].pos.y - 32, 0xff0000, "%d", enemy[i].hp);	// 残機の可視化
+			/*DrawFormatString(0,40 , 0xff0000, "%d", enemy[0].point);
+			DrawFormatString(0, 60, 0xff0000, "%d", enemy[1].point);
+			DrawFormatString(0, 80, 0xff0000, "%d", enemy[2].point);
+			DrawFormatString(0, 100, 0xff0000, "%d", enemy[3].point);
+			DrawFormatString(0, 120, 0xff0000, "%d", enemy[4].point);
+			DrawFormatString(0, 140, 0xff0000, "%d", enemy[5].point);
+			DrawFormatString(0, 160, 0xff0000, "%d", enemy[6].point);
+			DrawFormatString(0, 180, 0xff0000, "%d", enemy[7].point);
+			DrawFormatString(0, 200, 0xff0000, "%d", enemy[8].point);*/
+			
+
 		}
 		//DrawFormatString(0, 100 + i * 18, 0xff0000, "x:%d", enemy[i].pos.x);
-		//DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
+		
+		 //DrawFormatString(50, 100 + i * 18, 0xff0000, "y:%d", enemy[i].pos.y);
 		//DrawFormatString(50, 100 + i * 18, 0xff0000, "eT;%d", enemyTime[i]);
 		//DrawFormatString(100, 100 + i * 18, 0xff0000, "df:%d", enemy[i].damageflag);
 		//DrawFormatString(150, 100 + i * 18, 0xff0000, "cf:%d", enemy[i].changeFlag);
@@ -228,6 +244,7 @@ void DrawEnemy()
 		DrawIkayaki(i);
 		DrawIkatenn(i);
 		DrawSurume(i);
+		//DrawFormatString(0, 20 + i * 20, 0xff0000, "%d", enemy[i].point);
 	}
 	//スコア表示
 	//DrawFormatString(60, 30, 0xff0000, "score:%d", enemyScore, true);

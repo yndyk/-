@@ -25,6 +25,7 @@
 #include "kaigara.h"
 #include "sinju.h"
 #include "same.h"
+#include"Title.h"
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -211,6 +212,7 @@ bool SystmeInit(void)//システム初期化
 	 SysInitPearl();
 	 SysInitSame();
 	 ScoreSysInit();
+	 TitleSysInit();
 	 leftTime = TIME_FRAME * 31;
 	 //音
  	 Sound = LoadSoundMem("音素材/アワ.mp3");
@@ -244,12 +246,16 @@ void GameInit(void)//ゲームループ内の初期化
 	InitPearl();
 	ScoreInit();
 	InitSame();
+	TitleInit();
 }
 
 void GameTitlr(void)//タイトル画面処理
 {
+	TitleUpdate();
+	TitleDraw();
 	DrawGraph(10, 200, TitieImage, true);
 	DrawString(280, 400, "START_SPACE", 0x00ffff, true);
+	
 }
 
 void GameMain(void)//ゲーム画面処理
