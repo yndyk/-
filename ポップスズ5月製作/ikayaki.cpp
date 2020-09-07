@@ -75,10 +75,11 @@ void UpdateIkayaki(XY pos,bool flag, int num)	// pos:座標　flag:フラグ　num:配列
 			}
 			//enemyScore += 300;
 			SetScore(SCORE, 300);//スコア加算
-			
+			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 		
 	}
+	
 }
 
 void DrawIkayaki(int num)
@@ -94,7 +95,7 @@ void DrawIkayaki(int num)
 			ikayaki[num].pos.x + ikayaki[num].offSet.x,
 			ikayaki[num].pos.y + ikayaki[num].offSet.y,
 			0x000000, false);*/
-		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
+		
 	}
 
 	//DrawFormatString(0, 100 + num * 18, 0xff0000, "f;%d", ikayaki[num].flag);

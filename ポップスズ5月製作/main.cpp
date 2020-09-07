@@ -26,6 +26,7 @@
 #include "sinju.h"
 #include "same.h"
 #include"Title.h"
+
 //Dxlid.hを使用//独自で準備したヘッダーファイルは””で指定する
 
 //タイトル
@@ -49,6 +50,7 @@ GAMEMODE gamemode;
 int Sound;
 int OverSound;
 int ClearSound;
+
 //WinMain関数の使用
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
@@ -283,7 +285,6 @@ void GameMain(void)//ゲーム画面処理
 		UpdetaBenemy();
 		UpdetaSame();
 		leftTime--;
-		
 	}
 
 	//ポーズ中だったら色半分

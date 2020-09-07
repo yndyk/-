@@ -157,17 +157,25 @@ void UpdetaEnemy()
 				if (enemy[i].type == TYPE_1)
 				{
 					UpdateIkayaki(enemy[i].pos, enemy[i].changeFlag, i);
+					
+					
 				}
 				if (enemy[i].type == TYPE_2)
 				{
 					UpdateIkatenn(enemy[i].pos, enemy[i].changeFlag, i);
+					
+					
 				}
 				if (enemy[i].type == TYPE_3)
 				{
 					UpdetaSurume(enemy[i].pos, enemy[i].changeFlag, i);
+					
+					
 				}
-				StopSoundMem(ChngSound);
+				
+				
 			}
+			//StopSoundMem(ChngSound);
 		}
 	}
 }

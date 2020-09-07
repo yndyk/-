@@ -61,7 +61,7 @@ bool HitCheck(CHARACTER a, CHARACTER b)
 	bool hitFlag = false;	// ヒット判定用
 	distance.x = abs(a.offSet.x + b.offSet.x);
 	distance.y = abs(a.offSet.y + b.offSet.y);
-	if (abs(a.pos.x - b.pos.x) < distance.x &&			// 中心間距離が最小距離以下になったら当たった
+	if (abs(a.pos.x - b.pos.x) < distance.x &&	// 中心間距離が最小距離以下になったら当たった
 		abs(a.pos.y - b.pos.y) < distance.y)
 	{
 		hitFlag = true;

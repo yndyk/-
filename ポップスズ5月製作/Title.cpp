@@ -1,7 +1,6 @@
 #include "main.h"
 #include "Title.h"
 
-
 int TpImage[2];
 int TpCount;
 CHARACTER Tp;
@@ -10,6 +9,7 @@ void TitleSysInit()
 {
 	LoadDivGraph("bmp/潜水艇アニメーション.png", 2, 2, 1, 32, 32, TpImage);
 }
+
 void TitleInit()
 {
 	Tp.pos = { 0 - 96 * 3 , 64 + rand() % 18 + 1 * 32 };
@@ -19,6 +19,7 @@ void TitleInit()
 	Tp.flag = false;
 	TpCount = 0;
 }
+
 void TitleUpdate()
 {
 	ApprTitle();
@@ -38,8 +39,10 @@ void TitleUpdate()
 		Tp.flag = false;
 	}
 }
+
 void TitleDraw()
 {
+	Tp.count++;
 	if (Tp.flag) 
 	{
 		DrawTurnGraph(Tp.pos.x - Tp.offSet.x, Tp.pos.y - Tp.offSet.y,

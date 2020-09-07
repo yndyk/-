@@ -66,9 +66,11 @@ void UpdetaSurume(XY pos, bool flag, int num)
 			}
 			//enemyScore += 300;
 			SetScore(SCORE, 300);//スコア加算
+			PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
 		}
 		
 	}
+	
 }
 
 //描画
@@ -85,7 +87,7 @@ void DrawSurume(int num)
 			surume[num].pos.x + surume[num].offSet.x,
 			surume[num].pos.y + surume[num].offSet.y,
 			0x000000, false);*/
-		PlaySoundMem(ChngSound, DX_PLAYTYPE_BACK);//サウンド
+		
 	}
 }
 

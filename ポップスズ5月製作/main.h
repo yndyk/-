@@ -87,10 +87,7 @@ bool SystmeInit(void);
 void GameTitlr(void);
 void GameMain(void);
 void GameDraw(void);
-void GameClera(void);
-void GameOver(void);
+void GameClera(void);void GameOver(void);
 void GameOperation(void);
 bool FadeOutScreen(int fadeStep);
 bool FadeinScreen(int fadeStep);
-
-

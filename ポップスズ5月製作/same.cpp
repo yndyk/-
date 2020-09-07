@@ -26,7 +26,7 @@ void InitSame()
 {
 	same.pos = { 0 - 96 * 3 , 64 + rand() % 18 + 1 * 32 };
 	same.size = { 96,64 };
-	same.speed = {6,6};
+	same.speed = {7,7};
 	same.offSet = { same.size.x / 2,same.size.y / 2 };
 	same.hp -= TIME_FRAME  * 30;
 	same.flag = false;
@@ -46,7 +46,7 @@ void UpdetaSame()
 		if (same.pos.x + same.size.x < 0)
 		{
 			same.flag = false;
-			same.pos = { 0 + 96 ,64 + (rand() % 18 + 1) * 32 };
+			same.pos = { 0 - 96 ,64 + (rand() % 18 + 1) * 32 };
 		}
 		StopSoundMem(UntiSound);
 	}
@@ -110,7 +110,7 @@ void ApprSame()
 		if (same.flag == false)
 		{
 			same.flag = true;
-			same.pos = { 0 + 96, 64 + (rand() % 18 + 1) * 32 };
+			same.pos = { 0 - 96, 64 + (rand() % 18 + 1) * 32 };
 		}
 	}
 }

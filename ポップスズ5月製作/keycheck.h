@@ -7,12 +7,9 @@ enum KEY_MODE {
 	P1_LEFT,
 	P1_SHOT,
 	P1_B,
-
 	START,
 	PAUSE,
-	
 	QUIT,
-
 	KEY_MAX
 };
 
